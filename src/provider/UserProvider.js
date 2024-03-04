@@ -17,15 +17,30 @@ export const UserProvider = ({ children }) => {
     const [getId, setId] = useState([]);
     const [isPopupOpen, setPopupOpen] = useState(false);
     const [commentPopup, setCommentPopup] = useState(false);
+    const [getName, setName] = useState(sessionStorage.getItem('name'));
+    const [isActive, setIsActive] = useState(false);
+    const [getcomment, setComment] = useState([]);
+    const [temp,setTemp]=useState({});
+    const [singleId, setSingleId] = useState(0);
 
+    const onClickMidNav = (icon) => {
+        setIsActive(icon);
+      }
+
+    const onNameHandler = (data)=>{
+        setName(data);
+        sessionStorage.setItem('name', data);
+    }
     const openPopup = () =>{
            setPopupOpen(true)           
         };
     const closePopup = () =>{
         setPopupOpen(false);
         }
-    const openCommentPopup = () =>{
-        setCommentPopup(true)           
+        
+    const openCommentPopup = (id) =>{
+        setCommentPopup(true)  
+        setSingleId(id)         
         };
     const closeCommentPopup = () =>{
         setCommentPopup(false);
@@ -53,6 +68,15 @@ export const UserProvider = ({ children }) => {
         commentPopup,
         openCommentPopup,
         closeCommentPopup,
+        getName,
+        onNameHandler,
+        isActive,
+        onClickMidNav,
+        setComment,
+        getcomment,
+        setTemp,
+        temp,
+        singleId,
     };
 
     return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Cards } from '../cards/Cards';
-import Navbar from '../navbar/Navbar';
+import './Home.css';
 import { useUser } from '../provider/UserProvider';
 import Aside from '../asidebar/Aside';
 import Screenshot1 from '../images/Screenshot (353).png';
@@ -14,16 +14,16 @@ import Model3 from '../images/model-2.jpg';
 import Model1 from '../images/model-1.jpeg';
 import Model2 from '../images/moodel-2.jpeg';
 import { Icon } from '@iconify/react';
-import Popup from './Popup';
+import Popup from '../cards/Popup';
 import Comment from '../cards/Comment';
-import Slider from "react-slick";
+import UpdatePost from '../cards/UpdatePost';
 
 const Home = () => {
 
     // const [post, setPost] = useState([]);
-    const { getId, setId, isPopupOpen, openPopup, closePopup, closeCommentPopup, commentPopup } = useUser();
-    
-   
+    const { getId, setId, isPopupOpen, openPopup, closePopup, closeCommentPopup, commentPopup, getName } = useUser();
+
+
     const userPost = async () => {
         axios.get('https://academics.newtonschool.co/api/v1/facebook/post?limit=100').then((response) => {
             console.log(response.data.data)
@@ -36,26 +36,17 @@ const Home = () => {
         userPost()
     }, [])
 
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-      };
-
     return (<>
         {/* <div className='bg-[#F0F2F5] w-full h-screen'> */}
 
         <div className="w-full h-5/7 flex bg-[#F0F2F5]  pt-1">
             {/* Content for the first part */}
-            <div className='basis-1/4 overflow-y-auto'> <Aside />
+            <div className='basis-1/4 overflow-y-auto scrollbar'> <Aside />
             </div>
 
             {/* Content for the second part */}
-            <div className="basis-3/5 overflow-y-auto">
+            <div className="basis-3/5 overflow-y-auto scrollbar">
 
-            <Slider {...settings}>
                 <div className='flex justify-center gap-1 my-5'>
                     <div className='rounded-xl w-1/5 h-56'>
                         <img src={Model4} alt='image' className='w-full h-full rounded-xl' />
@@ -70,75 +61,77 @@ const Home = () => {
                         <img src={Model1} alt='image' className='rounded-xl w-full h-full' />
                     </div>
                 </div>
-            </Slider>
-                
+
                 <div className='mb-3 h-32 w-2/8 m-auto bg-white rounded-xl'>
                     <div className='flex p-3 gap-3'>
-                        <div className='rounded-full bg-black h-11 w-11 ml-2 pl-11'>
-                        </div>
-                        <input type='text' placeholder="What's on your mind ?"
-                        className='rounded-full bg-[#F0F2F5] px-4 py-2 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer w-full mr-2' onClick={openPopup}/>
-                    </div>
-                    
-                    <div className='border-b border-gray-200 mx-3'></div>
-                    <div className='flex justify-between pl-6'>
-                        <div className='flex cursor-pointer hover:bg-[#F0F2F5] rounded-lg mt-2 px-2 py-2'>    
-                            <Icon icon="wpf:video-call" width="1.8rem" height="1.6rem"  style={{color: '#E42645'}} className='ml-3'/>
-                            <h4 className='ml-1.5 text-gray-500 font-semibold'>Live Video</h4>
-                        </div>
-                        <div className='flex mt-2 cursor-pointer hover:bg-[#F0F2F5] rounded-lg px-2 py-2'>
-                            <Icon icon="flat-color-icons:stack-of-photos" width="1.8rem" height="1.8rem" />
-                            <h4 className='ml-1 text-gray-500 font-semibold'>Photos/Video</h4>
-                        </div>
-                        <div className='flex mt-2 px-2 py-2 mr-3 cursor-pointer hover:bg-[#F0F2F5] rounded-lg'>
-                            <Icon icon="tdesign:feel-at-ease" width="1.7rem" height="1.7rem"  style={{color: '#EAB129'}} />
-                            <h4 className='ml-1.5 text-base text-gray-500 font-semibold'>Feeling/activity</h4>
-                        </div>
-                    </div>
-                </div>
-                
-                {getId?.map((obj, _id) => {
-                    return (
-                        <div key={obj.id} className='mb-3 w-2/8 m-auto'>
-                            <Cards
-                                name={obj.author.name}
-                                createdAt={obj.createdAt}
-                                src1={obj.author.profileImage}
-                                src={obj.images}
-                                likeCount={obj.likeCount}
-                                commentCount={obj.commentCount}
-                                alt='images'
-                                id={obj._id}
-                                click={userPost}
-                            />
-                        </div>
-                    )
-                })}
-            </div>
-
-            {/* Content for the third part */}
-            <div className="basis-1/4 overflow-y-auto">
-                <div className='mb-1'>
-                    <img src={Image} alt='images' className='rounded-md' />
-                </div>
-                <div className='mb-1'>
-                    <img src={Microsoft} alt='images' className='rounded-md' />
-                </div>
-                <div className='mb-1'>
-                    <img src={Screenshot2} alt='images' className='rounded-md' />
-                </div>
-                <div className='mb-1'>
-                    <img src={Screenshot3} alt='images' className='rounded-md' />
-                </div>
-                <div className='mb-1'>
-                    <img src={Screenshot1} alt='images' className='rounded-md' />
+                        {getName &&
+                            <div className='rounded-full bg-[#c7c5c5] font-bold text-[#1B82E9] px-4 text-2xl h-11 w-11 ml-2 flex items-center justify-center'>{getName.charAt(0)}
+                            </div>}
+                    <input type='text' placeholder="What's on your mind ?"
+                        className='rounded-full bg-[#F0F2F5] px-4 py-2 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer w-full mr-2' onClick={openPopup} />
                 </div>
 
+                <div className='border-b border-gray-200 mx-3'></div>
+                <div className='flex justify-between pl-6'>
+                    <div className='flex cursor-pointer hover:bg-[#F0F2F5] rounded-lg mt-2 px-2 py-2' onClick={openPopup}>
+                        <Icon icon="wpf:video-call" width="1.8rem" height="1.6rem" style={{ color: '#E42645' }} className='ml-3' />
+                        <h4 className='ml-1.5 text-gray-500 font-semibold'>Live Video</h4>
+                    </div>
+                    <div className='flex mt-2 cursor-pointer hover:bg-[#F0F2F5] rounded-lg px-2 py-2' onClick={openPopup}>
+                        <Icon icon="flat-color-icons:stack-of-photos" width="1.8rem" height="1.8rem" />
+                        <h4 className='ml-1 text-gray-500 font-semibold'>Photos/Video</h4>
+                    </div>
+                    <div className='flex mt-2 px-2 py-2 mr-3 cursor-pointer hover:bg-[#F0F2F5] rounded-lg' onClick={openPopup}>
+                        <Icon icon="tdesign:feel-at-ease" width="1.7rem" height="1.7rem" style={{ color: '#EAB129' }} />
+                        <h4 className='ml-1.5 text-base text-gray-500 font-semibold'>Feeling/activity</h4>
+                    </div>
+                </div>
             </div>
-            {isPopupOpen && <Popup onClose={closePopup} />}
-            {commentPopup && <Comment onClose={closeCommentPopup}/>}
+
+            {getId?.map((obj, _id) => {
+                return (
+                    <div key={obj.id} className='mb-3 w-2/8 m-auto'>
+                        <Cards
+                            name={obj.author.name}
+                            createdAt={obj.createdAt}
+                            content={obj.content}
+                            src1={obj.author.profileImage}
+                            src={obj.images}
+                            likeCount={obj.likeCount}
+                            commentCount={obj.commentCount}
+                            alt='images'
+                            id={obj._id}
+                            click={userPost}
+                        />
+                    </div>
+                )
+            })}
         </div>
-        {/* </div> */}
+
+        {/* Content for the third part */}
+        <div className="basis-1/4 overflow-y-auto scrollbar">
+            <div className='mb-1'>
+                <img src={Image} alt='images' className='rounded-md' />
+            </div>
+            <div className='mb-1'>
+                <img src={Microsoft} alt='images' className='rounded-md' />
+            </div>
+            <div className='mb-1'>
+                <img src={Screenshot2} alt='images' className='rounded-md' />
+            </div>
+            <div className='mb-1'>
+                <img src={Screenshot3} alt='images' className='rounded-md' />
+            </div>
+            <div className='mb-1'>
+                <img src={Screenshot1} alt='images' className='rounded-md' />
+            </div>
+
+        </div>
+        {isPopupOpen && <Popup onClose={closePopup} />}
+        {commentPopup && <Comment onClose={closeCommentPopup} />}
+        {isPopupOpen && <UpdatePost onClose={closePopup} />}
+    </div >
+        {/* </div> */ }
     </>
     )
 }

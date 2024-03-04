@@ -1,15 +1,20 @@
 import { Icon } from '@iconify/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useUser } from '../provider/UserProvider';
 
 const Aside = () => {
+  const {getName, onClickMidNav } = useUser();
+ 
   return (
     <div className='px-3 py-3'>
 
         <div className='flex hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer  px-1 py-2'>
-          <div className='rounded-full bg-black h-8 w-8 flex'>
-          </div>
-          <h3 className='text-black pl-4 pt-1 text-base font-semibold'>Mustafa Zaheer</h3>
+          {getName && 
+          <div className='rounded-full bg-[#c7c5c5] font-bold text-[#1B82E9] text-xl items-center justify-center h-8 w-8 flex'>{getName.charAt(0)}
+          </div>}
+          {getName && 
+          <h3 className='text-black pl-4 pt-1 text-base font-semibold'>{getName}</h3>}
         </div>
 
         <div className='flex gap-4 px-2 pt-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
@@ -17,15 +22,15 @@ const Aside = () => {
         <h3 className='pt-0.5 font-semibold'>COVID-19 Information Center</h3>
         </div>
 
-        <Link to='/pages'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
-        <Icon icon="noto-v1:triangular-flag" width="1.6rem" height="1.6rem" />
-        <h3 className='pt-0.5 font-semibold'>Pages</h3>
+        <Link to='/pages'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer mt-2'>
+        <Icon icon="noto-v1:triangular-flag" width="1.6rem" height="1.6rem" onClick={() => onClickMidNav('page')}/>
+        <h3 className='font-semibold'>Pages</h3>
         </div></Link>
 
-        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
+        <Link to='/friends'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
         <Icon icon="fa-solid:user-friends" width="1.7rem" height="1.7rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold'>Friends</h3>
-        </div>
+        </div></Link>
 
         <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
         <Icon icon="icon-park:time" width="1.6rem" height="1.6rem" />
@@ -37,20 +42,20 @@ const Aside = () => {
         <h3 className='pt-0.5 font-semibold'>Saved</h3>
         </div>
 
-        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
+        <Link to='/group'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
         <Icon icon="el:group-alt" width="1.5rem" height="1.5rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold'>Groups</h3>
-        </div>
+        </div></Link>
         
-        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
+        <Link to='/videos'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
         <Icon icon="mdi:youtube-tv" width="1.5rem" height="1.5rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold'>Videos</h3>
-        </div>
+        </div></Link>
 
-        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
+        <Link to='/marketplace'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
         <Icon icon="healthicons:market-stall" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold'>Marketplace</h3>
-        </div>
+        </div></Link>
 
         <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
         <Icon icon="flat-color-icons:feedback" width="1.6rem" height="1.6rem" />

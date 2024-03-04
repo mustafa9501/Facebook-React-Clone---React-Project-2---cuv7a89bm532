@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Icon } from '@iconify/react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -17,7 +17,9 @@ const Signup = ({onClose}) => {
     const getData = {name, email, password, appType: 'facebook'}
 
     axios.post('https://academics.newtonschool.co/api/v1/user/signup', getData).then((response) => {
-      navigate('/home');
+      console.log(response)
+      navigate('/')
+      onClose();
     }).catch((error) =>{
       console.log(error);
       if(error.response && error.response.data && error.response.data.message){

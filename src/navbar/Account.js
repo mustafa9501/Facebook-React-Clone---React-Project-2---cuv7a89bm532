@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Account = () => {
 
-    const { getUser, signOutUser } = useUser();
+    const { getUser, signOutUser, getName } = useUser();
     const navigate = useNavigate();
 
     const onClickHandler = () => {
@@ -25,9 +25,9 @@ const Account = () => {
 
             <div className='w-68 m-1.5 mt-2 rounded-lg bg-white text-black h-36 p-1.5' style={{ boxShadow: '1px 1px 4px 4px rgba(0, 0, 0, 0.1)' }}>
                 <div className='flex hover:bg-[#F2F2F2] cursor-pointer hover:rounded-md px-1 py-2'>
-                    <div className='rounded-full bg-black h-11 w-11 flex'>
-                    </div>
-                    <h2 className='text-black pl-4 pt-1.5 text-lg'>Mustafa Zaheer</h2>
+                {getName && <div className='rounded-full h-11 w-11 bg-[#c7c5c5] font-bold text-[#1B82E9] text-2xl flex items-center justify-center'>{getName.charAt(0)}
+                    </div>}
+                    {getName && <h2 className='text-black pl-4 pt-1.5 text-lg'>{getName}</h2>}
                 </div>  
                 <div className='border-b border-slate-400 mt-1.5'></div>
                 <div className='rounded-lg bg-[#E4E6EB] hover:bg-[#d8dadb] text-center p-1.5 mt-5  cursor-pointer flex justify-center gap-2'>

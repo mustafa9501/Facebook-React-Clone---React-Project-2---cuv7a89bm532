@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useUser } from '../provider/UserProvider'
+import { useUser } from '../../../provider/UserProvider'
 
 const Pages = () => {
     const {closePopup, openPopup} = useUser()

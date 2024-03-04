@@ -1,11 +1,16 @@
+import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react'
-import React, { useState } from 'react';
 import Account from './Account';
 import { Link } from 'react-router-dom';
+import { useUser } from '../provider/UserProvider';
 
 const Navbar = () => {
+  
+  const {getName, onClickMidNav, isActive} = useUser();
+  console.log(getName)
+
   const [activeIcon, setActiveIcon] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  
   const [homeHovered, setHomeHovered] = useState(false);
   const [videoHovered, setVideoHovered] = useState(false);
   const [marketHovered, setMarketHovered] = useState(false);
@@ -14,7 +19,7 @@ const Navbar = () => {
   const [messengerHovered, setMessengerHovered] = useState(false);
   const [notificationHovered, setNotificationHovered] = useState(false);
   const [accountHovered, setAccountHovered] = useState(false);
-  const [gameHovered, setGameHovered] = useState(false);
+  const [pageHovered, setPageHovered] = useState(false);
 
   const dropDownEnter = (dropdown) => {
     switch (dropdown) {
@@ -27,7 +32,7 @@ const Navbar = () => {
         setNotificationHovered(false);
         setAccountHovered(false);
         setMarketHovered(false);
-        setGameHovered(false);
+        setPageHovered(false);
         break;
       case 'video':
         setHomeHovered(false);
@@ -38,7 +43,7 @@ const Navbar = () => {
         setNotificationHovered(false);
         setAccountHovered(false);
         setMarketHovered(false);
-        setGameHovered(false);
+        setPageHovered(false);
         break;
       case 'group':
         setHomeHovered(false);
@@ -49,7 +54,7 @@ const Navbar = () => {
         setNotificationHovered(false);
         setAccountHovered(false);
         setMarketHovered(false);
-        setGameHovered(false);
+        setPageHovered(false);
         break;
       case 'menu':
         setHomeHovered(false);
@@ -60,7 +65,7 @@ const Navbar = () => {
         setNotificationHovered(false);
         setAccountHovered(false);
         setMarketHovered(false);
-        setGameHovered(false);
+        setPageHovered(false);
         break;
       case 'messenger':
         setHomeHovered(false);
@@ -71,7 +76,7 @@ const Navbar = () => {
         setNotificationHovered(false);
         setAccountHovered(false);
         setMarketHovered(false);
-        setGameHovered(false);
+        setPageHovered(false);
         break;
       case 'notification':
         setHomeHovered(false);
@@ -82,7 +87,7 @@ const Navbar = () => {
         setNotificationHovered(true);
         setAccountHovered(false);
         setMarketHovered(false);
-        setGameHovered(false);
+        setPageHovered(false);
         break;
       case 'account':
         setHomeHovered(false);
@@ -93,7 +98,7 @@ const Navbar = () => {
         setNotificationHovered(false);
         setAccountHovered(true);
         setMarketHovered(false);
-        setGameHovered(false);
+        setPageHovered(false);
         break;
       case 'market':
         setHomeHovered(false);
@@ -104,9 +109,9 @@ const Navbar = () => {
         setNotificationHovered(false);
         setAccountHovered(false);
         setMarketHovered(true);
-        setGameHovered(false);
+        setPageHovered(false);
         break;
-      case 'game':
+      case 'page':
         setHomeHovered(false);
         setVideoHovered(false);
         setGroupHovered(false);
@@ -115,7 +120,7 @@ const Navbar = () => {
         setNotificationHovered(false);
         setAccountHovered(false);
         setMarketHovered(false);
-        setGameHovered(true);
+        setPageHovered(true);
         break;
       default:
         break;
@@ -131,12 +136,9 @@ const Navbar = () => {
     setNotificationHovered(false);
     setAccountHovered(false);
     setMarketHovered(false);
-    setGameHovered(false);
+    setPageHovered(false);
   };
 
-  const onClickMidNav = (icon) => {
-    setIsActive(icon);
-  }
   const onClickRightNav = (icon) => {
     setActiveIcon(icon);
   }
@@ -147,14 +149,18 @@ const Navbar = () => {
     setIsProfileOpen(!isProfileOpen)
   }
 
+  // useEffect(()=>{
+  //   onClickMidNav('home');
+  // },[]);
+
   return (
     <div className='bg-white drop-shadow-lg w-full h-14 flex justify-between'>
       <div className='flex justify-between gap-12'>
         {/* left icons */}
         <div className='flex'>
-          <div className='p-2 pl-5 cursor-pointer'>
+          <Link to='/'><div className='p-2 pl-5 cursor-pointer'>
             <Icon icon="logos:facebook" width="2.5rem" height="2.5rem" />
-          </div>
+          </div></Link>
           <div className='absolute mt-5 ml-16 pl-4'>
             <Icon icon="carbon:search" width="1.1rem" height="1.1rem" style={{ color: '#545454' }} />
           </div>
@@ -179,18 +185,19 @@ const Navbar = () => {
             </div></Link>
 
           <Link to='/pages'><div
-            className={`Games ps w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all relative border-[#0866FF] ${isActive === 'game' ? 'border-b-[3px]' : ''}`}
-            onMouseEnter={() => dropDownEnter('game')}
+            className={`Page ps w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all relative border-[#0866FF] ${isActive === 'page' ? 'border-b-[3px]' : ''}`}
+            onMouseEnter={() => dropDownEnter('page')}
             onMouseLeave={dropDownLeave}
-            onClick={() => onClickMidNav('game')}
+            onClick={() => onClickMidNav('page')}
+            // disabled={!isActive}
           >
-            <Icon icon="material-symbols-light:emoji-flags" width="2rem" height="2rem" style={{ color: isActive === 'game' ? '#0866FF' : '#606266' }} />
-            {gameHovered && (
+            <Icon icon="material-symbols-light:emoji-flags" width="2rem" height="2rem" style={{ color: isActive === 'page' ? '#0866FF' : '#606266' }} />
+            {pageHovered && (
               <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Pages</div>
             )}
           </div></Link>
 
-          <div
+          <Link to='/videos'><div
             className={`Home w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all border-[#0866FF] relative  ${isActive === 'video' ? 'border-b-[3px]' : ''}`}
             onMouseEnter={() => dropDownEnter('video')}
             onMouseLeave={dropDownLeave}
@@ -200,8 +207,8 @@ const Navbar = () => {
             {videoHovered && (
               <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Video</div>
             )}
-          </div>
-          <div
+          </div></Link>
+          <Link to='/marketplace'><div
             className={`Home w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all border-[#0866FF] relative  ${isActive === 'market' ? 'border-b-[3px]' : ''}`}
             onMouseEnter={() => dropDownEnter('market')}
             onMouseLeave={dropDownLeave}
@@ -211,8 +218,8 @@ const Navbar = () => {
             {marketHovered && (
               <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Marketplace</div>
             )}
-          </div>
-          <div
+          </div></Link>
+          <Link to='/group'><div
             className={`Groups w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all relative border-[#0866FF] ${isActive === 'group' ? 'border-b-[3px]' : ''}`}
             onMouseEnter={() => dropDownEnter('group')}
             onMouseLeave={dropDownLeave}
@@ -222,7 +229,7 @@ const Navbar = () => {
             {groupHovered && (
               <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Groups</div>
             )}
-          </div>
+          </div></Link>
         </div>
       </div>
 
@@ -277,8 +284,12 @@ const Navbar = () => {
 
         <div className='relative' onMouseEnter={() => dropDownEnter('account')}
           onMouseLeave={dropDownLeave}
-          onClick={() => onClickRightNav('account')}>
-          <Icon
+          onClick={() => onClickRightNav('account')}>   
+          {getName ? <div 
+            className='w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold bg-[#E4E6EB] cursor-pointer hover:bg-[#dad8d8]'
+            onClick={toggleProfile}> {getName.charAt(0)}          
+            </div>  : 
+            <Icon
             icon="bxs:user"
             width="1.2rem"
             height="1.2rem"
@@ -286,11 +297,12 @@ const Navbar = () => {
             className={`w-10 h-10 rounded-full p-1 bg-[#E4E6EB] cursor-pointer hover:bg-[#dad8d8] `}
             onClick={toggleProfile}
           />
+           } 
           {accountHovered && (
             <div className='absolute mt-3 text-white shadow-md py-1.5 px-1 rounded-lg bg-[#050505] text-sm'>Account</div>
           )}
-
         </div>
+
       </div>
     </div>
   );
