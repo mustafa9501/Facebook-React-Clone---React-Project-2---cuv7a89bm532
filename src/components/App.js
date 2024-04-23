@@ -13,6 +13,20 @@ import Marketplace from '../asidebar/allPages/Marketplace';
 import Group from '../asidebar/allPages/Group';
 import { useNavigate } from 'react-router-dom';
 import Friends from '../asidebar/allPages/Friends';
+import Profile from '../profile/Profile';
+import About from '../profile/About';
+import Post from '../profile/Post';
+import Overviews from '../profile/about/Overviews';
+import Work_education from '../profile/about/Work_education';
+import Placed_lived from '../profile/about/Placed_lived';
+import Skills from '../profile/about/Skills';
+import ProfilePage from '../asidebar/allPages/page/ProfilePage';
+import PostProfile from '../asidebar/allPages/page/PostProfile';
+import AboutProfile from '../asidebar/allPages/page/AboutProfile';
+import Overview1 from '../asidebar/allPages/page/aboutPage/Overview1';
+import Work_education1 from '../asidebar/allPages/page/aboutPage/Work_education1';
+import Payments from '../asidebar/allPages/page/aboutPage/Payments';
+import Skills1 from '../asidebar/allPages/page/aboutPage/Skills1';
 
 function App() {
 
@@ -33,7 +47,7 @@ function App() {
  }
 
   return (<>
-      <div className='h-screen w-full'>
+      <div className='h-screen w-screen'>
       <BrowserRouter>
       {getUser && getUser.status === "success" && (
       <Navbar />)}
@@ -41,13 +55,35 @@ function App() {
           {!getUser && (
           <Route path="/" element={<Login/>}/>)}
           {getUser && getUser.status === "success" && (
-          <Route path="/" element={<Home/>}/>)}
+          <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>)}   
           <Route path="/pages" element={<ProtectedRoute><Pages/></ProtectedRoute>}/>
           <Route path="/pages/createpage" element={<ProtectedRoute><CreatePage/></ProtectedRoute>}/>
+
+          <Route path="/pages/profilepage" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}>
+                <Route path="postprofile" element={<ProtectedRoute><PostProfile /></ProtectedRoute>}/>
+                <Route path="aboutprofile" element={<ProtectedRoute><AboutProfile /></ProtectedRoute>}>
+                    <Route path="overview1" element={<ProtectedRoute><Overview1 /></ProtectedRoute>}/> 
+                    <Route path="work_education1" element={<ProtectedRoute><Work_education1 /></ProtectedRoute>}/>
+                    <Route path="payments" element={<ProtectedRoute><Payments /></ProtectedRoute>}/>
+                    <Route path="skills1" element={<ProtectedRoute><Skills1 /></ProtectedRoute>}/>
+                </Route>
+          </Route>
+
+
           <Route path="/videos" element={<ProtectedRoute><Videos/></ProtectedRoute>}/>
           <Route path="/marketplace" element={<ProtectedRoute><Marketplace/></ProtectedRoute>}/>
           <Route path="/group" element={<ProtectedRoute><Group/></ProtectedRoute>}/>
           <Route path="/friends" element={<ProtectedRoute><Friends/></ProtectedRoute>}/>
+
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
+              <Route path="post" element={<ProtectedRoute><Post /></ProtectedRoute>}/> 
+              <Route path="about" element={<ProtectedRoute><About /></ProtectedRoute>}> 
+                  <Route path="overviews" element={<ProtectedRoute><Overviews /></ProtectedRoute>}/>
+                  <Route path="work_education" element={<ProtectedRoute><Work_education /></ProtectedRoute>}/>
+                  <Route path="placed_lived" element={<ProtectedRoute><Placed_lived /></ProtectedRoute>}/>
+                  <Route path="skills" element={<ProtectedRoute><Skills /></ProtectedRoute>}/>
+               </Route>   
+          </Route> 
         </Routes>
       </BrowserRouter>
       </div>

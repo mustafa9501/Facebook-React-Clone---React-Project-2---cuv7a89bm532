@@ -1,3 +1,7 @@
 .scrollbar::-webkit-scrollbar {
     width: 10px;
   }
+
+  .scrollbar-post::-webkit-scrollbar {
+    width: 0px;
+  }

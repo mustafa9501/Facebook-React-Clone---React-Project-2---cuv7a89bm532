@@ -48,7 +48,7 @@ const Signup = ({onClose}) => {
              <form className='flex flex-col pl-3 pr-3 pt-1 text-lg' onSubmit={onClickHandler}>
                     <input className='p-2 border border-zinc-300 rounded-md mt-1 focus:border-blue-500 focus:outline-none'
                     type='text'
-                    placeholder='Enter your name'
+                    placeholder='Enter your full name'
                     value={name}
                     onChange={(e)=>setName(e.target.value)}
                     />

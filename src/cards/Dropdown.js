@@ -1,13 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import axios from 'axios';
 import { Icon } from '@iconify/react'
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../provider/UserProvider';
 
-const Dropdown = () => {
+const Dropdown = ({id}) => {
 
     // const navigate = useNavigate();
-    const {openPopup, singleId} = useUser();
+    const { getUser, popupUpdateOpen} = useUser();
     // const [getValue, setValue] = useState('');
+
+    const postDelete = async (idd) => {
+       
+        
+        try {
+            const result = await axios.delete(`https://academics.newtonschool.co/api/v1/facebook/post/${idd}`, {
+                headers: {
+                    Authorization: `Bearer ${getUser.token}`
+                }
+            });
+            
+            window.location.reload();
+            console.log(result);
+            
+        } catch (err) {
+            alert(err.message);
+        }
+    };
+    
+    // useEffect(()=>{
+    //     dropDownForId(id)
+    // }, [])
 
     return (<>
         <div
@@ -18,14 +41,14 @@ const Dropdown = () => {
             tabIndex="-1"
             style={{ boxShadow: '1px 3px 4px 4px rgba(0, 0, 0, 0.1)' }}>
 
-            <div className='Settings text-md flex gap-4 cursor-pointer rounded-md hover:bg-[#F2F2F2] py-2 px-2' onClick={openPopup}>
+            <div className='Settings text-md flex gap-4 cursor-pointer rounded-md hover:bg-[#F2F2F2] py-2 px-2' onClick={()=>popupUpdateOpen(id)}>
                 <Icon icon="ic:baseline-edit" width="2rem" height="2rem" style={{ color: 'black' }}
                     className='border bg-[#E4E6EB] rounded-full p-1' />
                 <h2 className='text-black mt-1'>Edit</h2>
             </div>
 
             <div className='Settings text-md flex justify-between  cursor-pointer rounded-md hover:bg-[#F2F2F2] py-2 px-2'>
-                <div className='flex gap-4'>
+                <div className='flex gap-4' onClick={()=>postDelete(id)}>
                     <Icon icon="subway:delete" width="2rem" height="2rem" style={{ color: 'black' }}
                         className='border bg-[#E4E6EB] rounded-full p-1' />
                     <h2 className='text-black mt-1'>Delete</h2>

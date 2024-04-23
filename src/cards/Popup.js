@@ -2,10 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useUser } from '../provider/UserProvider';
+import Profile from '../images/profile.png';
 
 const Popup = ({ onClose }) => {
     const { getName, getUser } = useUser();
-    const [getValue, setValue] = useState('');
+    const [getValue, setValue] = useState([]);
 
     const postDetails = async (event) => {
         event.preventDefault();
@@ -14,7 +15,7 @@ const Popup = ({ onClose }) => {
 
         let formData = new FormData();
         formData.append('title', 'newton');
-        formData.append('content', getValue);  // Use the content from getValue state
+        formData.append('content', getValue);  
         formData.append('images', imageData);
         
         try {
@@ -24,7 +25,7 @@ const Popup = ({ onClose }) => {
                 }
             });
             
-            window.location.reload();
+            // window.location.reload();
             console.log(result);
             
         } catch (err) {
@@ -45,9 +46,12 @@ const Popup = ({ onClose }) => {
                     </div>
                     <div className='border-b border-gray'></div>
                     <div className='flex'>
-                        {getName && 
-                        <div className='rounded-full bg-[#c7c5c5] font-bold text-[#1B82E9] text-2xl flex items-center justify-center h-11 w-11 m-4'>{getName.charAt(0)}
-                        </div>}
+                        {getUser && 
+                        <img
+                        src={Profile} 
+                        alt="Profile"
+                        className='w-10 h-10 m-4 rounded-full cursor-pointer bg-[#eceaea] hover:bg-[#dad8d8]'
+                      />}
                         {getName && 
                         <h3 className='text-gray text-lg pt-6 font-semibold'>{getName}</h3>}
                     </div>

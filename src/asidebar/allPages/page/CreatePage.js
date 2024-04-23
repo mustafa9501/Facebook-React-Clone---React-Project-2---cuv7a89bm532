@@ -8,7 +8,8 @@ const CreatePage = () => {
     // const [backButton] = useState(true);
         const {getUser} = useUser();
         const navigate = useNavigate();
-        const [getTitle, setTitle] = useState([]);
+        const [getTitle, setTitle] = useState('');
+        const [getName, setName] = useState('Page name');
         const [getValue, setValue] = useState([]);
 
         const backButtonHandler = () => {
@@ -21,8 +22,9 @@ const CreatePage = () => {
         let imageData = document.getElementById('images').files[0];
 
         let formData = new FormData();
+        formData.append('name', getName);
         formData.append('title', getTitle);
-        formData.append('content', getValue);  // Use the content from getValue state
+        formData.append('description', getValue);  
         formData.append('images', imageData);
         
         try {
@@ -31,8 +33,8 @@ const CreatePage = () => {
                     Authorization: `Bearer ${getUser.token}`
                 }
             });
-            
             // window.location.reload();
+            navigate('/pages')
             console.log(result);
             
         } catch (err) {
@@ -46,7 +48,7 @@ const CreatePage = () => {
 
                 {/* left part of channel */}
 
-                <div className='Part-1 w-1/7 h-full bg-white pl-4 pt-2 text-black' style={{ boxShadow: '0px 3px 2px 2px rgba(0, 0, 0, 0.1)' }}>
+                <div className='Part-1 w-1/7 h-full bg-white pl-4 pt-2 text-black overflow-y-auto scrollbar' style={{ boxShadow: '0px 3px 2px 2px rgba(0, 0, 0, 0.1)' }}>
                     <div className='overflow-y-auto'>
                         <div className='flex justify-between'>
                             <h6 className='text-[12px] mt-3.5 text-zinc-500'><span className='hover:underline cursor-pointer hover:text-[#1877F2]' onClick={backButtonHandler}>Pages</span> › Create a Page</h6>
@@ -59,11 +61,14 @@ const CreatePage = () => {
 
                         <h4 className='text-gray-600 pt-1.5 text-md'>Your Page is where people go to learn more about you. Make sure yours has all the information they may need.</h4>
 
-                        <input className='rounded-lg border border-gray-300 mt-2.5 w-5/7 py-3.5 px-3 text-gray-600 hover:border-gray-500 focus:border-[#1877F2] focus:outline-none' placeholder='Page name (required)' type='text' onChange={(e)=>setTitle(e.target.value)}></input>
+                        <input className='rounded-lg border border-gray-300 mt-2.5 w-5/7 py-3.5 px-3 text-gray-600 hover:border-gray-500 focus:border-[#1877F2] focus:outline-none' placeholder='Page name (required)' type='text' onChange={(e)=>setName(e.target.value)}></input>
                         <h6 className='pt-1.5 text-[12px] text-gray-600'>Use the name of your business, brand or organization, or a name that helps explain your Page. <span className='text-[#1877F2] hover:underline cursor-pointer'>Learn More</span></h6>
 
+                        <input className='rounded-lg border border-gray-300 mt-2.5 w-5/7 py-3.5 px-3 text-gray-600 hover:border-gray-500 focus:border-[#1877F2] focus:outline-none' placeholder='Category (required)' type='text' onChange={(e)=>setTitle(e.target.value)}></input>
+                        <h6 className='pt-1.5 text-[12px] text-gray-600'>Enter a category that best describes you. </h6>
+
                         <textarea type='text' className='h-28 w-5/7 mt-3 p-4 text-lg border rounded-lg border-gray-300 hover:border-gray-500 resize-none focus:border-[#1877F2] focus:outline-none' placeholder="Bio (optional)" onChange={(e)=>setValue(e.target.value)}></textarea>
-                        <h6 className='text-[12px] text-gray-600'>Tell people a little about what you do.</h6>
+                        <h6 className='text-[12px] text-gray-600'>Tell discription about the page.</h6>
 
                         <input type="file" name="images" id="images" className='mt-4 py-3 w-5/7 pl-2 rounded-lg border border-gray-300 hover:border-gray-500'/>
                        
@@ -77,14 +82,14 @@ const CreatePage = () => {
                 {/* right part of channel */}
 
                 <div className='Part-2 m-10 bg-white w-2/8 h-5/7 rounded-lg' style={{ boxShadow: '0px 3px 2px 2px rgba(0, 0, 0, 0.1)' }}>
-                    <div className='overflow-y-auto border rounded-lg border-gray-300 m-6 h-5/7 relative'>
+                    <div className='overflow-y-auto scrollbar border rounded-lg border-gray-300 m-6 h-5/7 relative'>
                         <div className='bg-[#F0F2F5] h-2/3 relative'>
                             <div className='Image-profile absolute top-1/2 left-1/2 transform -translate-x-1/2 mt-4 border rounded-full border-gray-500 bg-[#C9CCD1] w-40 h-40' style={{ boxShadow: '0px 0px 1px 6px rgba(255, 255, 255, 0.7)' }}>
                                 <Icon icon="iconamoon:profile-fill" width="8rem" height="10rem" className='ml-3.5' style={{ color: 'white' }} />
                             </div>
                         </div>
 
-                        {getTitle ? <h2 className='text-4xl text-black font-bold text-center mt-7'> {getTitle}</h2> :
+                        {getName ? <h2 className='text-4xl text-black font-bold text-center mt-7'> {getName}</h2> :
                         <h2 className='text-4xl text-[#BCC0C4] font-bold text-center mt-7'> Page name</h2>}
 
                         <div className='border-b border-gray-300 mx-4 mt-7'></div>

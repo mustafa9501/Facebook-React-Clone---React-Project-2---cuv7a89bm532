@@ -1,43 +1,69 @@
-import Reac, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useUser } from '../provider/UserProvider';
 import { Icon } from '@iconify/react';
 
-const UpdatePost = ({ onClose }) => {
 
-    const {singleId, getUser, getName} = useUser();
-    const [ getValue, setValue] = useState('dataa');
+const UpdatePost = ({ onClose, id }) => {
+    console.log(id)
+
+    const {singleId, getUser, getName, dropDownForId } = useUser();
+    const [ getValue, setValue] = useState('');
+    const [ postContent, setPostContent] = useState('');
+    const [hasStartedTyping, setHasStartedTyping] = useState(false);
+
+    const handleInputChange = (e) => {
+        setValue(e.target.value);
+        setHasStartedTyping(true);
+    };
+
+    console.log(singleId)
+
+    const postContentHandler = async () =>{
+        try{
+            const response = await axios.get(`https://academics.newtonschool.co/api/v1/facebook/post/${singleId}`,{
+                header: {
+                    Authorization: `Bearer ${getUser.token}`
+                }
+            })
+            setPostContent(response.data.data)
+            console.log(response.data.data)
+
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
     const postUpdate = async (event) => {
         event.preventDefault();
-  
         let imageData = document.getElementById('images1').files[0];
-  
         let formData = new FormData();
         formData.append('title', 'newton');
         formData.append('content', getValue);  // Use the content from getValue state
-        formData.append('images', imageData);
-        
+        formData.append('images', imageData); 
         try {
             const result = await axios.patch(`https://academics.newtonschool.co/api/v1/facebook/post/${singleId}`, formData, {
                 headers: {
                     Authorization: `Bearer ${getUser.token}`
                 }
-            });
-            
-            window.location.reload();
-            console.log(result);
-            
-        } catch (err) {
-            alert(err.message);
+            });      
+                    window.location.reload();
+                    console.log(result);      
+            } catch (error) {
+            alert(error.message);
         }
         onClose();
     };
 
+    useEffect(()=>{
+        postContentHandler();
+    }, [singleId])
+
+
   return (
     <>
          <div className="fixed h-screen w-screen flex items-center justify-center bg-[#F3F3F4] bg-opacity-85">
-                <div className="main_popup bg-white w-2/6 h-3/5 rounded-lg drop-shadow-xl">
+                <div className="main_popup bg-white w-2/6 h-3/5 rounded-lg drop-shadow-xl overflow-y-auto scrollbar-post">
                     <div className='flex justify-end gap-32'>
                         <h3 className='text-center text-xl font-bold py-3'>Create post</h3>
                         <div className='cursor-pointer pr-3 py-3 flex justify-end' onClick={onClose}>
@@ -53,9 +79,13 @@ const UpdatePost = ({ onClose }) => {
                         <h3 className='text-gray text-lg pt-6 font-semibold'>{getName}</h3>}
                     </div>
                     {getName && 
-                    <textarea type='text' className='h-32 w-5/7 text-zinc-800 text-2xl pl-1.5 ml-4 mt-1 focus:outline-none resize-none' placeholder={`What's on your mind, ${getName}?`} onChange={(e)=>setValue(e.target.value)}></textarea>}
+                    <textarea type='text' className='h-32 w-5/7 text-zinc-800 text-2xl pl-1.5 ml-4 mt-1 focus:outline-none resize-none' placeholder={`What's on your mind, ${getName}?`} onChange={handleInputChange} value={hasStartedTyping ? getValue : postContent.content}></textarea>}
 
-                    <div className='rounded-lg border border-gray mx-5 '>
+                    <div className='px-2 rounded-lg'>
+                        <img src={postContent.images} alt='image'/>
+                    </div>
+
+                    <div className='rounded-lg border border-gray mx-5 mt-2'>
                         <div className='flex justify-between px-3 py-3.5'>
                             {/* <h4 className='font-semibold pl-1 cursor-pointer'>Add to your post</h4> */}
                             <input type="file" name="images" id="images1"/>
@@ -68,7 +98,7 @@ const UpdatePost = ({ onClose }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='rounded-lg border bg-[#1B82E9] px-2 py-1.5 mx-5 my-2 text-center text-white font-semibold cursor-pointer hover:bg-[#5997d6]' onClick={postUpdate}>Post</div>
+                    <div className='rounded-lg border bg-[#1B82E9] px-2 py-1.5 mx-5 my-2 mb-4 text-center text-white font-semibold cursor-pointer hover:bg-[#5997d6]' onClick={postUpdate}>Post</div>
                 </div>
             </div>
     </>

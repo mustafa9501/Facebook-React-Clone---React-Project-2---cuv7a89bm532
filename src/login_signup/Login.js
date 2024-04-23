@@ -11,7 +11,7 @@ const Login = () => {
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
-    const {signInUser, onNameHandler} = useUser();
+    const {signInUser, onNameHandler, onEmailHandler} = useUser();
 
     const openPopup = (event) =>{
         event.preventDefault();
@@ -30,10 +30,12 @@ const Login = () => {
         axios.post('https://academics.newtonschool.co/api/v1/user/login', getData).then((response) =>{
 
             localStorage.setItem('token', response.data.token);
-            signInUser({status:response.data.status,token:response.data.token})
-            onNameHandler(response.data.data.name)
-            console.log(response.data.data.name)
-            navigate('/')
+            signInUser({status:response.data.status,token:response.data.token});
+            onNameHandler(response.data.data.name);
+            onEmailHandler(response.data.data.email);
+            console.log(response.data.data.name);
+            console.log(response.data.data.email)
+            navigate('/');
 
         }).catch((error)=>{
             if(error.response && error.response.data && error.response.data.message){
