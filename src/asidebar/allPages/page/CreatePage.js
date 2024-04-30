@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react'
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../../provider/UserProvider';
 
@@ -42,9 +42,57 @@ const CreatePage = () => {
         }
     };
 
+    const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsScreenSmall(window.innerWidth < 1100);
+        };
+
+        window.addEventListener("resize", checkScreenSize);
+
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
     return (
-        <>
-            <div className='bg-[#F0F2F5] w-screen h-5/7 flex box-border'>
+        <>  
+            {isScreenSmall ? (
+                <>
+                    <div className='Part-1 w-full h-full bg-white pl-4 pr-1.5 pt-2 text-black overflow-y-auto scrollbar' style={{ boxShadow: '0px 3px 2px 2px rgba(0, 0, 0, 0.1)' }}>
+                    <div className='overflow-y-auto'>
+                        <div className='flex justify-between'>
+                            <h6 className='text-[12px] mt-3.5 text-zinc-500'><span className='hover:underline cursor-pointer hover:text-[#1877F2]' onClick={backButtonHandler}>Pages</span> › Create a Page</h6>
+                            <div className='cursor-pointer pr-2 flex justify-end' onClick={backButtonHandler}>
+                                <Icon icon="maki:cross" width="2rem" height="2rem" style={{ color: '#606771' }} className='bg-gray-200 hover:bg-gray-300 rounded-full p-1.5' />
+                            </div>
+                        </div>
+
+                        <h2 className='text-2xl font-bold'>Create a Page</h2>
+
+                        <h4 className='text-gray-600 pt-1.5 text-md'>Your Page is where people go to learn more about you. Make sure yours has all the information they may need.</h4>
+
+                        <input className='rounded-lg border border-gray-300 mt-2.5 w-5/7 py-3.5 px-3 text-gray-600 hover:border-gray-500 focus:border-[#1877F2] focus:outline-none' placeholder='Page name (required)' type='text' onChange={(e)=>setName(e.target.value)}></input>
+                        <h6 className='pt-1.5 text-[12px] text-gray-600'>Use the name of your business, brand or organization, or a name that helps explain your Page. <span className='text-[#1877F2] hover:underline cursor-pointer'>Learn More</span></h6>
+
+                        <input className='rounded-lg border border-gray-300 mt-2.5 w-5/7 py-3.5 px-3 text-gray-600 hover:border-gray-500 focus:border-[#1877F2] focus:outline-none' placeholder='Category (required)' type='text' onChange={(e)=>setTitle(e.target.value)}></input>
+                        <h6 className='pt-1.5 text-[12px] text-gray-600'>Enter a category that best describes you. </h6>
+
+                        <textarea type='text' className='h-28 w-5/7 mt-3 p-4 text-lg border rounded-lg border-gray-300 hover:border-gray-500 resize-none focus:border-[#1877F2] focus:outline-none' placeholder="Bio (optional)" onChange={(e)=>setValue(e.target.value)}></textarea>
+                        <h6 className='text-[12px] text-gray-600'>Tell discription about the page.</h6>
+
+                        <input type="file" name="images" id="images" className='mt-4 py-3 w-5/7 pl-2 rounded-lg border border-gray-300 hover:border-gray-500'/>
+                       
+                    </div>
+
+                    <button className='bg-[#1877F2] hover:bg-[#4788dd] text-white font-semibold w-5/7 rounded-lg py-2 mt-4' onClick={createChannel}>Create Page</button>
+                    <h6 className='text-[10px] text-gray-600 mt-2.5'>By creating a Page, you agree to the <span className='text-[#1877F2] cursor-pointer hover:underline'>Pages, Groups and Events Policies</span></h6>   
+
+                </div>
+                </>
+
+            ) : (
+
+                <div className='bg-[#F0F2F5] w-screen h-5/7 flex box-border'>
 
                 {/* left part of channel */}
 
@@ -138,6 +186,8 @@ const CreatePage = () => {
                 </div>
 
             </div>
+            )}
+            
         </>
     )
 }

@@ -55,62 +55,68 @@ const ProfilePage = () => {
     return (
         <>
             {isScreenSmall ? (
-                <div className='w-full h-5/7 bg-white'>
-                    {/* {getData && getData.map((obj)=>(  */}
-                    <div className='h-full drop-shadow-sm'>
-                        <div className='h-3/7'>
-                            <Icon icon="mingcute:arrow-left-line" width="1.8rem" height="1.8rem" style={{ color: 'black' }} className='absolute cursor-pointer w-full bg-white' onClick={() => navigate('/pages')} />
-                            <img src={Cover} className='h-full w-full' />
-                        </div>
-                        <div className='px-4 mt-4'>
-                            <div className='flex'>
-                                <div className='ml-1 mt-4'>
-                                    <img src={getData.image || Avatar} alt='profile' className='rounded-full h-44 w-44 absolute top-1/3 mt-4' />
+                <>
+                    <div className='w-full bg-white '>
+
+                        <div className='h-full'>
+                            <div className='flex py-1 pl-3 bg-white w-full fixed '>
+                                <Icon icon="mingcute:arrow-left-line" width="1.6rem" height="1.6rem" style={{ color: 'black' }} className=' cursor-pointer bg-white ' onClick={() => navigate('/pages')} />
+                                <h2 className='Name text-md font-bold pl-4 pt-0.5 flex '>{getData.name}</h2>
+                            </div>
+                            <div className='h-3/7'>
+                                <img src={Cover} className='h-80 w-full' />
+                            </div>
+                            <div className='px-4 mt-4'>
+                                <div className='flex'>
+                                    <div className='ml-1 '>
+                                        <img src={getData.image || Avatar} alt='profile' className='rounded-full h-44 w-44 absolute top-[12.5rem]' />
+                                    </div>
+                                    <div>
+                                        <h2 className='Name text-3xl font-bold pt-14 pl-4 flex '>{getData.name}</h2>
+                                        <h2 className='Name text-sm pt-2 pl-4 pr-4 '>{getData.description}</h2>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h2 className='Name text-3xl font-bold pt-10 pl-4 flex '>{getData.name}</h2>
-                                    <h2 className='Name text-sm pt-2 pl-4 pr-4 '>{getData.description}</h2>
+                                <div className='w-100% flex justify-center gap-2 mt-4'>
+                                    <button className='border w-1/2 px-6 rounded-lg bg-[#d9dbe0] font-semibold flex gap-2 pt-2.5 cursor-not-allowed'>
+                                        <Icon icon="ri:chat-follow-up-fill" width="1.2rem" height="1.2rem" style={{ color: 'black' }} className='mt-0.5' />Follow
+                                    </button>
+                                    <button className='border w-1/2 px-6 py-2 rounded-lg bg-[#0861F2] text-white font-semibold flex gap-2 pt-2.5 cursor-not-allowed'>
+                                        <Icon icon="zondicons:announcement" width="1.2rem" height="1.2rem" style={{ color: 'white' }} className='mt-0.5' />Promote
+                                    </button>
                                 </div>
                             </div>
-                            <div className='w-100% flex justify-center gap-2 mt-4'>
-                                <button className='border w-1/2 px-6 rounded-lg bg-[#d9dbe0] font-semibold flex gap-2 pt-2.5 cursor-not-allowed'>
-                                    <Icon icon="ri:chat-follow-up-fill" width="1.2rem" height="1.2rem" style={{ color: 'black' }} className='mt-0.5' />Follow
-                                </button>
-                                <button className='border w-1/2 px-6 py-2 rounded-lg bg-[#0861F2] text-white font-semibold flex gap-2 pt-2.5 cursor-not-allowed'>
-                                    <Icon icon="zondicons:announcement" width="1.2rem" height="1.2rem" style={{ color: 'white' }} className='mt-0.5' />Promote
-                                </button>
+                            <div className='border-b border-gray-400 mt-4'></div>
+
+                            <div className='flex justify-evenly  mt-2 text-gray-600 font-semibold'>
+                                <Link to='postprofile'>
+                                    <div className={`cursor-pointer hover:bg-[#F0F2F5] rounded-lg px-2 py-2 ${isActive === 'post' ? 'text-[#0866FF]' : ''}`} onClick={() => activeHandler('post')}>
+                                        <h2 className={`${isActive === 'post' ? 'border-b-2 border-[#0866FF]' : ''}`}>Post</h2>
+                                    </div>
+                                </Link>
+                                <Link to='aboutprofile'>
+                                    <div
+                                        className={`cursor-pointer hover:bg-[#F0F2F5] rounded-lg px-2 py-2 ${isActive === 'about' ? 'text-[#0866FF]' : ''}`}
+                                        onClick={() => activeHandler('about')}
+                                    >
+                                        <h2 className={`${isActive === 'about' ? 'border-b-2 border-[#0866FF]' : ''}`}>About</h2>
+                                    </div>
+                                </Link>
+                                <div className='cursor-not-allowed hover:bg-[#F0F2F5] rounded-lg px-2 py-2'>Followers</div>
+                                <div className='cursor-not-allowed hover:bg-[#F0F2F5] rounded-lg px-2 py-2'>Photos</div>
                             </div>
-                        </div>
-                        <div className='border-b border-gray-400 mt-4'></div>
 
-                        <div className='flex justify-evenly  mt-2 text-gray-600 font-semibold'>
-                            <Link to='postprofile'>
-                                <div className={`cursor-pointer hover:bg-[#F0F2F5] rounded-lg px-2 py-2 ${isActive === 'post' ? 'text-[#0866FF]' : ''}`} onClick={() => activeHandler('post')}>
-                                    <h2 className={`${isActive === 'post' ? 'border-b-2 border-[#0866FF]' : ''}`}>Post</h2>
-                                </div>
-                            </Link>
-                            <Link to='aboutprofile'>
-                                <div
-                                    className={`cursor-pointer hover:bg-[#F0F2F5] rounded-lg px-2 py-2 ${isActive === 'about' ? 'text-[#0866FF]' : ''}`}
-                                    onClick={() => activeHandler('about')}
-                                >
-                                    <h2 className={`${isActive === 'about' ? 'border-b-2 border-[#0866FF]' : ''}`}>About</h2>
-                                </div>
-                            </Link>
-                            <div className='cursor-not-allowed hover:bg-[#F0F2F5] rounded-lg px-2 py-2'>Followers</div>
-                            <div className='cursor-not-allowed hover:bg-[#F0F2F5] rounded-lg px-2 py-2'>Photos</div>
-                        </div>
-
-                        {/* <div className='flex gap-3 mr-6 pt-2.5'>
+                            {/* <div className='flex gap-3 mr-6 pt-2.5'>
                             <div className='cursor-not-allowed flex gap-4'>
                                 <button className='border px-2 rounded-lg bg-[#d9dbe0] font-semibold flex gap-2 pt-2 cursor-not-allowed'>
                                     <Icon icon="simple-icons:messenger" width="1.2rem" height="1.2rem" style={{ color: 'black' }} className='mt-0.5' />Message</button>
                                 <h4 className='rounded-lg bg-gray-300 px-3.5 py-1.5 font-semibold text-gray-600 '>...</h4>
                             </div>
                         </div> */}
+                        </div>
+                        {/* ))} */}
                     </div>
-                    {/* ))} */}
-                </div>
+                    <Outlet />
+                </>
 
             ) : (
 

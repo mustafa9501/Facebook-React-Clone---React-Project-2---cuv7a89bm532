@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../provider/UserProvider';
 import Facebook from '../images/new-Facebook-Logo.png';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [isPopupOpen, setPopupOpen] = useState(false);
@@ -67,7 +68,7 @@ const Login = () => {
         <>
             {isScreenSmall ? (<>
                 <div className='bg-[#FFFBE2] py-2 pl-4 flex gap-3'>
-                <Icon icon="fa:mobile" width="1.2rem" height="1.4rem"  style={{color: 'black'}} className='mt-1'/>
+                    <Icon icon="fa:mobile" width="1.2rem" height="1.4rem" style={{ color: 'black' }} className='mt-1' />
                     <p className='pt-1 text-[#3B5998]'>Get Facebook for Android and browser faster</p>
                 </div>
                 <div className='flex justify-center pt-10'>
@@ -90,13 +91,17 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <button type='submit' className='rounded-md mt-4 py-2.5 text-white font-bold text-xl text-semibold border bg-blue-600 cursor-pointer'>Log in</button>
-                        <div className='text-center mt-3 text-blue-600 text-base cursor-pointer'>
+                        <div className='text-center mt-3 text-blue-600 text-base cursor-not-allowed'>
                             Forgotten password?
                         </div>
                         <div className='border-b border-zinc-200 mt-5'>
                         </div>
-                        <button className='px-2 py-2.5 border text-black rounded-md w-2/3 m-auto mt-6 cursor-pointer'
-                            onClick={openPopup}>Create new account</button>
+                        <div className='flex justify-center'>
+                        <Link to='/signup'>
+                            <button className='px-10 py-2.5 border border-gray-300 text-black rounded-md mt-6 cursor-pointer'
+                            >Create new account</button>
+                        </Link>
+                        </div>
                     </form>
                 </div>
                 <div className='flex justify-between px-14 pt-10'>
@@ -140,7 +145,7 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <button type='submit' className='rounded-md mt-4 py-2.5 text-white font-bold text-xl text-semibold border bg-blue-600 cursor-pointer'>Log in</button>
-                            <div className='text-center mt-3 text-blue-600 text-base cursor-pointer'>
+                            <div className='text-center mt-3 text-blue-600 text-base cursor-not-allowed'>
                                 Forgotten password?
                             </div>
                             <div className='border-b border-zinc-200 mt-5'>
