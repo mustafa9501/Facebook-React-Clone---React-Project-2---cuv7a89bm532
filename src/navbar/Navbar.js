@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { Icon } from '@iconify/react'
 import Account from './Account';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../provider/UserProvider';
 import Profile from '../images/profile.png';
-import Facebook from '../images/facebook_logos.png';
+import Avatar from '../images/dummy_avatar.jpg';
+import Facebook from '../images/new-Facebook-Logo.png';
 import SettingPrivacy from './SettingPrivacy';
 import HelpSupport from './HelpSuport';
 import Feedback from './Feedback';
@@ -16,7 +17,7 @@ import Menu from './Menu';
 
 const Navbar = () => {
 
-  const { onClickMidNav, isActive, getUser, getsetting, gethelp, getdisplay, getfeedback, searchDroplistHandler, searchDroplist, searchDroplistClose, getName } = useUser();
+  const { onClickMidNav, isActive, getUser, getsetting, gethelp, getdisplay, getfeedback, searchDroplistHandler, searchDroplist, searchDroplistClose, getName, signOutUser, getEmail, viewPageHandler } = useUser();
   const popupRef = useRef(null);
   const searchRef = useRef(null);
 
@@ -30,6 +31,8 @@ const Navbar = () => {
   const [notificationHovered, setNotificationHovered] = useState(false);
   const [accountHovered, setAccountHovered] = useState(false);
   const [pageHovered, setPageHovered] = useState(false);
+
+  const navigate = useNavigate();
 
   const dropDownEnter = (dropdown) => {
     switch (dropdown) {
@@ -213,6 +216,40 @@ const Navbar = () => {
     onClickMidNav('home');
   }, []);
 
+  const onClickHandler = () => {
+    localStorage.removeItem("token");
+    signOutUser();
+    navigate('/')
+  };
+
+  const [getData, setData] = useState('');
+
+  const pageDetails = async () => {
+    try {
+      const response = await axios.get('https://academics.newtonschool.co/api/v1/facebook/channel/', {
+        headers: {
+          Authorization: `Bearer ${getUser.token}`
+        }
+      });
+      const filteredData = response.data.data.filter(item => item.owner.email === getEmail);
+      setData(filteredData);
+      console.log(filteredData)
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    pageDetails();
+  }, [getEmail]);
+
+  const [showChannel, setShowChannel] = useState(false);
+
+  const channelPopupHandler = ()=>{
+    setShowChannel(!showChannel);
+  }
+
   return (
     <>
       {isSidebarOpen && (
@@ -227,19 +264,37 @@ const Navbar = () => {
                 </div>
                 <Icon icon="ion:search" width="2rem" height="2rem" style={{ color: 'black' }} className='mr-7 rounded-full bg-[#E4E6EB] p-1 cursor-pointer' />
               </div>
-              
+
               {/* profile */}
-              <div className='flex cursor-pointer px-2 py-3 bg-white ml-2 mt-14 mr-2 rounded-lg'>
-                {getUser && <img
-                  src={Profile}
-                  alt="Profile"
-                  className='w-10 h-10 rounded-full cursor-pointer bg-[#dad7d7] mt-1'
-                />}
-                <div>
-                  {getName && <h2 className='text-black pl-4 font-semibold'>{getName}</h2>}
-                  <h3 className='text-gray-400 text-[14px] pl-4'>View your profile</h3>
+                <div className='flex justify-between cursor-pointer px-2 py-3 bg-white ml-2 mt-14 mr-2 rounded-lg'>
+                <div className='flex'>
+                  {getUser && <img
+                    src={Profile}
+                    alt="Profile"
+                    className='w-10 h-10 rounded-full cursor-pointer bg-[#dad7d7] mt-1'
+                  />}
+                  <div>
+                    {getName && <h2 className='text-black pl-4 font-semibold'>{getName}</h2>}
+                    <h3 className='text-gray-400 text-[14px] pl-4'>View your profile</h3>
+                  </div>
+                  </div>
+                <Icon icon = {showChannel ? "iconamoon:arrow-up-2-bold" : "iconamoon:arrow-down-2-bold"} width="2rem" height="2rem" style={{ color: "black" }} className='bg-[#E4E6EB] rounded-full mr-1.5 mt-2 cursor-pointer' onClick={channelPopupHandler}/>
                 </div>
-              </div>
+
+              {/* our channel */}
+              {showChannel && getData && getData.map((obj) => (
+                <Link to='/pages/profilepage/postprofile'>
+                  <div key={obj._id} className='cursor-pointer bg-white rounded-lg my-2 py-1.5 mx-2 text-black' onClick={() => viewPageHandler(obj._id)}>
+                    <div className='pl-2 flex gap-4'>
+                      <img className="w-10 h-10 rounded-full bg-gray-200 mt-1" src={obj.image || Avatar} alt="profile" />
+                      <div>
+                        <h2 className='pt-1 font-semibold text-md hover:underline'>{obj.name}</h2>
+                        <h2 className=' text-[10px]'>{obj.createdAt}</h2>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
 
               {/* menu list */}
               <div className='mt-4 ml-2 mr-2 mb-3'>
@@ -262,7 +317,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Second line: Videos and Groups */}
-                <div className='flex gap-3 mt-4 justify-between'>
+                <div className='flex gap-3 mt-2.5 justify-between'>
                   <Link to='/videos' className='flex-grow'>
                     <div className='pl-3 py-2 hover:bg-[#e6e3e3] cursor-pointer bg-white rounded-lg' onClick={toggleSidebar}>
                       <Icon icon="mdi:youtube-tv" width="1.5rem" height="1.5rem" style={{ color: '#1B82E9' }} />
@@ -279,85 +334,122 @@ const Navbar = () => {
                 </div>
 
                 {/* Third line: Marketplace and Memories */}
-                <div className='flex gap-3 mt-4 justify-between'>
+                <div className='flex gap-3 mt-2.5 justify-between'>
                   <Link to='/marketplace' className='flex-grow'>
                     <div className='pl-3 py-2 hover:bg-[#e6e3e3] cursor-pointer bg-white rounded-lg' onClick={toggleSidebar}>
-                    <Icon icon="healthicons:market-stall" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
+                      <Icon icon="healthicons:market-stall" width="1.6rem" height="1.6rem" style={{ color: '#1B82E9' }} />
                       <h3 className='pt-0.5 font-semibold text-black'>Marketplace</h3>
                     </div>
                   </Link>
 
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
                     <Icon icon="icon-park:time" width="1.6rem" height="1.6rem" />
-                      <h3 className='pt-0.5 font-semibold text-black'>Memories</h3>
-                    </div>
+                    <h3 className='pt-0.5 font-semibold text-black'>Memories</h3>
+                  </div>
                 </div>
 
                 {/* Fourth line: Saved and Feeds */}
-                <div className='flex gap-3 mt-4 justify-between'>
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
-                    <Icon icon="ph:bookmarks-simple-duotone" width="1.6rem" height="1.7rem"  style={{color: '#B749CE'}} />
-                      <h3 className='pt-0.5 font-semibold text-black'>Saved</h3>
-                    </div>
+                <div className='flex gap-3 mt-2.5 justify-between'>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                    <Icon icon="ph:bookmarks-simple-duotone" width="1.6rem" height="1.7rem" style={{ color: '#B749CE' }} />
+                    <h3 className='pt-0.5 font-semibold text-black'>Saved</h3>
+                  </div>
 
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
                     <Icon icon="flat-color-icons:feedback" width="1.6rem" height="1.6rem" />
-                      <h3 className='pt-0.5 font-semibold text-black'>Feeds</h3>
-                    </div>                 
+                    <h3 className='pt-0.5 font-semibold text-black'>Feeds</h3>
+                  </div>
                 </div>
 
                 {/* Fifth line: Events and Ads Manager */}
-                <div className='flex gap-3 mt-4 justify-between'>
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                <div className='flex gap-3 mt-2.5 justify-between'>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
                     <Icon icon="icon-park:schedule" width="1.6rem" height="1.6rem" />
-                      <h3 className='pt-0.5 font-semibold text-black'>Events</h3>
-                    </div>
+                    <h3 className='pt-0.5 font-semibold text-black'>Events</h3>
+                  </div>
 
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
-                    <Icon icon="svg-spinners:bars-scale-fade" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
-                      <h3 className='pt-0.5 font-semibold text-black'>Ads Manager</h3>
-                    </div>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                    <Icon icon="svg-spinners:bars-scale-fade" width="1.6rem" height="1.6rem" style={{ color: '#1B82E9' }} />
+                    <h3 className='pt-0.5 font-semibold text-black'>Ads Manager</h3>
+                  </div>
                 </div>
 
                 {/* Sixth line: Messenger and Gaming Video */}
-                <div className='flex gap-3 mt-4 justify-between'>
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                <div className='flex gap-3 mt-2.5 justify-between'>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
                     <Icon icon="logos:messenger" width="1.6rem" height="1.6rem" />
-                      <h3 className='pt-0.5 font-semibold text-black'>Messenger</h3>
-                    </div>
+                    <h3 className='pt-0.5 font-semibold text-black'>Messenger</h3>
+                  </div>
 
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
-                    <Icon icon="simple-icons:facebookgaming" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
-                      <h3 className='pt-0.5 font-semibold text-black'>Gaming Video</h3>
-                    </div>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                    <Icon icon="simple-icons:facebookgaming" width="1.6rem" height="1.6rem" style={{ color: '#1B82E9' }} />
+                    <h3 className='pt-0.5 font-semibold text-black'>Gaming Video</h3>
+                  </div>
                 </div>
 
                 {/* Seventh line: Facebook Pay and Fundraisers */}
-                <div className='flex gap-3 mt-4 justify-between'>
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
-                    <Icon icon="fluent:payment-16-filled" width="1.6rem" height="1.6rem"  style={{color: '#1f224c'}} />
-                      <h3 className='pt-0.5 font-semibold text-black'>Facebook Pay</h3>
-                    </div>
+                <div className='flex gap-3 mt-2.5 justify-between'>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                    <Icon icon="fluent:payment-16-filled" width="1.6rem" height="1.6rem" style={{ color: '#1f224c' }} />
+                    <h3 className='pt-0.5 font-semibold text-black'>Facebook Pay</h3>
+                  </div>
 
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
-                    <Icon icon="mingcute:refund-dollar-line" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
-                      <h3 className='pt-0.5 font-semibold text-black'>Fundraisers</h3>
-                    </div>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                    <Icon icon="mingcute:refund-dollar-line" width="1.6rem" height="1.6rem" style={{ color: '#1B82E9' }} />
+                    <h3 className='pt-0.5 font-semibold text-black'>Fundraisers</h3>
+                  </div>
                 </div>
 
                 {/* Eight line: Messenger Kids and PLay Games */}
-                <div className='flex gap-3 mt-4 justify-between'>
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
-                    <Icon icon="simple-icons:messenger" width="1.6rem" height="1.6rem"  style={{color: '#64dd93'}} />
-                      <h3 className='pt-0.5 font-semibold text-black'>Messenger Kids</h3>
-                    </div>
+                <div className='flex gap-3 mt-2.5 justify-between'>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                    <Icon icon="simple-icons:messenger" width="1.6rem" height="1.6rem" style={{ color: '#64dd93' }} />
+                    <h3 className='pt-0.5 font-semibold text-black'>Messenger Kids</h3>
+                  </div>
 
-                    <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
-                    <Icon icon="codicon:layout-activitybar-right" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
-                      <h3 className='pt-0.5 font-semibold text-black'>PLay Games</h3>
-                    </div>
+                  <div className='flex-grow pl-3 py-2 hover:bg-[#e6e3e3] cursor-not-allowed bg-white rounded-lg '>
+                    <Icon icon="codicon:layout-activitybar-right" width="1.6rem" height="1.6rem" style={{ color: '#1B82E9' }} />
+                    <h3 className='pt-0.5 font-semibold text-black'>PLay Games</h3>
+                  </div>
                 </div>
 
+                <div className='border-b border-gray-300 pt-4 w-full'></div>
+
+                <div className='flex gap-4 pt-4'>
+                  <Icon icon="material-symbols:settings" width="2rem" height="2rem" style={{ color: 'black' }}
+                    className='border bg-[#E4E6EB] rounded-full p-1' />
+                  <h2 className='text-black mt-0.5 font-semibold text-lg'>Setting & privacy</h2>
+                </div>
+
+                <div className='flex gap-4 bg-white mt-3 py-2 px-2 rounded-lg'>
+                  <Icon icon="ic:outline-help" width="2rem" height="2rem" style={{ color: 'black' }}
+                    className='border bg-[#E4E6EB] rounded-full p-1' />
+                  <h2 className='text-black mt-1'>Help & support</h2>
+                </div>
+
+                <div className='flex gap-4 bg-white mt-2.5 py-2 px-2 rounded-lg'>
+                  <Icon icon="material-symbols-light:dark-mode" width="2rem" height="2rem" style={{ color: 'black' }}
+                    className='border bg-[#E4E6EB] rounded-full p-1' />
+                  <h2 className='text-black mt-1'>Display</h2>
+                </div>
+
+                <div className='flex gap-4 bg-white mt-2.5 py-2 px-2 rounded-lg'>
+                  <Icon icon="material-symbols:feedback-rounded" width="2rem" height="2rem" style={{ color: 'black' }}
+                    className='border bg-[#E4E6EB] rounded-full p-1' />
+                  <h2 className='text-black mt-1'>Give feedback</h2>
+                </div>
+
+                <div className='border-b border-gray-300 pt-4 w-full'></div>
+
+                {getUser && getUser.status === "success" && (
+                  <div className='Settings text-md flex justify-between cursor-pointer hover:bg-[#F2F2F2] py-2 px-2  mt-2.5  rounded-lg' onClick={onClickHandler}>
+                    <div className='flex gap-4' >
+                      <Icon icon="majesticons:logout" width="2rem" height="2rem" style={{ color: 'black' }}
+                        className='border bg-[#E4E6EB] rounded-full p-1' />
+                      <h2 className='text-black mt-0.5 font-semibold text-lg' >Logout</h2>
+                    </div>
+                  </div>
+                )}
 
               </div>
 
@@ -367,12 +459,12 @@ const Navbar = () => {
       )}
 
       {isScreenSmall ? (
-        <div>
-          <div className='flex justify-between w-screen'>
-            <img src={Facebook} className='h-8 w-32 m-3 ml-5' />
+        <>
+          <div className='flex justify-between w-full px-1'>
+            <Link to="/"><img src={Facebook} className='h-14 w-32 ml-5' /></Link>
             <div className='flex gap-3'>
-              <Icon icon="ri:search-line" width="2rem" height="2rem" style={{ color: 'black' }} className='mt-3 rounded-full bg-[#E4E6EB] p-1 cursor-pointer' />
-              <Icon icon="codicon:three-bars" width="2rem" height="2rem" style={{ color: 'black' }} className='mt-3 mr-4 rounded-full bg-[#E4E6EB] p-1 cursor-pointer' onClick={toggleSidebar} />
+              <Link to="/search"><Icon icon="ri:search-line" width="2rem" height="2rem" style={{ color: 'black' }} className='mt-3 rounded-full bg-[#E4E6EB] p-1 cursor-pointer' /></Link>
+              <Icon icon="codicon:three-bars" width="2rem" height="2rem" style={{ color: 'black' }} className='mt-3 mr-3 rounded-full bg-[#E4E6EB] p-1 cursor-pointer' onClick={toggleSidebar} />
             </div>
           </div>
           <div className='border-b border-gray-200'></div>
@@ -425,7 +517,7 @@ const Navbar = () => {
             </div></Link>
           </div>
           <div className='border-b border-gray-300'></div>
-        </div>
+        </>
 
       ) : (
         <div className='bg-white drop-shadow-lg w-screen h-14 flex justify-between sticky top-0 z-10'>

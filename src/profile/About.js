@@ -3,7 +3,7 @@ import axios from 'axios';
 import UserProfile from '../images/user-profile.png';
 import { Icon } from '@iconify/react';
 import { useUser } from '../provider/UserProvider';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Overviews from './about/Overviews';
 import Work_education from './about/Work_education';
 import Placed_lived from './about/Placed_lived';
@@ -21,16 +21,39 @@ const About = () => {
         setIsActive(tag);
     }
     
-    const contentMap = {
-        Overview: <> <Overviews /> </>,
-        'Work and education': <> <Work_education /> </>,
-        'Place lived': <> <Placed_lived /> </>,
-        'Skills': <> <Skills /> </>
-    };
+    // const contentMap = {
+    //     Overview: <> <Overviews /> </>,
+    //     'Work and education': <> <Work_education /> </>,
+    //     'Place lived': <> <Placed_lived /> </>,
+    //     'Skills': <> <Skills /> </>
+    // };
 
     console.log('Active tag:', isActive);
+
+    const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsScreenSmall(window.innerWidth < 1100);
+        };
+
+        window.addEventListener("resize", checkScreenSize);
+
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+    
     return (
-        <>
+        <>  {isScreenSmall ? (
+            <div className='pl-4 pb-4'>
+                <h2 className='font-bold text-xl px-4 pt-5'>About</h2>
+                <h3 className='pl-4 pt-2'><Overviews/></h3>
+                <h3 className='pl-4'><Work_education/></h3>
+                <h3 className='pl-4 pt-2'><Placed_lived/></h3>
+                <h3 className='pl-4 pt-2'><Skills/></h3>
+            </div>
+
+        ) : (
+
             <div className='w-screen bg-[#F0F2F5] pt-4 px-5 pb-6 flex justify-center'>
 
                 <div className='bg-white w-2/3 rounded-lg flex gap-10'>
@@ -50,18 +73,20 @@ const About = () => {
                             style={{ color: isActive === 'Skills' ? '#0866FF' : '#5A5A5A' }} onClick={() => activeHandler('Skills')}>Skills
                         </h3></Link>
                     </div>
-
-                    <div className='border-r border-gray-300'></div>
+                    <Outlet/>
+                    {/* <div className='border-r border-gray-300'></div> */}
 
                     {/* right */}
-                    <div className='Right'>
+                    {/* <div className='Right'>
                         <div className='Right mb-4'>
                             {contentMap[isActive]}
                         </div>
 
-                    </div>
+                    </div> */}
                 </div>
             </div>
+        )}
+            
         </>
     )
 }

@@ -46,7 +46,11 @@ const Pages = () => {
     return (<>
         {isScreenSmall ? (
             <div  className='Part-2 overflow-y-auto scrollbar'>
+            <div className='flex justify-between'>    
             <h3 className='font-bold pl-7 text-2xl pt-4 pb-2 '>All Pages</h3>
+            <Icon icon="ep:back" width="2rem" height="2rem" style={{ color: 'black' }} className='mt-4 mr-4 bg-[#d9dbe0] hover:bg-[#c2c5c9] rounded-full p-1 cursor-not-allowed ' onClick={()=>navigate(-1)}/>
+            </div>
+
             {getData && getData.map((obj)=>(       
                 <div key={obj._id} className='bg-white  rounded-lg mb-4'>
                     <div className='w-full pt-6 pl-5 flex gap-5'>

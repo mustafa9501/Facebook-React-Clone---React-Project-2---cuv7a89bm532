@@ -50,29 +50,20 @@ const Home = () => {
 
     return (<>
         {isScreenSmall ? (
-            <div className="basis-3/5 overflow-y-auto scrollbar">
-
-            <div className='bg-white flex mt-2'>
-                    <div className='flex pl-3 gap-2'>
-                        {getUser &&
-                            <img
-                                src={Profile}
-                                alt="Profile"
-                                className='w-12 h-11 rounded-full cursor-pointer bg-[#eceaea]'
-                            />}
-                        <input type='text' placeholder={`What's on your mind ?`}
-                            className='rounded-full bg-[#F0F2F5] px-5 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer mr-1' onClick={openPopup} />
+            <div className="w-full h-screen">
+                <div className='bg-white flex mt-2 pr-3 px-1'>
+                    <div className='flex pl-5 gap-2 w-full'>
+                        {getUser && <img src={Profile} alt="Profile" className='w-12 h-11 rounded-full cursor-pointer bg-[#eceaea]' />}
+                        <input type='text' placeholder={`What's on your mind ?`} className='flex-grow rounded-full bg-[#F0F2F5] px-4 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer mr-2' onClick={openPopup} />
                     </div>
-                    
-                    <div className='mr-1 cursor-pointer px-2' onClick={openPopup}>
-                        <Icon icon="flat-color-icons:stack-of-photos" width="1.8rem" height="1.8rem" className='ml-2'/>
+                    <div className='mr-1 cursor-pointer' onClick={openPopup}>
+                        <Icon icon="flat-color-icons:stack-of-photos" width="1.8rem" height="1.8rem" className='ml-2' />
                         <h4 className=' text-sm text-gray-500 font-semibold'>Photos</h4>
                     </div>
                 </div>
                 <div className='border-b-4 border-gray-300 mt-2'></div>
-                
                 {/* story images */}
-                <div className='flex justify-center gap-1 my-5'>
+                <div className='flex justify-center gap-1 my-5 px-3'>
                     <div className='rounded-xl w-2/9 h-48'>
                         <img src={Model4} alt='image' className='w-full h-full rounded-xl' />
                     </div>
@@ -87,28 +78,28 @@ const Home = () => {
                     </div>
                 </div>
                 {/* posts */}
-                {post?.map((obj, _id) => {
-                    return (
-                        <div key={obj.id} className='mb-3 w-full m-auto'>
-                            <Cards
-                                name={obj.author.name}
-                                createdAt={obj.createdAt}
-                                content={obj.content}
-                                src1={obj.author.profileImage}
-                                src={obj.images}
-                                likeCount={obj.likeCount}
-                                commentCount={obj.commentCount}
-                                alt='images'
-                                id={obj._id}
-                                authorId={obj.author._id}
-                                isLiked={obj.isLiked}
-                            // click={userPost}
-                            />
-                        </div>
-                    )
-                })}
+                <div className="w-full flex flex-col items-center">
+                    {post?.map((obj, _id) => {
+                        return (
+                            <div key={obj.id} className='mb-3 w-full px-2'>
+                                <Cards
+                                    name={obj.author.name}
+                                    createdAt={obj.createdAt}
+                                    content={obj.content}
+                                    src1={obj.author.profileImage}
+                                    src={obj.images}
+                                    likeCount={obj.likeCount}
+                                    commentCount={obj.commentCount}
+                                    alt='images'
+                                    id={obj._id}
+                                    authorId={obj.author._id}
+                                    isLiked={obj.isLiked}
+                                />
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
-
         ) : (
             <div className="w-screen h-5/7 flex bg-[#F0F2F5]  pt-1">
                 {/* Content for the first part */}

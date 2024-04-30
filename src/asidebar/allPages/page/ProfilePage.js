@@ -55,20 +55,20 @@ const ProfilePage = () => {
     return (
         <>
             {isScreenSmall ? (
-                <div className='w-full h-5/7 bg-white '>
+                <div className='w-full h-5/7 bg-white'>
                     {/* {getData && getData.map((obj)=>(  */}
                     <div className='h-full drop-shadow-sm'>
-                        <div className='h-3/7 rounded-b-xl m-auto'>
-                        <Icon icon="mingcute:arrow-left-line" width="1.8rem" height="1.8rem" style={{color: 'white'}} className='absolute m-3 cursor-pointer' onClick={()=>navigate(-1)}/>
-                            <img src={Cover} className='h-full w-full rounded-b-xl ' />
+                        <div className='h-3/7'>
+                            <Icon icon="mingcute:arrow-left-line" width="1.8rem" height="1.8rem" style={{ color: 'black' }} className='absolute cursor-pointer w-full bg-white' onClick={() => navigate('/pages')} />
+                            <img src={Cover} className='h-full w-full' />
                         </div>
                         <div className='px-4 mt-4'>
                             <div className='flex'>
                                 <div className='ml-1 mt-4'>
-                                    <img src={getData.image || Avatar} alt='profile' className='rounded-full h-16% w-16%' />
+                                    <img src={getData.image || Avatar} alt='profile' className='rounded-full h-44 w-44 absolute top-1/3 mt-4' />
                                 </div>
                                 <div>
-                                    <h2 className='Name text-3xl font-bold pt-4 pl-4 flex '>{getData.name}</h2>
+                                    <h2 className='Name text-3xl font-bold pt-10 pl-4 flex '>{getData.name}</h2>
                                     <h2 className='Name text-sm pt-2 pl-4 pr-4 '>{getData.description}</h2>
                                 </div>
                             </div>

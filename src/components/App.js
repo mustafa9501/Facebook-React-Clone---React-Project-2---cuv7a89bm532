@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Login from '../login_signup/Login';
 import Home from './Home';
 import Navbar from '../navbar/Navbar';
@@ -27,13 +29,30 @@ import Overview1 from '../asidebar/allPages/page/aboutPage/Overview1';
 import Work_education1 from '../asidebar/allPages/page/aboutPage/Work_education1';
 import Payments from '../asidebar/allPages/page/aboutPage/Payments';
 import Skills1 from '../asidebar/allPages/page/aboutPage/Skills1';
+import Search from '../navbar/Search';
+import Comment from '../cards/Comment';
 
 function App() {
+  return (
+    <div className="h-screen w-full font-poppins bg-black">
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </div>
+  );
+}
 
-  axios.interceptors.request.use(async (config) => {
+function AppContent() {
+
+    axios.interceptors.request.use(async (config) => {
     config.headers["projectid"] = "8hsukqjomca0";
     return config;
   });
+
+  const location = useLocation();
+  // const isCallingRoute =
+  //   location.pathname === "/search" ||
+  //   location.pathname === "/profile/post";
 
   const { getUser } = useUser();
 
@@ -47,10 +66,11 @@ function App() {
  }
 
   return (<>
-      <div className='h-screen w-screen'>
-      <BrowserRouter>
-      {getUser && getUser.status === "success" && (
+      <div className='h-screen w-screen bg-white'>
+  
+      {(location.pathname !== "/profile/post" && location.pathname !== "/profile/about" && location.pathname !== "/comment" && location.pathname !== "/search" && location.pathname !== "/pages/profilepage/postprofile" && location.pathname !== "/pages/profilepage/aboutprofile")  && getUser && getUser.status === "success" && (
       <Navbar />)}
+
         <Routes>
           {!getUser && (
           <Route path="/" element={<Login/>}/>)}
@@ -84,8 +104,11 @@ function App() {
                   <Route path="skills" element={<ProtectedRoute><Skills /></ProtectedRoute>}/>
                </Route>   
           </Route> 
-        </Routes>
-      </BrowserRouter>
+          {/* {isCallingRoute && <Search/>} */}
+          <Route path="/search" element={<ProtectedRoute><Search /></ProtectedRoute>}/>       
+          <Route path="/comment" element={<ProtectedRoute><Comment /></ProtectedRoute>}/>       
+         </Routes>
+      
       </div>
   </>)
 }

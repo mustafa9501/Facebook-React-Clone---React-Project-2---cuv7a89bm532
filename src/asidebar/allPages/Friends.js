@@ -1,10 +1,12 @@
 import { Icon } from '@iconify/react'
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Friends = () => {
 
     const [getData, setData] =useState([]);
+    const navigate = useNavigate();
 
     const friendsList = async () => {
         axios.get('https://academics.newtonschool.co/api/v1/facebook/post?limit=100').then((response) => {
@@ -17,9 +19,58 @@ const Friends = () => {
     useEffect(() => {
         friendsList()
     }, [])
+
+    const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsScreenSmall(window.innerWidth < 1100);
+    };
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
     
     return (<>
-        <div className='bg-[#F0F2F5] w-screen h-5/7 flex'>
+        {isScreenSmall ? (
+            <>
+                <div className='Part-1 bg-white pl-4 pt-3'>
+                <div className='flex justify-between pr-4'>
+                    <h4 className='text-2xl font-bold pl-2'>Friends</h4>
+                    <Icon icon="ep:back" width="2rem" height="2rem" style={{ color: 'black' }} className='mt-1 bg-[#d9dbe0] hover:bg-[#c2c5c9] rounded-full p-1 cursor-not-allowed ' onClick={()=>navigate('/')}/>
+                </div>
+                
+                <div className='border-b border-gray-300 pl-3 mr-4 mt-3'></div>
+                
+                <div className='flex mt-3'>
+                <div className='flex gap-4 bg-[#E4E6EB] px-4 cursor-not-allowed rounded-full mr-4 py-2'>
+                    <h3 className='font-bold text-lg text-black'>Your friends</h3>
+                </div>
+
+                <div className='flex gap-4 bg-[#E4E6EB] px-4 cursor-not-allowed rounded-full mr-4 py-1.5'>
+                    <h3 className='font-bold text-lg text-black '>Suggestions</h3>
+                </div>
+                </div>
+            </div>
+            <div className='font-semibold text-xl p-6 overflow-y-auto scrollbar'>All Friends
+            <div className='flex flex-wrap gap-2 pt-4 bg-[#F0F2F5] px-1'>
+            {getData.map((obj, id)=>{
+                return (
+                    <div key={obj.id} className='Part-2 mt-2'>
+                          <img src={obj.author.profileImage} alt="profile" className='h-36 w-36 rounded-t-2xl'></img>
+                          <div className='p-2 bg-white text-sm rounded-b-2xl'>{obj.author.name}</div>
+                    </div>
+                )
+            })}
+            </div>
+            </div>
+            </>
+
+        ) : (
+
+             <>
+            <div className='bg-[#F0F2F5] w-screen h-5/7 flex'>
 
             <div className='Part-1 w-1/7 h-full bg-white pl-4 pt-3  ' style={{ boxShadow: '0px 3px 2px 2px rgba(0, 0, 0, 0.1)' }}>
                 <div className='flex justify-between pr-4'>
@@ -63,6 +114,8 @@ const Friends = () => {
             </div>
             </div>
         </div>
+        </>
+        )}    
     </>
     )
 }

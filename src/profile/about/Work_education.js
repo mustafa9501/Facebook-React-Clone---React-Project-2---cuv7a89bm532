@@ -29,7 +29,7 @@ const Work_education = () => {
   console.log(getData)
 
   return (
-    <div className='pt-4'>
+    <div className='pt-4 pb-4'>
       <h2 className='font-semibold text-xl'>Work</h2>
       {getData.workExperience && getData.workExperience.map((obj) => (
         <>

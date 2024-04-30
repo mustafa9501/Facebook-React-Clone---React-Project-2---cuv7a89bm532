@@ -13,9 +13,9 @@ import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 import Profile from "../images/profile.png"
 
-export function Cards({ src, src1, alt, name, createdAt, content, likeCount, commentCount, id, authorId, isLiked }) {
+export function Cards({ src, src1, alt, name, createdAt, content, likeCount, commentCount, id, authorId  }) {
 
-  const { getUser, openCommentPopup, setComment, userIdHandler } = useUser();
+  const { getUser, openCommentPopup, setComment, userIdHandler, openComment } = useUser();
   const [getDropdown, setDropdown] = useState(false);
   const [liked, setLiked] = useState(false);
   const [displayLikeCount, setDisplayLikeCount] = useState(likeCount);
@@ -83,7 +83,6 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
     axios.get(`https://academics.newtonschool.co/api/v1/facebook/post/${id}/comments`).then((response) => {
       console.log(response.data.data)
       setComment(response.data.data)
-
     }).catch((error) => {
       // console.log(error);
     })
@@ -112,9 +111,23 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
 //    event.preventDefault();
 // }
 
+const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsScreenSmall(window.innerWidth < 1100);
+        };
+
+        window.addEventListener("resize", checkScreenSize);
+
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
   return (
     <>
-      <Card className="w-full px-1 rounded-xl">
+      {isScreenSmall ? (
+        <>
+          <Card className="w-full px-2 mx-2rounded-xl">
         <CardHeader className="flex justify-between gap-3.5">
           <Link to='/profile/post'><div className="py-2.5 flex" onClick={()=>userIdHandler(authorId)}>
             <img className="w-10 h-10 rounded-full" src={src1||Profile}  alt="Rounded avatar" />
@@ -131,10 +144,65 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
           {createdAt}
         </Typography>
 
-        <CardBody floated={false} className="p-0 h-full w-full">
+        <CardBody floated={false} className="p-0 h-full w-full px-2">
           <p className="pl-6 pr-3 pt-2 pb-3">{content}</p>
           <div className="flex justify-center mb-3">
-            <img src={src} alt={alt} />
+            <img src={src} alt="image" />
+          </div>
+          <div className="flex justify-between">
+            <div className="ml-4 mb-2.5 bg-blue-500 w-5 h-5 rounded-full flex gap-3"><div className="flex mt-1 ml-1"><Icon icon="mdi:like" width="0.8rem" height="0.8rem" style={{ color: 'white' }} /></div>
+              <h5 className="mb-2">{displayLikeCount}</h5>
+            </div>
+            <div className="mr-4 flex gap-1"><h5>{commentCount}</h5>
+              <Icon icon="basil:comment-solid" width="1.4rem" height="1.4rem" style={{ color: '#606770' }} /></div>
+          </div>
+          <div className="border-b border-neutral-400 mx-4"></div>
+        </CardBody>
+
+        <CardFooter className="flex justify-between px-5 pt-2 pb-1">
+          <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded-md px-5 py-1" onClick={() => likeHandler(id)}>
+          <Icon icon={liked ? "mdi:like" : "mdi:like-outline"} width="1.2rem" height="1.2rem" style={{ color: liked ? '#1877F2' : 'gray' }} className="mt-0.5" />
+            <h4 className={`font-semibold
+            ${liked ? 'text-[#1877F2]' : 'text-gray-600'} text-sm pt-0.5`}>Like</h4>
+          </Typography>
+          <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-2 py-1 mb-1" onClick={()=>{openComment(id);  userCommentPost()}}>
+            <Icon icon="cil:comment-bubble" width="1.2rem" height="1.2rem" style={{ color: 'gray' }} className="mt-1" />
+            <Link to='/comment'><h4 className="text-gray-600 font-semibold
+              test-sm">Comment</h4></Link>
+          </Typography>
+          <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-3 py-1 mb-1">
+            <Icon icon="majesticons:share-line" width="1.5rem" height="1.5rem" style={{ color: 'gray' }} />
+            <h4 className="font-semibold
+            text-gray-600  test-sm">Share</h4>
+          </Typography>
+        </CardFooter>
+
+      </Card>
+        </>
+
+      ) : (
+
+        <Card className="w-full px-2 mx-2rounded-xl">
+        <CardHeader className="flex justify-between gap-3.5">
+          <Link to='/profile/post'><div className="py-2.5 flex" onClick={()=>userIdHandler(authorId)}>
+            <img className="w-10 h-10 rounded-full" src={src1||Profile}  alt="Rounded avatar" />
+            <Typography variant="h4" color="blue-gray" className="px-3 text-lg hover:underline">
+              {name}
+            </Typography>
+          </div></Link>
+          <div ref={popupRef} className="Edit flex pt-3" onClick={dropDownHandler}>
+            <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] cursor-pointer p-1"/>
+          </div>
+          {getDropdown && <Dropdown id={id}/>}
+        </CardHeader>
+        <Typography variant="h4" color="blue-gray" className="text-[10px] absolute mt-9 ml-16 pl-1.5 text-zinc-500">
+          {createdAt}
+        </Typography>
+
+        <CardBody floated={false} className="p-0 h-full w-full px-2">
+          <p className="pl-6 pr-3 pt-2 pb-3">{content}</p>
+          <div className="flex justify-center mb-3">
+            <img src={src} alt="image" />
           </div>
           <div className="flex justify-between">
             <div className="ml-4 mb-2.5 bg-blue-500 w-5 h-5 rounded-full flex gap-3"><div className="flex mt-1 ml-1"><Icon icon="mdi:like" width="0.8rem" height="0.8rem" style={{ color: 'white' }} /></div>
@@ -165,6 +233,8 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
         </CardFooter>
 
       </Card>
+      )}
+      
     </>
   );
 }

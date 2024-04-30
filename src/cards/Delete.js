@@ -12,7 +12,7 @@ const Delete = () => {
             // tabIndex="-1"
             style={{ boxShadow: '1px 3px 4px 4px rgba(0, 0, 0, 0.1)' }}>
 
-            <div className='Settings text-md flex justify-between  cursor-pointer rounded-md hover:bg-[#F2F2F2] py-2 px-2'>
+            <div className='Settings text-md flex justify-between  cursor-not-allowed rounded-md hover:bg-[#F2F2F2] py-2 px-2'>
                 <div className='flex gap-4'>
                     <Icon icon="subway:delete" width="2rem" height="2rem" style={{ color: 'black' }}
                         className='border bg-[#E4E6EB] rounded-full p-1' />

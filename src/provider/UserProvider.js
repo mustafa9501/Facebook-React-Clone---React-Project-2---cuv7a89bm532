@@ -58,6 +58,10 @@ export const UserProvider = ({ children }) => {
         setSingleId(id)         
         };
 
+    const openComment = (id) =>{  
+        setSingleId(id)         
+        };
+
     const closeCommentPopup = () =>{
         setCommentPopup(false);
         }
@@ -157,7 +161,8 @@ export const UserProvider = ({ children }) => {
         setSearchDroplist,
         searchDroplistClose,
         onEmailHandler,
-        getEmail
+        getEmail,
+        openComment
     };
 
     return (

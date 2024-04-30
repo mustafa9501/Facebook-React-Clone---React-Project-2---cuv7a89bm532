@@ -28,13 +28,15 @@ const Skills = () => {
 
   return (
     <>
-      <h2 className='font-semibold text-xl pt-4'>Skills</h2>
-      {getData.skills && getData.skills.map((obj) => (
-        <>
-          <div key={obj._id} className='pl-3 pt-2'>
+      <div>
+        <h2 className='font-semibold text-xl pt-4'>Skills</h2>
+        {getData.skills && getData.skills.map((obj) => (
+          <>
+            <div key={obj._id} className='pl-3 pt-2'>
               <h3 className='pt-1'>{obj}</h3>
-          </div>
-        </>))}
+            </div>
+          </>))}
+      </div>
     </>
   )
 }
