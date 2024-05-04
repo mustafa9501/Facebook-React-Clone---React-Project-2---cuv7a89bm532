@@ -135,7 +135,7 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
               {name}
             </Typography>
           </div></Link>
-          <div ref={popupRef} className="Edit flex pt-3" onClick={dropDownHandler}>
+          <div className="Edit flex pt-3" onClick={dropDownHandler}>
             <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] cursor-pointer p-1"/>
           </div>
           {getDropdown && <Dropdown id={id}/>}
@@ -144,8 +144,8 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
           {createdAt}
         </Typography>
 
-        <CardBody floated={false} className="p-0 h-full w-full px-2">
-          <p className="pl-6 pr-3 pt-2 pb-3">{content}</p>
+        <CardBody floated={false} className="p-0 h-full w-full">
+          <p className="pl-3 pr-2 pt-2 pb-3">{content}</p>
           <div className="flex justify-center mb-3">
             <img src={src} alt="image" />
           </div>
@@ -159,7 +159,7 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
           <div className="border-b border-neutral-400 mx-4"></div>
         </CardBody>
 
-        <CardFooter className="flex justify-between px-5 pt-2 pb-1">
+        <CardFooter className="flex justify-between px-2 pt-2 pb-1">
           <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded-md px-5 py-1" onClick={() => likeHandler(id)}>
           <Icon icon={liked ? "mdi:like" : "mdi:like-outline"} width="1.2rem" height="1.2rem" style={{ color: liked ? '#1877F2' : 'gray' }} className="mt-0.5" />
             <h4 className={`font-semibold

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import { Cards } from '../cards/Cards';
 import './Home.css';
 import { useUser } from '../provider/UserProvider';
@@ -17,12 +18,14 @@ import { Icon } from '@iconify/react';
 import Popup from '../cards/Popup';
 import Comment from '../cards/Comment';
 import UpdatePost from '../cards/UpdatePost';
-import Profile from '../images/profile.png'
+import Profile from '../images/profile.png';
 
 const Home = () => {
 
     const [post, setPost] = useState([]);
     const { isPopupOpen, openPopup, closePopup, closeCommentPopup, commentPopup, getUser, updatePopupClose, updated, getName } = useUser();
+
+    const navigate = useNavigate();
 
     const userPost = async () => {
         axios.get('https://academics.newtonschool.co/api/v1/facebook/post?limit=100').then((response) => {
@@ -54,9 +57,9 @@ const Home = () => {
                 <div className='bg-white flex mt-2 pr-3 px-1'>
                     <div className='flex pl-5 gap-2 w-full'>
                         {getUser && <img src={Profile} alt="Profile" className='w-12 h-11 rounded-full cursor-pointer bg-[#eceaea]' />}
-                        <input type='text' placeholder={`What's on your mind ?`} className='flex-grow rounded-full bg-[#F0F2F5] px-4 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer mr-2' onClick={openPopup} />
+                        <input type='text' placeholder={`What's on your mind ?`} className='flex-grow rounded-full bg-[#F0F2F5] px-4 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer mr-2' onClick={()=>navigate('/composer')}/>
                     </div>
-                    <div className='mr-1 cursor-pointer' onClick={openPopup}>
+                    <div className='mr-1 cursor-pointer' onClick={()=>navigate('/composer')}>
                         <Icon icon="flat-color-icons:stack-of-photos" width="1.8rem" height="1.8rem" className='ml-2' />
                         <h4 className=' text-sm text-gray-500 font-semibold'>Photos</h4>
                     </div>

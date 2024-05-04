@@ -246,9 +246,15 @@ const Navbar = () => {
 
   const [showChannel, setShowChannel] = useState(false);
 
-  const channelPopupHandler = ()=>{
+  const channelPopupHandler = () => {
     setShowChannel(!showChannel);
   }
+
+  const [checked, setChecked] = useState(false);
+
+  const handleToggle = () => {
+    setChecked(!checked);
+  };
 
   return (
     <>
@@ -266,7 +272,7 @@ const Navbar = () => {
               </div>
 
               {/* profile */}
-                <div className='flex justify-between cursor-pointer px-2 py-3 bg-white ml-2 mt-14 mr-2 rounded-lg'>
+              <div className='flex justify-between cursor-pointer px-2 py-3 bg-white ml-2 mt-14 mr-2 rounded-lg'>
                 <div className='flex'>
                   {getUser && <img
                     src={Profile}
@@ -277,9 +283,9 @@ const Navbar = () => {
                     {getName && <h2 className='text-black pl-4 font-semibold'>{getName}</h2>}
                     <h3 className='text-gray-400 text-[14px] pl-4'>View your profile</h3>
                   </div>
-                  </div>
-                <Icon icon = {showChannel ? "iconamoon:arrow-up-2-bold" : "iconamoon:arrow-down-2-bold"} width="2rem" height="2rem" style={{ color: "black" }} className='bg-[#E4E6EB] rounded-full mr-1.5 mt-2 cursor-pointer' onClick={channelPopupHandler}/>
                 </div>
+                <Icon icon={showChannel ? "iconamoon:arrow-up-2-bold" : "iconamoon:arrow-down-2-bold"} width="2rem" height="2rem" style={{ color: "black" }} className='bg-[#E4E6EB] rounded-full mr-1.5 mt-2 cursor-pointer' onClick={channelPopupHandler} />
+              </div>
 
               {/* our channel */}
               {showChannel && getData && getData.map((obj) => (
@@ -427,10 +433,33 @@ const Navbar = () => {
                   <h2 className='text-black mt-1'>Help & support</h2>
                 </div>
 
-                <div className='flex gap-4 bg-white mt-2.5 py-2 px-2 rounded-lg'>
-                  <Icon icon="material-symbols-light:dark-mode" width="2rem" height="2rem" style={{ color: 'black' }}
-                    className='border bg-[#E4E6EB] rounded-full p-1' />
-                  <h2 className='text-black mt-1'>Display</h2>
+                <div className='flex justify-between mt-2.5 rounded-lg bg-white'>
+                  <div className='flex gap-4 py-2 px-2'>
+                    <Icon icon="material-symbols-light:dark-mode" width="2rem" height="2rem" style={{ color: 'black' }}
+                      className='border bg-[#E4E6EB] rounded-full p-1' />
+                    <h2 className='text-black mt-1'>Display</h2>
+                  </div>
+                  <div className='pt-3 pr-3'>
+                    <label htmlFor="toggle" className="flex items-center cursor-pointer">
+                      <div className="relative">
+                        <input
+                          id="toggle"
+                          type="checkbox"
+                          className="sr-only"
+                          checked={checked}
+                          onChange={handleToggle}
+                        />
+                        <div
+                          className={`toggle__line w-14 h-6 bg-gray-400 rounded-full shadow-inner ${checked ? 'bg-black' : 'bg-gray-400'
+                            }`}
+                        ></div>
+                        <div
+                          className={`toggle__dot absolute w-7 h-5 mt-0.5 bg-black rounded-full shadow inset-y-0 left-0 ${checked ? 'transform translate-x-full bg-black' : 'bg-white'
+                            }`}
+                        ></div>
+                      </div>
+                    </label>
+                  </div>
                 </div>
 
                 <div className='flex gap-4 bg-white mt-2.5 py-2 px-2 rounded-lg'>

@@ -32,6 +32,8 @@ import Skills1 from '../asidebar/allPages/page/aboutPage/Skills1';
 import Search from '../navbar/Search';
 import Comment from '../cards/Comment';
 import Signup from '../login_signup/Signup';
+import UpdatePost from '../cards/UpdatePost';
+import Popup from '../cards/Popup';
 
 function App() {
   return (
@@ -69,7 +71,7 @@ function AppContent() {
   return (<>
       <div className='h-screen w-screen bg-white'>
   
-      {(location.pathname !== "/pages" && location.pathname !== "/profile/post" && location.pathname !== "/profile/about" && location.pathname !== "/comment" && location.pathname !== "/search" && location.pathname !== "/pages/profilepage/postprofile" && location.pathname !== "/pages/profilepage/aboutprofile" && location.pathname !== "/pages/createpage")  && getUser && getUser.status === "success" && (
+      {(location.pathname !== "/pages" && location.pathname !== "/profile/post" && location.pathname !== "/profile/about" && location.pathname !== "/comment" && location.pathname !== "/search" && location.pathname !== "/pages/profilepage/postprofile" && location.pathname !== "/pages/profilepage/aboutprofile" && location.pathname !== "/pages/createpage" && location.pathname !== "/updatepost" && location.pathname !== "/composer")  && getUser && getUser.status === "success" && (
       <Navbar />)}
 
         <Routes>
@@ -109,6 +111,8 @@ function AppContent() {
           {/* {isCallingRoute && <Search/>} */}
           <Route path="/search" element={<ProtectedRoute><Search /></ProtectedRoute>}/>       
           <Route path="/comment" element={<ProtectedRoute><Comment /></ProtectedRoute>}/>              
+          <Route path="/updatepost" element={<ProtectedRoute><UpdatePost /></ProtectedRoute>}/>              
+          <Route path="/composer" element={<ProtectedRoute><Popup /></ProtectedRoute>}/>              
          </Routes>
       
       </div>

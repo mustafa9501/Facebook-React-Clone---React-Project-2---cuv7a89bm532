@@ -53,20 +53,6 @@ const Comment = ({ onClose }) => {
         })
       }
 
-    // const deleteComment = async (singleId) => {  
-    //     try {
-    //         const result = await axios.delete(`https://academics.newtonschool.co/api/v1/facebook/comment/${singleId}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${getUser.token}`
-    //             }
-    //         });       
-    //         // window.location.reload();
-    //         console.log(result);    
-    //     } catch (err) {
-    //         alert(err.message);
-    //     }
-    // };
-
     const dropDownHandler =(()=>{
         setDropdown(!getDropdown);
     })
@@ -113,23 +99,23 @@ const Comment = ({ onClose }) => {
                      {/* );
                      })} */}
                          
-                     {getcomment.map((obj) => {
+                     {getcomment.map((obj, index) => {
                          return (<>
-                             <div className='flex pl-6 gap-3 pt-5'>
+                             <div key={index} className='flex pl-6 gap-3 pt-5'>
                                  <img src={Avatar} alt='profile' className='h-10 w-10 bg-gray-100 rounded-full ' />
                                  <div className='rounded-3xl bg-[#F0F2F5] px-3 p-2'>
                                      <h2 className='font-semibold'>Unknown</h2>
                                      <p className='text-black'>{obj.content}</p>
                                  </div>
-                                 <Icon icon="tabler:dots" width="1.7rem" height="1.7rem" style={{ color: 'gray' }} className='mt-4 rounded-full hover:bg-gray-200 cursor-pointer px-1 py-1' onClick={dropDownHandler}/>
+                                 <Icon icon="tabler:dots" width="1.7rem" height="1.7rem" style={{ color: 'gray' }} className='mt-3 rounded-full hover:bg-gray-200 cursor-pointer px-1 py-1' onClick={dropDownHandler}/>
                              </div>    
+                             {getDropdown && <Delete />}               
                              
                              <div className='flex gap-4 pl-[88px]'>
                                  <h6 className='text-[11px] font-bold cursor-not-allowed'>Like</h6>
                                  <h6 className='text-[11px] font-bold cursor-not-allowed'>Reply</h6>
                              </div>
                              </> )})}    
-                             {getDropdown && <Delete />}               
                  </div>
                  <div className='flex'>
                      <img src={Profile} className='h-10 w-10 rounded-full bg-gray-100 ml-6' />
@@ -170,15 +156,17 @@ const Comment = ({ onClose }) => {
                     {/* );
                     })} */}
                         
-                    {getcomment.map((obj) => {
+                    {getcomment.map((obj, id) => {
                         return (<>
-                            <div className='flex pl-6 gap-3 pt-5'>
+                            <div key={obj.id} className='flex pl-6 gap-3 pt-5'>
                                 <img src={Avatar} alt='profile' className='h-10 w-10 bg-gray-100 rounded-full ' />
                                 <div className='rounded-3xl bg-[#F0F2F5] px-3 p-2'>
                                     <h2 className='font-semibold'>Unknown</h2>
                                     <p className='text-black'>{obj.content}</p>
                                 </div>
+                                <div>
                                 <Icon icon="tabler:dots" width="1.7rem" height="1.7rem" style={{ color: 'gray' }} className='mt-4 rounded-full hover:bg-gray-200 cursor-pointer px-1 py-1' onClick={dropDownHandler}/>
+                                </div>
                             </div>    
                             
                             <div className='flex gap-4 pl-[88px]'>
