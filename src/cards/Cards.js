@@ -125,9 +125,9 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
 
   return (
     <>
+    <div className={`${darkTheme && 'dark'}`}>
       {isScreenSmall ? (
         <>
-        <div className={`${darkTheme && 'dark'}`}>
           <Card className="w-full px-2 mx-2rounded-xl dark:bg-[#323436]">
         <CardHeader className="flex justify-between gap-3.5 dark:bg-[#323436] dark:text-white">
           <Link to='/profile/post'><div className="py-2.5 flex" onClick={()=>userIdHandler(authorId)}>
@@ -179,7 +179,6 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
         </CardFooter>
 
       </Card>
-      </div>
         </>
 
       ) : (
@@ -236,7 +235,7 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
 
       </Card>
       )}
-      
+      </div>
     </>
   );
 }

@@ -60,9 +60,9 @@ const ProfilePage = () => {
                         <div className='w-full bg-white dark:bg-[#18191A]'>
 
                             <div className='h-full'>
-                                <div className='flex py-1 pl-3 bg-white w-full fixed '>
-                                    <Icon icon="mingcute:arrow-left-line" width="1.6rem" height="1.6rem" style={{ color: 'black' }} className=' cursor-pointer bg-white ' onClick={() => navigate('/pages')} />
-                                    <h2 className='Name text-md font-bold pl-4 pt-0.5 flex '>{getData.name}</h2>
+                                <div className='flex py-1 pl-3 bg-white dark:bg-[#18191A]  w-full fixed '>
+                                    <Icon icon="mingcute:arrow-left-line" width="1.6rem" height="1.6rem" style={{ color: darkTheme ? 'white' : 'black' }} className=' cursor-pointer bg-white dark:bg-[#18191A]' onClick={() => navigate('/pages')} />
+                                    <h2 className='Name text-md font-bold pl-4 pt-0.5 flex dark:text-white'>{getData.name}</h2>
                                 </div>
                                 <div className='h-3/7'>
                                     <img src={Cover} className='h-80 w-full' />
@@ -73,22 +73,22 @@ const ProfilePage = () => {
                                             <img src={getData.image || Avatar} alt='profile' className='rounded-full h-44 w-44 absolute top-[12.5rem]' />
                                         </div>
                                         <div>
-                                            <h2 className='Name text-3xl font-bold pt-14 pl-4 flex '>{getData.name}</h2>
-                                            <h2 className='Name text-sm pt-2 pl-4 pr-4 '>{getData.description}</h2>
+                                            <h2 className='Name text-3xl font-bold pt-14 pl-4 flex dark:text-white'>{getData.name}</h2>
+                                            <h2 className='Name text-sm pt-2 pl-4 pr-4 dark:text-white'>{getData.description}</h2>
                                         </div>
                                     </div>
                                     <div className='w-100% flex justify-center gap-2 mt-4'>
-                                        <button className='border w-1/2 px-6 rounded-lg bg-[#d9dbe0] font-semibold flex gap-2 pt-2.5 cursor-not-allowed'>
-                                            <Icon icon="ri:chat-follow-up-fill" width="1.2rem" height="1.2rem" style={{ color: 'black' }} className='mt-0.5' />Follow
+                                        <button className='w-1/2 px-6 rounded-lg bg-[#d9dbe0] dark:bg-[#323436] dark:text-white font-semibold flex gap-2 pt-2.5 cursor-not-allowed'>
+                                            <Icon icon="ri:chat-follow-up-fill" width="1.2rem" height="1.2rem" style={{ color: darkTheme ? 'white' : 'black' }} className='mt-0.5 ' />Follow
                                         </button>
-                                        <button className='border w-1/2 px-6 py-2 rounded-lg bg-[#0861F2] text-white font-semibold flex gap-2 pt-2.5 cursor-not-allowed'>
+                                        <button className='w-1/2 px-6 py-2 rounded-lg bg-[#0861F2] text-white font-semibold flex gap-2 pt-2.5 cursor-not-allowed'>
                                             <Icon icon="zondicons:announcement" width="1.2rem" height="1.2rem" style={{ color: 'white' }} className='mt-0.5' />Promote
                                         </button>
                                     </div>
                                 </div>
                                 <div className='border-b border-gray-400 mt-4'></div>
 
-                                <div className='flex justify-evenly  mt-2 text-gray-600 font-semibold'>
+                                <div className='flex justify-evenly  mt-2 text-gray-600 dark:text-white font-semibold'>
                                     <Link to='postprofile'>
                                         <div className={`cursor-pointer hover:bg-[#F0F2F5] rounded-lg px-2 py-2 ${isActive === 'post' ? 'text-[#0866FF]' : ''}`} onClick={() => activeHandler('post')}>
                                             <h2 className={`${isActive === 'post' ? 'border-b-2 border-[#0866FF]' : ''}`}>Post</h2>

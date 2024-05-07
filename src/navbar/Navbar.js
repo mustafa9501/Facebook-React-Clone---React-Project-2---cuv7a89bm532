@@ -281,7 +281,7 @@ const Navbar = () => {
                 <div className='flex gap-4 cursor-pointer mt-0.5'><Icon icon="ic:sharp-arrow-back" width="1.6rem" height="1.6rem" style={{ color: darkTheme ? 'white' : 'black' }} onClick={toggleSidebar} />
                   <h2 className='text-black dark:text-white text-lg font-bold'>Menu</h2>
                 </div>
-                <Icon icon="ion:search" width="2rem" height="2rem" style={{ color: 'black' }} className='mr-7 rounded-full bg-[#E4E6EB] p-1 cursor-pointer' />
+                {/* <Icon icon="ion:search" width="2rem" height="2rem" style={{ color: 'black' }} className='mr-7 rounded-full bg-[#E4E6EB] p-1 cursor-pointer' /> */}
               </div>
 
               {/* profile */}

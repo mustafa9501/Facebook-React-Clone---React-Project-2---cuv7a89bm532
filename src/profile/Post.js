@@ -116,7 +116,7 @@ const Post = () => {
                             </div>
                         </div>
 
-                        <div className='w-full dark:bg-[#18191A] p-1'>
+                        <div className='w-full dark:bg-[#18191A] p-1.5'>
                             {getPost.map((obj) => (
                                 <Card key={obj._id} className="w-full rounded-xl mt-6 dark:bg-[#323436]">
                                     <CardHeader className="flex justify-between gap-3.5 dark:bg-[#323436] pt-2">
