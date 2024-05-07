@@ -33,6 +33,13 @@ export const UserProvider = ({ children }) => {
     const [userId, setUserId] = useState(0);
     const [viewPageId, setViewPageId] = useState(0);
     const [searchDroplist, setSearchDroplist] = useState(false);
+    const [commentId, setCommentId] = useState(null);
+    const [darkTheme, setDarkTheme] = useState(false);
+
+  const handleToggle = () => {
+    setDarkTheme(!darkTheme);
+  };
+     
 
     const onClickMidNav = (icon) => {
         setIsActive(icon);
@@ -119,6 +126,10 @@ export const UserProvider = ({ children }) => {
         setSearchDroplist(false)
       }
 
+      const dropDownHandlerOpen = (id) => {
+        setCommentId(id);
+    };
+
     const object = {
         getUser,
         signInUser,
@@ -162,7 +173,11 @@ export const UserProvider = ({ children }) => {
         searchDroplistClose,
         onEmailHandler,
         getEmail,
-        openComment
+        openComment,
+        commentId,
+        setCommentId,
+        handleToggle,
+        darkTheme
     };
 
     return (

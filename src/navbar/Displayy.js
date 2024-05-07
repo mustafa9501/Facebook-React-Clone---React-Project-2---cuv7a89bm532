@@ -4,6 +4,7 @@ import { useUser } from '../provider/UserProvider'
 const Displayy = () => {
 
     const {comingSoonPopupClose} = useUser();
+       
 
     return (
         <>
@@ -30,7 +31,7 @@ const Displayy = () => {
                     <label for='radio-off' className='cursor-pointer'>Off</label>
                     <input type='radio' id='radio-off' name='radio-btn' value='Off' checked="checked" className='w-5 h-5 mt-1 cursor-pointer'/>
                 </div>
-                <div className='flex justify-between pl-3.5 pr-4 text-black  text-lg hover:bg-[#e7e6e6] cursor-pointer rounded-lg py-2 ml-10 mb-2'>
+                <div className='flex justify-between pl-3.5 pr-4 text-black  text-lg hover:bg-[#e7e6e6] cursor-pointer rounded-lg py-2 ml-10 mb-2' >
                     <label for='radio-on' className='cursor-pointer'>On</label>
                     <input type='radio' id='radio-on' name='radio-btn' value='On' className='w-5 h-5 mt-1 cursor-pointer'/>
                 </div>

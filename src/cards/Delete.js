@@ -1,34 +1,62 @@
 import { Icon } from '@iconify/react'
-import React from 'react'
+import {React, useState, useEffect} from 'react';
+import axios from 'axios';
+import { useUser } from '../provider/UserProvider';
 
 const Delete = () => {
 
-    // const deleteComment = async (singleId) => {  
-    //     try {
-    //         const result = await axios.delete(`https://academics.newtonschool.co/api/v1/facebook/comment/${singleId}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${getUser.token}`
-    //             }
-    //         });       
-    //         // window.location.reload();
-    //         console.log(result);    
-    //     } catch (err) {
-    //         alert(err.message);
-    //     }
-    // };
+    const {getUser, commentId, singleId, setComment} = useUser();
+
+    const userCommentPost = async () => {
+        axios.get(`https://academics.newtonschool.co/api/v1/facebook/post/${singleId}/comments`).then((response) => {
+            console.log(response.data.data)
+            setComment(response.data.data)
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
+    const deleteComment = async () => {  
+        try {
+            const result = await axios.delete(`https://academics.newtonschool.co/api/v1/facebook/comment/${commentId}`, {
+                headers: {
+                    Authorization: `Bearer ${getUser.token}`
+                }
+            });       
+            userCommentPost();
+            console.log(result);    
+        } catch (err) {
+            alert(err.message);
+        }
+    };
+
+    console.log(commentId)
+
+    const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsScreenSmall(window.innerWidth < 1100);
+    };
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   return (
-    <>
-        <div
-            className="absolute left-32 w-1/6 index-10 rounded-md bg-white text-zinc-200 font-semibold px-2 focus:outline-none"
+    <>  
+        {isScreenSmall ? (
+            <div
+            className="absolute left-[12rem] mt-8 sm:w-1/2 md:w-1/6 rounded-md bg-white text-zinc-200 font-semibold py-2 px-2 focus:outline-none z-10"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="user-menu-button"
-            // tabIndex="-1"
-            style={{ boxShadow: '1px 3px 4px 4px rgba(0, 0, 0, 0.1)' }}>
+            tabIndex="-1"
+            style={{ boxShadow: '0px 1px 4px 3px rgba(0, 0, 0, 0.1)' }}>
 
-            <div className='Settings text-md flex justify-between  cursor-not-allowed rounded-md hover:bg-[#F2F2F2] py-1 px-1'>
-                <div className='flex gap-3'>
+            <div className='Settings text-md flex justify-between  cursor-pointer rounded-md hover:bg-[#F2F2F2] pr-2'>
+                <div className='flex gap-3' onClick={deleteComment}>
                     <Icon icon="subway:delete" width="1.8rem" height="1.8rem" style={{ color: 'black' }}
                         className='border bg-[#E4E6EB] rounded-full p-1.5' />
                     <h2 className='text-black mt-0.5'>Delete</h2>
@@ -36,6 +64,28 @@ const Delete = () => {
 
             </div>
         </div>
+
+        ) : (
+
+            <div
+            className="absolute left-[12rem] mt-8 w-1/6 rounded-md bg-white text-zinc-200 font-semibold py-2 px-2 focus:outline-none z-10"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="user-menu-button"
+            tabIndex="-1"
+            style={{ boxShadow: '0px 1px 4px 3px rgba(0, 0, 0, 0.1)' }}>
+
+            <div className='Settings text-md flex justify-between  cursor-pointer rounded-md hover:bg-[#F2F2F2] pr-2'>
+                <div className='flex gap-3' onClick={deleteComment}>
+                    <Icon icon="subway:delete" width="1.8rem" height="1.8rem" style={{ color: 'black' }}
+                        className='border bg-[#E4E6EB] rounded-full p-1.5' />
+                    <h2 className='text-black mt-0.5'>Delete</h2>
+                </div>
+
+            </div>
+        </div>
+        )}
+        
     </>
   )
 }

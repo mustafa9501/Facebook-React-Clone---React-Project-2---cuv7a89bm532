@@ -23,7 +23,7 @@ import Profile from '../images/profile.png';
 const Home = () => {
 
     const [post, setPost] = useState([]);
-    const { isPopupOpen, openPopup, closePopup, closeCommentPopup, commentPopup, getUser, updatePopupClose, updated, getName } = useUser();
+    const { isPopupOpen, openPopup, closePopup, closeCommentPopup, commentPopup, getUser, updatePopupClose, updated, getName, darkTheme} = useUser();
 
     const navigate = useNavigate();
 
@@ -51,22 +51,23 @@ const Home = () => {
         return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
 
-    return (<>
+    return ( <>
         {isScreenSmall ? (
-            <div className="w-full h-screen">
-                <div className='bg-white flex mt-2 pr-3 px-1'>
+            <div className={`${darkTheme && 'dark'}`}>
+            <div className={`w-full h-screen bg-white dark:bg-[#18191A]`}>
+                <div className='bg-white  dark:bg-[#18191A] flex pr-3 px-1 pt-2'>
                     <div className='flex pl-5 gap-2 w-full'>
-                        {getUser && <img src={Profile} alt="Profile" className='w-12 h-11 rounded-full cursor-pointer bg-[#eceaea]' />}
-                        <input type='text' placeholder={`What's on your mind ?`} className='flex-grow rounded-full bg-[#F0F2F5] px-4 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer mr-2' onClick={()=>navigate('/composer')}/>
+                        {getUser && <img src={Profile} alt="Profile" className='w-12 h-11 rounded-full cursor-pointer bg-[#eceaea] ' />}
+                        <input type='text' placeholder={`What's on your mind ?`} className='flex-grow rounded-full bg-[#F0F2F5] dark:bg-[#323436] px-4 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer mr-2' onClick={()=>navigate('/composer')}/>
                     </div>
                     <div className='mr-1 cursor-pointer' onClick={()=>navigate('/composer')}>
                         <Icon icon="flat-color-icons:stack-of-photos" width="1.8rem" height="1.8rem" className='ml-2' />
-                        <h4 className=' text-sm text-gray-500 font-semibold'>Photos</h4>
+                        <h4 className=' text-sm text-gray-500 font-semibold dark:text-white'>Photos</h4>
                     </div>
                 </div>
-                <div className='border-b-4 border-gray-300 mt-2'></div>
+                <div className='border-b-4 border-gray-300 dark:border-gray-950  mt-2'></div>
                 {/* story images */}
-                <div className='flex justify-center gap-1 my-5 px-3'>
+                <div className='flex justify-center gap-1 my-5 px-3 dark:bg-[#18191A]'>
                     <div className='rounded-xl w-2/9 h-48'>
                         <img src={Model4} alt='image' className='w-full h-full rounded-xl' />
                     </div>
@@ -81,7 +82,7 @@ const Home = () => {
                     </div>
                 </div>
                 {/* posts */}
-                <div className="w-full flex flex-col items-center">
+                <div className="w-full flex flex-col items-center dark:bg-[#18191A]">
                     {post?.map((obj, _id) => {
                         return (
                             <div key={obj.id} className='mb-3 w-full px-2'>
@@ -103,8 +104,9 @@ const Home = () => {
                     })}
                 </div>
             </div>
+            </div>
         ) : (
-            <div className="w-screen h-5/7 flex bg-[#F0F2F5]  pt-1">
+            <div className="w-screen h-5/7 flex bg-[#F0F2F5] dark:bg-[#18191A] pt-1">
                 {/* Content for the first part */}
                 <div className='basis-1/4 overflow-y-auto scrollbar'> <Aside />
                 </div>
@@ -127,7 +129,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div className='mb-3 h-32 w-2/8 m-auto bg-white rounded-xl'>
+                    <div className='mb-3 h-32 w-2/8 m-auto bg-white dark:bg-[#18191A] rounded-xl'>
                         <div className='flex p-3 gap-3'>
                             {getUser &&
                                 <img
@@ -142,7 +144,7 @@ const Home = () => {
                         <div className='flex justify-between pl-6'>
                             <div className='flex cursor-pointer hover:bg-[#F0F2F5] rounded-lg mt-2 px-2 py-2' onClick={openPopup}>
                                 <Icon icon="wpf:video-call" width="1.8rem" height="1.6rem" style={{ color: '#E42645' }} className='ml-3' />
-                                <h4 className='ml-1.5 text-gray-500 font-semibold'>Live Video</h4>
+                                <h4 className='ml-1.5 text-gray-500 font-semibold dark:text-red-300'>Live Video</h4>
                             </div>
                             <div className='flex mt-2 cursor-pointer hover:bg-[#F0F2F5] rounded-lg px-2 py-2' onClick={openPopup}>
                                 <Icon icon="flat-color-icons:stack-of-photos" width="1.8rem" height="1.8rem" />

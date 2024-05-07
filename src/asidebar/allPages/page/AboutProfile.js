@@ -15,12 +15,12 @@ const AboutProfile = () => {
         setIsActive(tag);
     }
 
-    // const contentMap = {
-    //     'Contact and basic info': <> <Overview1 /> </>,
-    //     'Work and education': <> <Work_education1 /> </>,
-    //     'Place lived': <> <Placed_lived1 /> </>,
-    //     'Skills': <> <Skills1 /> </>
-    // };
+    const contentMap = {
+        'Contact and basic info': <> <Overview1 /> </>,
+        'Work and education': <> <Work_education1 /> </>,
+        'Place lived': <> <Placed_lived1 /> </>,
+        'Skills': <> <Skills1 /> </>
+    };
 
     const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
 

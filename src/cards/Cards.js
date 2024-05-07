@@ -16,7 +16,7 @@ import Profile from "../images/profile.png"
 export function Cards({ src, src1, alt, name, createdAt, content, likeCount, commentCount, id, authorId  }) {
 
   const { getUser, openCommentPopup, setComment, userIdHandler, openComment } = useUser();
-  const [getDropdown, setDropdown] = useState(false);
+  const [getDropdownn, setDropdownn, darkTheme] = useState(false);
   const [liked, setLiked] = useState(false);
   const [displayLikeCount, setDisplayLikeCount] = useState(likeCount);
   const popupRef = useRef(null);
@@ -92,7 +92,7 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
         // Clicked outside the popup, close it
-        setDropdown(false);
+        setDropdownn(false);
       }
     };
 
@@ -104,7 +104,7 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
   }, []);
 
   const dropDownHandler = (()=>{
-    setDropdown(!getDropdown);
+    setDropdownn(!getDropdownn);
 })
 
 // const onClickHandler =(event)=>{
@@ -127,24 +127,25 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
     <>
       {isScreenSmall ? (
         <>
-          <Card className="w-full px-2 mx-2rounded-xl">
-        <CardHeader className="flex justify-between gap-3.5">
+        <div className={`${darkTheme && 'dark'}`}>
+          <Card className="w-full px-2 mx-2rounded-xl dark:bg-[#323436]">
+        <CardHeader className="flex justify-between gap-3.5 dark:bg-[#323436] dark:text-white">
           <Link to='/profile/post'><div className="py-2.5 flex" onClick={()=>userIdHandler(authorId)}>
             <img className="w-10 h-10 rounded-full" src={src1||Profile}  alt="Rounded avatar" />
-            <Typography variant="h4" color="blue-gray" className="px-3 text-lg hover:underline">
+            <Typography variant="h4" color="blue-gray" className="px-3 text-lg hover:underline ">
               {name}
             </Typography>
           </div></Link>
           <div className="Edit flex pt-3" onClick={dropDownHandler}>
-            <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] cursor-pointer p-1"/>
+            <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] cursor-pointer p-1"/>
           </div>
-          {getDropdown && <Dropdown id={id}/>}
+          {getDropdownn && <Dropdown id={id}/>}
         </CardHeader>
-        <Typography variant="h4" color="blue-gray" className="text-[10px] absolute mt-9 ml-16 pl-1.5 text-zinc-500">
+        <Typography variant="h4" color="blue-gray" className="text-[10px] absolute mt-9 ml-16 pl-1.5 text-zinc-500 dark:text-white">
           {createdAt}
         </Typography>
 
-        <CardBody floated={false} className="p-0 h-full w-full">
+        <CardBody floated={false} className="p-0 h-full w-full dark:text-white">
           <p className="pl-3 pr-2 pt-2 pb-3">{content}</p>
           <div className="flex justify-center mb-3">
             <img src={src} alt="image" />
@@ -154,30 +155,31 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
               <h5 className="mb-2">{displayLikeCount}</h5>
             </div>
             <div className="mr-4 flex gap-1"><h5>{commentCount}</h5>
-              <Icon icon="basil:comment-solid" width="1.4rem" height="1.4rem" style={{ color: '#606770' }} /></div>
+              <Icon icon="basil:comment-solid" width="1.4rem" height="1.4rem" style={{ color: darkTheme ? 'white' : '#606770' }} /></div>
           </div>
           <div className="border-b border-neutral-400 mx-4"></div>
         </CardBody>
 
-        <CardFooter className="flex justify-between px-2 pt-2 pb-1">
-          <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded-md px-5 py-1" onClick={() => likeHandler(id)}>
+        <CardFooter className="flex justify-between px-2 pt-2 pb-1 ">
+          <Typography className="flex gap-2 cursor-pointer rounded-md px-5 py-1" onClick={() => likeHandler(id)}>
           <Icon icon={liked ? "mdi:like" : "mdi:like-outline"} width="1.2rem" height="1.2rem" style={{ color: liked ? '#1877F2' : 'gray' }} className="mt-0.5" />
             <h4 className={`font-semibold
-            ${liked ? 'text-[#1877F2]' : 'text-gray-600'} text-sm pt-0.5`}>Like</h4>
+            ${liked ? 'text-[#1877F2]' : ('text-gray-600')} text-sm font-semibold pt-0.5`}>Like</h4>
           </Typography>
           <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-2 py-1 mb-1" onClick={()=>{openComment(id);  userCommentPost()}}>
-            <Icon icon="cil:comment-bubble" width="1.2rem" height="1.2rem" style={{ color: 'gray' }} className="mt-1" />
-            <Link to='/comment'><h4 className="text-gray-600 font-semibold
+            <Icon icon="cil:comment-bubble" width="1.2rem" height="1.2rem" style={{ color: darkTheme ? 'white' : 'gray' }} className="mt-1" />
+            <Link to='/comment'><h4 className="text-gray-600 dark:text-white font-semibold
               test-sm">Comment</h4></Link>
           </Typography>
           <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-3 py-1 mb-1">
-            <Icon icon="majesticons:share-line" width="1.5rem" height="1.5rem" style={{ color: 'gray' }} />
+            <Icon icon="majesticons:share-line" width="1.5rem" height="1.5rem" style={{ color: darkTheme ? 'white' : 'gray' }} />
             <h4 className="font-semibold
-            text-gray-600  test-sm">Share</h4>
+            text-gray-600 dark:text-white test-sm">Share</h4>
           </Typography>
         </CardFooter>
 
       </Card>
+      </div>
         </>
 
       ) : (
@@ -193,7 +195,7 @@ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
           <div ref={popupRef} className="Edit flex pt-3" onClick={dropDownHandler}>
             <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] cursor-pointer p-1"/>
           </div>
-          {getDropdown && <Dropdown id={id}/>}
+          {getDropdownn && <Dropdown id={id}/>}
         </CardHeader>
         <Typography variant="h4" color="blue-gray" className="text-[10px] absolute mt-9 ml-16 pl-1.5 text-zinc-500">
           {createdAt}

@@ -83,7 +83,7 @@ const Search = () => {
                 <div className='h-[30rem] overflow-y-auto scrollbar bg-white mb-3'>
                     <div className='flex justify-between'>
                     <h3 className='pl-6 pt-6 pb-4 font-semibold text-lg'>Recent</h3>
-                    {/* <Icon icon="maki:cross" width="1.8rem" height="1.8rem"  style={{color: 'gray'}} className='mt-6 mr-3 rounded-full bg-[#e7e6e6] p-1 cursor-pointer' onClick={()=>navigate(-1)}/> */}
+                    <h3 className='text-[#7695eb] font-semibold pt-6 pr-3'>See all</h3>
                     </div>
                     {notFound ? (
                         <div className="ml-6 pt-2 pb-2 pr-3">Not found</div>

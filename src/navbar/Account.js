@@ -42,6 +42,7 @@ const Account = () => {
     pageDetails();
   }, [getEmail]);
 
+  
   return (<>
 
     <div

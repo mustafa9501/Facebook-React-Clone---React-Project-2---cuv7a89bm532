@@ -2,10 +2,12 @@ import { Icon } from '@iconify/react';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../provider/UserProvider';
 
 const Marketplace = () => {
 
     const navigate = useNavigate();
+    const {darkTheme} = useUser();
 
     const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
 
@@ -20,39 +22,40 @@ const Marketplace = () => {
     }, []);
 
     return (<>
+        <div className={`${darkTheme && 'dark'}`}>
         {isScreenSmall ? (
             <>
-            <div className='Part-1 h-full bg-white pl-4 pt-3  '>
+            <div className='Part-1 h-full bg-white dark:bg-[#18191A] pl-4 pt-3  '>
                 <div className='flex justify-between pr-4'>
-                    <h4 className='text-2xl font-bold'>Marketplace</h4>
-                    <Icon icon="ep:back" width="2rem" height="2rem" style={{ color: 'black' }} className='bg-[#d9dbe0] hover:bg-[#c2c5c9] rounded-full p-1 cursor-not-allowed ' onClick={() => navigate('/')} />
+                    <h4 className='text-2xl font-bold dark:text-white'>Marketplace</h4>
+                    <Icon icon="ep:back" width="2rem" height="2rem" style={{ color: 'black' }} className='bg-[#d9dbe0] hover:bg-[#c2c5c9] rounded-full p-1 cursor-not-allowed' onClick={() => navigate('/')} />
                 </div>
-                <div className='text-zinc-600 hover:bg-[#d3dde5] rounded-lg px-2 py-1.5 mr-4 mt-5 text-center font-semibold cursor-not-allowed bg-[#e2f1ef]'>+ Create new listing</div>
+                <div className='text-zinc-600 hover:bg-[#d3dde5] rounded-lg px-2 py-1.5 mr-4 mt-5 text-center font-semibold cursor-not-allowed bg-[#e2f1ef] dark:bg-[#323436] dark:text-white'>+ Create new listing</div>
 
                 <div className='border-b border-gray-300 pl-3 mr-4 mt-3'></div>
                 <div className='flex justify-evenly gap-1 overflow-x-auto scrollbar'>
-                    <div className='flex gap-1 mt-5 bg-[#d9dbe0] cursor-not-allowed rounded-full  py-1.5 px-2 pr-3'>
+                    <div className='flex gap-1 mt-5 bg-[#d9dbe0] dark:bg-[#323436] cursor-not-allowed rounded-full  py-1.5 px-2 pr-3'>
                         <Icon icon="ph:video-fill" width="1.8rem" height="1.8rem" style={{ color: 'gray' }} className='rounded-full bg-[#d9dbe0] p-1' />
-                        <h3 className='font-semibold text-sm text-black mt-1'>Browse</h3>
+                        <h3 className='font-semibold text-sm text-black mt-1 dark:text-white'>Browse</h3>
                     </div>
-                    <div className='flex gap-1 mt-5 cursor-not-allowed rounded-full bg-[#d9dbe0] py-1.5 px-2 pr-2.5'>
+                    <div className='flex gap-1 mt-5 cursor-not-allowed rounded-full bg-[#d9dbe0] dark:bg-[#323436] py-1.5 px-2 pr-2.5'>
                         <Icon icon="mage:video-player-fill" width="1.8rem" height="1.8rem" style={{ color: 'gray' }} className='rounded-full bg-[#d9dbe0] p-1' />
-                        <h3 className='font-semibold text-sm text-zinc-black mt-1'>Inbox</h3>
+                        <h3 className='font-semibold text-sm text-zinc-black mt-1 dark:text-white'>Inbox</h3>
                     </div>
-                    <div className='flex gap-1 mt-5 bg-[#d9dbe0] cursor-not-allowed rounded-full  py-1.5 px-2 pr-3'>
+                    <div className='flex gap-1 mt-5 bg-[#d9dbe0] dark:bg-[#323436] cursor-not-allowed rounded-full  py-1.5 px-2 pr-3'>
                         <Icon icon="mdi:movie-open-play" width="1.8rem" height="1.8rem" style={{ color: 'gray' }} className='rounded-full bg-[#d9dbe0] p-1' />
-                        <h3 className='font-semibold text-sm text-black mt-1'>Buying</h3>
+                        <h3 className='font-semibold text-sm text-black mt-1 dark:text-white'>Buying</h3>
                     </div>
-                    <div className='flex gap-1 mt-5 bg-[#d9dbe0] cursor-not-allowed rounded-full  py-1.5 px-2 pr-3'>
+                    <div className='flex gap-1 mt-5 bg-[#d9dbe0] dark:bg-[#323436] cursor-not-allowed rounded-full  py-1.5 px-2 pr-3'>
                         <Icon icon="mdi:movie-open-play" width="1.8rem" height="1.8rem" style={{ color: 'gray' }} className='rounded-full bg-[#d9dbe0] p-1' />
-                        <h3 className='font-semibold text-sm text-black mt-1'>Selling</h3>
+                        <h3 className='font-semibold text-sm text-black mt-1 dark:text-white'>Selling</h3>
                     </div>
-                    <div className='flex gap-1 mt-5 bg-[#d9dbe0] cursor-not-allowed rounded-full  py-1.5 px-2 pr-3'>
+                    <div className='flex gap-1 mt-5 bg-[#d9dbe0] dark:bg-[#323436] cursor-not-allowed rounded-full  py-1.5 px-2 pr-3'>
                         <Icon icon="ri:live-fill" width="1.8rem" height="1.8rem" style={{ color: 'gray' }} className='rounded-full bg-[#d9dbe0] p-1' />
-                        <h3 className='font-semibold text-sm text-black mt-1'>Notifications</h3>
+                        <h3 className='font-semibold text-sm text-black mt-1 dark:text-white'>Notifications</h3>
                     </div>
                 </div>
-                <div className='Part-2 font-bold text-2xl pt-10 flex items-center justify-center'>This page is coming soon !!
+                <div className='Part-2 font-bold text-2xl pt-10 flex items-center justify-center dark:text-white'>This page is coming soon !!
                 </div>
             </div>
         </>
@@ -97,7 +100,8 @@ const Marketplace = () => {
             </div>
             <div className='Part-2 font-bold text-3xl p-5 text-center flex m-auto items-center'>This page is coming soon !!</div>
         </div>
-        )}       
+        )}    
+        </div>   
     </>
     )
 }
