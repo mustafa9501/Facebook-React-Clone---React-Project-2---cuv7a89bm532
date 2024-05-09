@@ -93,15 +93,15 @@ const Popup = ({ onClose }) => {
 
             ) : (
 
-                <div className="fixed h-screen w-screen flex items-center justify-center bg-[#F3F3F4] bg-opacity-85">
-                <div className="main_popup bg-white w-2/6 h-3/5 rounded-lg drop-shadow-xl">
+                <div className="fixed h-screen w-screen flex items-center justify-center bg-[#F3F3F4] dark:bg-[#18191A] bg-opacity-85 dark:bg-opacity-85 ">
+                <div className="main_popup bg-white dark:bg-[#323436] w-2/6 h-3/5 rounded-lg drop-shadow-xl">
                     <div className='flex justify-end gap-32'>
-                        <h3 className='text-center text-xl font-bold py-3'>Create post</h3>
+                        <h3 className='text-center text-xl font-bold py-3 dark:text-white'>Create post</h3>
                         <div className='cursor-pointer pr-3 py-3 flex justify-end' onClick={onClose}>
                             <Icon icon="maki:cross" width="2rem" height="2rem" style={{ color: '#606771' }} className='bg-gray-200 hover:bg-gray-300 rounded-full p-1.5' />
                         </div>
                     </div>
-                    <div className='border-b border-gray'></div>
+                    <div className='border-b border-gray dark:border-gray-500'></div>
                     <div className='flex'>
                         {getUser && 
                         <img
@@ -110,15 +110,15 @@ const Popup = ({ onClose }) => {
                         className='w-10 h-10 m-4 rounded-full cursor-pointer bg-[#eceaea] hover:bg-[#dad8d8]'
                       />}
                         {getName && 
-                        <h3 className='text-gray text-lg pt-6 font-semibold'>{getName}</h3>}
+                        <h3 className='text-gray text-lg pt-6 font-semibold dark:text-white'>{getName}</h3>}
                     </div>
                     {getName && 
-                    <textarea type='text' className='h-32 w-5/7 text-zinc-800 text-2xl pl-1.5 ml-4 mt-1 focus:outline-none resize-none' placeholder={`What's on your mind, ${getName}?`} onChange={(e)=>setValue(e.target.value)}></textarea>}
+                    <textarea type='text' className='h-32 w-5/7 text-zinc-800 dark:text-zink-400 dark:bg-[#323436] text-2xl pl-1.5 ml-4 mt-1 focus:outline-none resize-none' placeholder={`What's on your mind, ${getName}?`} onChange={(e)=>setValue(e.target.value)}></textarea>}
 
-                    <div className='rounded-lg border border-gray mx-5 '>
-                        <div className='flex justify-between px-3 py-3.5'>
+                    <div className='rounded-lg border border-gray dark:border-gray-500 mx-5 '>
+                        <div className='flex justify-between px-3 py-3.5 dark:bg-[#323436] dark:text-white'>
                             {/* <h4 className='font-semibold pl-1 cursor-pointer'>Add to your post</h4> */}
-                            <input type="file" name="images" id="images"/>
+                            <input type="file" name="images" id="images" />
                             <div className='flex gap-3'>
                                 <Icon icon="flat-color-icons:stack-of-photos" width="1.7rem" height="1.7rem" className='cursor-pointer hover:scale-110' />
                                 {/* <Icon icon="fa-solid:user-tag" width="1.6rem" height="1.6rem" style={{ color: '#1B82E9' }} className='cursor-pointer hover:scale-110' /> */}
@@ -128,7 +128,7 @@ const Popup = ({ onClose }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='rounded-lg border bg-[#1B82E9] px-2 py-1.5 mx-5 my-2 text-center text-white font-semibold cursor-pointer hover:bg-[#5997d6]' onClick={postDetails}>Post</div>
+                    <div className='rounded-lg  bg-[#1B82E9] px-2 py-1.5 mx-5 my-2 text-center text-white font-semibold cursor-pointer hover:bg-[#5997d6]' onClick={postDetails}>Post</div>
                 </div>
             </div>
             )}

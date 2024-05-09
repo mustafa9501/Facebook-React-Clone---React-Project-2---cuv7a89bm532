@@ -71,8 +71,15 @@ function AppContent() {
   return (<>
   <div className={`${darkTheme && 'dark'}`}>
       <div className='h-screen w-screen bg-white dark:bg-[#18191A]'>
+
+      {/* && location.pathname !== "/profile/post" */}
+      {/* location.pathname !== "/pages" && */}
+      {/* location.pathname !== "/profile/about" &&  */}
+      {/* && location.pathname !== "/pages/profilepage/postprofile" */}
+      {/* && location.pathname !== "/pages/profilepage/aboutprofile" */}
+      {/* && location.pathname !== "/pages/createpage" */}
   
-      {(location.pathname !== "/pages" && location.pathname !== "/profile/post" && location.pathname !== "/profile/about" && location.pathname !== "/comment" && location.pathname !== "/search" && location.pathname !== "/pages/profilepage/postprofile" && location.pathname !== "/pages/profilepage/aboutprofile" && location.pathname !== "/pages/createpage" && location.pathname !== "/updatepost" && location.pathname !== "/composer")  && getUser && getUser.status === "success" && (
+      {( location.pathname !== "/comment" && location.pathname !== "/search"  && location.pathname !== "/updatepost" && location.pathname !== "/composer")  && getUser && getUser.status === "success" && (
       <Navbar />)}
 
         <Routes>

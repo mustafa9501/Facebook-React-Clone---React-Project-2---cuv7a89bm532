@@ -564,7 +564,7 @@ const Navbar = () => {
         </>
 
       ) : (
-        <div className='bg-white drop-shadow-lg w-screen h-14 flex justify-between sticky top-0 z-10'>
+        <div className={`bg-white dark:bg-[#242526] drop-shadow-lg w-screen h-14 flex justify-between sticky top-0 z-10 ${darkTheme && 'dark'}`}>
           <div className='flex justify-between gap-12'>
             {/* left icons */}
             {searchDroplist && <Search ref={searchRef} />}
@@ -573,10 +573,10 @@ const Navbar = () => {
                 <Icon icon="logos:facebook" width="2.5rem" height="2.5rem" />
               </div></Link>
               <div className='absolute mt-5 ml-16 pl-4'>
-                <Icon icon="carbon:search" width="1.1rem" height="1.1rem" style={{ color: '#545454' }} />
+                <Icon icon="carbon:search" width="1.1rem" height="1.1rem" style={{ color:darkTheme ? 'white' : '#545454' }} />
               </div>
               <div className='Search' onClick={searchDroplistHandler}>
-                <input type='text' className='bg-[#F0F2F5] rounded-full mt-2 py-2 px-10 focus:outline-none' placeholder='Search Facebook' readOnly />
+                <input type='text' className='bg-[#F0F2F5] dark:bg-[#323436] rounded-full mt-2 py-2 px-10 focus:outline-none' placeholder='Search Facebook' readOnly />
               </div>
             </div>
 
@@ -584,19 +584,19 @@ const Navbar = () => {
             <div className='flex items-center gap-2'>
               <Link to='/'>
                 <div
-                  className={`Home w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all border-[#0866FF] relative  ${isActive === 'home' ? 'border-b-[3px]' : ''}`}
+                  className={`Home w-28 h-12 rounded-lg p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] dark:hover:bg-[#3A3B3C] transition-all border-[#0866FF] relative  ${isActive === 'home' ? 'border-b-[3px]' : ''}`}
                   onMouseEnter={() => dropDownEnter('home')}
                   onMouseLeave={dropDownLeave}
                   onClick={() => onClickMidNav('home')}
                 >
                   <Icon icon="fluent:home-28-filled" width="1.8rem" height="1.8rem" style={{ color: isActive === 'home' ? '#0866FF' : '#606266' }} />
                   {homeHovered && (
-                    <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Home</div>
+                    <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm dark:bg-gray-100 dark:text-black'>Home</div>
                   )}
                 </div></Link>
 
               <Link to='/pages'><div
-                className={`Page ps w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all relative border-[#0866FF] ${isActive === 'page' ? 'border-b-[3px]' : ''}`}
+                className={`Page ps w-28 h-12 rounded-lg p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] dark:hover:bg-[#3A3B3C] transition-all relative border-[#0866FF] ${isActive === 'page' ? 'border-b-[3px]' : ''}`}
                 onMouseEnter={() => dropDownEnter('page')}
                 onMouseLeave={dropDownLeave}
                 onClick={() => onClickMidNav('page')}
@@ -604,41 +604,41 @@ const Navbar = () => {
               >
                 <Icon icon="material-symbols-light:emoji-flags" width="2rem" height="2rem" style={{ color: isActive === 'page' ? '#0866FF' : '#606266' }} />
                 {pageHovered && (
-                  <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Pages</div>
+                  <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm dark:bg-gray-100 dark:text-black'>Pages</div>
                 )}
               </div></Link>
 
               <Link to='/videos'><div
-                className={`Home w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all border-[#0866FF] relative  ${isActive === 'video' ? 'border-b-[3px]' : ''}`}
+                className={`Home w-28 h-12 rounded-lg p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] dark:hover:bg-[#3A3B3C] transition-all border-[#0866FF] relative  ${isActive === 'video' ? 'border-b-[3px]' : ''}`}
                 onMouseEnter={() => dropDownEnter('video')}
                 onMouseLeave={dropDownLeave}
                 onClick={() => onClickMidNav('video')}
               >
                 <Icon icon="ph:video-fill" width="1.8rem" height="1.8rem" style={{ color: isActive === 'video' ? '#0866FF' : '#606266' }} />
                 {videoHovered && (
-                  <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Video</div>
+                  <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm dark:bg-gray-100 dark:text-black'>Video</div>
                 )}
               </div></Link>
               <Link to='/marketplace'><div
-                className={`Home w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all border-[#0866FF] relative  ${isActive === 'market' ? 'border-b-[3px]' : ''}`}
+                className={`Home w-28 h-12 rounded-lg p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] dark:hover:bg-[#3A3B3C] transition-all border-[#0866FF] relative  ${isActive === 'market' ? 'border-b-[3px]' : ''}`}
                 onMouseEnter={() => dropDownEnter('market')}
                 onMouseLeave={dropDownLeave}
                 onClick={() => onClickMidNav('market')}
               >
                 <Icon icon="healthicons:market-stall" width="1.8rem" height="1.8rem" style={{ color: isActive === 'market' ? '#0866FF' : '#606266' }} />
                 {marketHovered && (
-                  <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Marketplace</div>
+                  <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm dark:bg-gray-100 dark:text-black'>Marketplace</div>
                 )}
               </div></Link>
               <Link to='/group'><div
-                className={`Groups w-28 h-12 rounded p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] transition-all relative border-[#0866FF] ${isActive === 'group' ? 'border-b-[3px]' : ''}`}
+                className={`Groups w-28 h-12 rounded-lg p-1 cursor-pointer flex justify-center items-center hover:bg-[#F2F2F2] dark:hover:bg-[#3A3B3C] transition-all relative border-[#0866FF] ${isActive === 'group' ? 'border-b-[3px]' : ''}`}
                 onMouseEnter={() => dropDownEnter('group')}
                 onMouseLeave={dropDownLeave}
                 onClick={() => onClickMidNav('group')}
               >
                 <Icon icon="ri:group-2-line" width="1.8rem" height="1.8rem" style={{ color: isActive === 'group' ? '#0866FF' : '#606266' }} />
                 {groupHovered && (
-                  <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] text-sm'>Groups</div>
+                  <div className='absolute mt-24 text-white shadow-md py-1.5 px-3 rounded-lg bg-[#050505] dark:bg-gray-100 dark:text-black text-sm'>Groups</div>
                 )}
               </div></Link>
             </div>
@@ -668,7 +668,7 @@ const Navbar = () => {
                 onClick={toggleMenu}
               />
               {menuHovered && (
-                <div className='absolute mt-3 text-white shadow-md py-1.5 px-2 rounded-lg bg-[#050505] text-sm'>Menu</div>
+                <div className='absolute mt-3 text-white shadow-md py-1.5 px-2 rounded-lg bg-[#050505] text-sm dark:bg-gray-100 dark:text-black'>Menu</div>
               )}
             </div>
 
@@ -684,7 +684,7 @@ const Navbar = () => {
                 onClick={toggleMessenger}
               />
               {messengerHovered && (
-                <div className='absolute mt-3 text-white shadow-md py-1.5 px-2 rounded-lg bg-[#050505] text-sm'>Messenger</div>
+                <div className='absolute mt-3 text-white shadow-md py-1.5 px-2 rounded-lg bg-[#050505] text-sm dark:bg-gray-100 dark:text-black'>Messenger</div>
               )}
             </div>
 
@@ -700,7 +700,7 @@ const Navbar = () => {
                 onClick={toggleNotification}
               />
               {notificationHovered && (
-                <div className='absolute mt-3 text-white shadow-md py-1.5 px-2 rounded-lg bg-[#050505] text-sm'>Notifications</div>
+                <div className='absolute mt-3 text-white shadow-md py-1.5 px-2 rounded-lg bg-[#050505] text-sm dark:bg-gray-100 dark:text-black'>Notifications</div>
               )}
             </div>
             {/*  */}
@@ -725,7 +725,7 @@ const Navbar = () => {
                 />
               }
               {accountHovered && (
-                <div className='absolute mt-3 text-white shadow-md py-1.5 px-1 rounded-lg bg-[#050505] text-sm'>Account</div>
+                <div className='absolute mt-3 text-white shadow-md py-1.5 px-1 rounded-lg bg-[#050505] text-sm dark:bg-gray-100 dark:text-black'>Account</div>
               )}
             </div>
 

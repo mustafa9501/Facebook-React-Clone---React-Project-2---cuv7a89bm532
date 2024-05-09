@@ -35,11 +35,12 @@ export const UserProvider = ({ children }) => {
     const [searchDroplist, setSearchDroplist] = useState(false);
     const [commentId, setCommentId] = useState(null);
     const [darkTheme, setDarkTheme] = useState(false);
+    const [isActive1, setIsActive1] = useState('post');
+    const [isActive2, setIsActive2] = useState('post');
 
   const handleToggle = () => {
     setDarkTheme(!darkTheme);
   };
-     
 
     const onClickMidNav = (icon) => {
         setIsActive(icon);
@@ -177,7 +178,11 @@ export const UserProvider = ({ children }) => {
         commentId,
         setCommentId,
         handleToggle,
-        darkTheme
+        darkTheme,
+        setIsActive1,
+        isActive1,
+        setIsActive2,
+        isActive2
     };
 
     return (

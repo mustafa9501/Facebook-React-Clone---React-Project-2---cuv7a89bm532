@@ -27,25 +27,27 @@ const Payments = () => {
     }, [])
 
   return (
-    <>
-         <h2 className='font-semibold text-xl pt-5'>Payments Details</h2>
+    <>  
+      <div>
+         <h2 className='font-semibold text-xl pt-5 dark:text-white'>Payments Details</h2>
       {getData.owner && getData.owner.paymentDetails && getData.owner.paymentDetails.map((obj) => (
         <>
           <div key={obj._id} className='pl-3'>
             <div className='flex pt-4 gap-3'>
               <Icon icon="ion:card" width="2rem" height="2rem" style={{ color: '#727B87' }} />          
-                <h3 className='pt-1'>{obj.cardNumber}</h3>
+                <h3 className='pt-1 dark:text-white'>{obj.cardNumber}</h3>
             </div>
             <div className='flex pt-3 gap-3'>
               <Icon icon="fluent:dual-screen-update-20-filled" width="2rem" height="2rem" style={{ color: '#727B87' }} />
-              <h3 className='pt-1'>{obj.expirationDate}</h3>
+              <h3 className='pt-1 dark:text-white'>{obj.expirationDate}</h3>
             </div>
             <div className='flex pt-3 gap-3'>
               <Icon icon="solar:card-bold-duotone" width="2rem" height="2rem" style={{ color: '#727B87' }} />
-              <h3 className='pt-1 pr-5'>{obj.cvv}</h3>
+              <h3 className='pt-1 pr-5 dark:text-white'>{obj.cvv}</h3>
             </div>
           </div>
         </>))}
+        </div>
     </>
   )
 }

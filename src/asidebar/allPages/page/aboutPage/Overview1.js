@@ -30,47 +30,49 @@ const Overview1 = () => {
 
     return (
         <>
-            <h2 className='font-semibold text-xl pt-5'>Basic info User</h2>
+            <div className='pb-2'>
+            <h2 className='font-semibold text-xl pt-5 dark:text-white'>Basic info User</h2>
             <div className='pb-6 pl-3'>
                 { getData.owner && <>
                     <div className='pt-3 flex gap-4'>
                         <Icon icon="bxs:user" width="2rem" height="2rem" style={{ color: '#727B87' }} />
-                        <h3 className='pt-1.5'>{getData.owner.name}</h3>
+                        <h3 className='pt-1.5 dark:text-white'>{getData.owner.name}</h3>
                     </div>
             
                 <div className=' pt-4 flex gap-4'>
                     <Icon icon="ic:baseline-email" width="2rem" height="2rem" style={{ color: '#727B87' }} />
-                    <h3 className='pt-1.5'>{getData.owner.email}</h3>
+                    <h3 className='pt-1.5 dark:text-white'>{getData.owner.email}</h3>
                 </div>
            
                 <div className=' pt-4 flex gap-4'>
                     <Icon icon="ph:gender-male-bold" width="1.8rem" height="1.8rem" style={{ color: '#727B87' }} />
-                    <h3 className='pt-1.5 pl-1'>{getData.owner.gender||'male'}</h3>
+                    <h3 className='pt-1.5 pl-1 dark:text-white'>{getData.owner.gender||'male'}</h3>
                 </div>
                 </> }
             </div>
 
-            <h2 className='font-semibold text-xl pt-4'>Contact details</h2>
+            <h2 className='font-semibold text-xl pt-4 dark:text-white'>Contact details</h2>
             {getData.owner && getData.owner.address && getData.owner.address.map((obj)=>( <>
                 <div className=' pt-4 flex gap-4 pl-4'>
                     <Icon icon="ion:home" width="1.8rem" height="1.8rem" style={{ color: '#727B87' }} />
-                    <h3 className='pt-1.5 pl-1'>Live in {obj.street}, {obj.city}</h3>
+                    <h3 className='pt-1.5 pl-1 dark:text-white'>Live in {obj.street}, {obj.city}</h3>
                 </div>
                 <div className='pt-4 flex gap-4 pl-4'>
                     <Icon icon="carbon:location-filled" width="1.8rem" height="1.8rem" style={{ color: '#727B87' }} />
-                    <h3 className='pt-1.5 pl-1'>From {obj.state}</h3>
+                    <h3 className='pt-1.5 pl-1 dark:text-white'>From {obj.state}</h3>
                 </div>
                 <div className='pt-4 flex gap-4 pl-4'>
                     <Icon icon="tabler:flag-filled" width="1.8rem" height="1.8rem" style={{ color: '#727B87' }} />
-                    <h3 className='pt-1.5 pl-1'>{obj.country}</h3>
+                    <h3 className='pt-1.5 pl-1 dark:text-white'>{obj.country}</h3>
                 </div>
                 </> ))}
                 { getData.owner && <>
                  <div className=' pt-4 flex gap-3.5 pl-4'>
                      <Icon icon="ph:phone-fill" width="1.8rem" height="1.8rem" style={{ color: '#727B87' }} />
-                <h3 className='pt-1 pl-1'>{getData.owner.phone||"123456789"}</h3>
+                <h3 className='pt-1 pl-1 dark:text-white'>{getData.owner.phone||"123456789"}</h3>
                 </div>
              </> }
+             </div>
         </>
     )
 }

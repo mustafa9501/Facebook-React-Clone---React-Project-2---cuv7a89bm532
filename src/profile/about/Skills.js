@@ -5,7 +5,7 @@ import { useUser } from '../../provider/UserProvider';
 
 const Skills = () => {
 
-  const { getUser, userId } = useUser();
+  const { getUser, userId, darkTheme } = useUser();
   const [getData, setData] = useState('')
 
   const userDetails = async () => {
@@ -28,12 +28,12 @@ const Skills = () => {
 
   return (
     <>
-      <div>
-        <h2 className='font-semibold text-xl pt-4'>Skills</h2>
+      <div className={`${darkTheme && 'dark'}`}>
+        <h2 className='font-semibold text-xl pt-4 dark:text-white'>Skills</h2>
         {getData.skills && getData.skills.map((obj) => (
           <>
-            <div key={obj._id} className='pl-3 pt-2'>
-              <h3 className='pt-1'>{obj}</h3>
+            <div key={obj._id} className='pl-3 pt-2 pb-2'>
+              <h3 className='pt-1 dark:text-white'>{obj}</h3>
             </div>
           </>))}
       </div>
