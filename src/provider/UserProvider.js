@@ -34,13 +34,21 @@ export const UserProvider = ({ children }) => {
     const [viewPageId, setViewPageId] = useState(0);
     const [searchDroplist, setSearchDroplist] = useState(false);
     const [commentId, setCommentId] = useState(null);
-    const [darkTheme, setDarkTheme] = useState(false);
+    const [darkTheme, setDarkTheme] = useState(() => {
+        // Get dark theme preference from local storage or default to false
+        const storedTheme = localStorage.getItem('darkTheme');
+        return storedTheme ? JSON.parse(storedTheme) : false;
+    });
     const [isActive1, setIsActive1] = useState('post');
     const [isActive2, setIsActive2] = useState('post');
 
-  const handleToggle = () => {
-    setDarkTheme(!darkTheme);
-  };
+    useEffect(() => {
+        localStorage.setItem('darkTheme', JSON.stringify(darkTheme));
+    }, [darkTheme]);
+
+    const handleToggle = () => {
+        setDarkTheme(prevTheme => !prevTheme);
+    };
 
     const onClickMidNav = (icon) => {
         setIsActive(icon);

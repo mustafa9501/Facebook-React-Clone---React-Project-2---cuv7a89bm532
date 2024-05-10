@@ -50,7 +50,7 @@ const Aside = () => {
         </Link>
       )}
 
-        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
+        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
         <Icon icon="dashicons:plus-alt" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold dark:text-white'>COVID-19 Information Center</h3>
         </div>
