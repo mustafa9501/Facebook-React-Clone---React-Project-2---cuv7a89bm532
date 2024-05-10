@@ -128,8 +128,8 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
       {isScreenSmall ? (
         <div className={`${darkTheme && 'dark'}`}>
           <>
-            <Card className="w-full px-2 mx-2rounded-xl dark:bg-[#323436]">
-              <CardHeader className="flex justify-between gap-3.5 dark:bg-[#323436] dark:text-white">
+            <Card className="w-full mx-2rounded-xl dark:bg-[#323436]">
+              <CardHeader className="flex justify-between gap-3 dark:bg-[#323436] dark:text-white">
                 <Link to='/profile/post'><div className="py-2.5 flex" onClick={() => userIdHandler(authorId)}>
                   <img className="w-10 h-10 rounded-full" src={src1 || Profile} alt="Rounded avatar" />
                   <Typography variant="h4" color="blue-gray" className="px-3 text-lg hover:underline ">
@@ -162,9 +162,9 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
 
               <CardFooter className="flex justify-between px-2 pt-2 pb-1 ">
                 <Typography className="flex gap-2 cursor-pointer rounded-md px-5 py-1" onClick={() => likeHandler(id)}>
-                  <Icon icon={liked ? "mdi:like" : "mdi:like-outline"} width="1.2rem" height="1.2rem" style={{ color: liked ? '#1877F2' : 'gray' }} className="mt-0.5" />
+                  <Icon icon={liked ? "mdi:like" : "mdi:like-outline"} width="1.2rem" height="1.2rem" style={{ color: liked ? '#1877F2' : (darkTheme ? 'white' : 'gray') }} className="mt-0.5" />
                   <h4 className={`font-semibold
-            ${liked ? 'text-[#1877F2]' : ('text-gray-600')} text-sm font-semibold pt-0.5`}>Like</h4>
+            ${liked ? 'text-[#1877F2]' : (darkTheme ? 'dark:text-white' : 'text-gray-600')} text-sm font-semibold pt-0.5`}>Like</h4>
                 </Typography>
                 <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-2 py-1 mb-1" onClick={() => { openComment(id); userCommentPost() }}>
                   <Icon icon="cil:comment-bubble" width="1.2rem" height="1.2rem" style={{ color: darkTheme ? 'white' : 'gray' }} className="mt-1" />
