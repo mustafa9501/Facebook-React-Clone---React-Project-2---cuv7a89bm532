@@ -54,13 +54,13 @@ const Home = () => {
     return (<>
         {isScreenSmall ? (
             <div className={`${darkTheme && 'dark'}`}>
-                <div className={`w-full h-screen bg-white dark:bg-[#18191A]`}>
-                    <div className='bg-white  dark:bg-[#18191A] flex pr-3 px-1 pt-2'>
-                        <div className='flex pl-5 gap-2 w-full'>
+                <div className={`w-screen h-screen bg-white dark:bg-[#18191A]`}>
+                    <div className='bg-white  dark:bg-[#18191A] flex gap-2 px-1 pt-2'>
+                        <div className='flex pl-5 gap-2 w-screen'>
                             {getUser && <img src={Profile} alt="Profile" className='w-12 h-11 rounded-full cursor-pointer bg-[#eceaea] ' />}
-                            <input type='text' placeholder={`What's on your mind ?`} className='flex-grow rounded-full bg-[#F0F2F5] dark:bg-[#323436] px-4 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer mr-10' onClick={() => navigate('/composer')} />
+                            <input type='text' placeholder={`What's on your mind ?`} className='flex-grow rounded-full bg-[#F0F2F5] dark:bg-[#323436] pl-4 pr-2 text-lg focus:outline-none hover:bg-[#e5e6e9] cursor-pointer' onClick={() => navigate('/composer')} />
                         </div>
-                        <div className='mr-3 cursor-pointer' onClick={() => navigate('/composer')}>
+                        <div className='pr-1 cursor-pointer' onClick={() => navigate('/composer')}>
                             <Icon icon="flat-color-icons:stack-of-photos" width="1.8rem" height="1.8rem" className='ml-2' />
                             <h4 className=' text-sm text-gray-500 font-semibold dark:text-white'>Photos</h4>
                         </div>

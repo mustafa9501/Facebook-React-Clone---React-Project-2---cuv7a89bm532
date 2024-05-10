@@ -551,7 +551,7 @@ const Navbar = () => {
               <Icon icon="healthicons:market-stall" width="1.5rem" height="1.5rem" style={{ color: isActive === 'market' ? '#0866FF' : '#606266' }} />
             </div></Link>
             <Link to='/group'><div
-              className={`Groups ml-1 w-16 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
+              className={`Groups ml-1 w-16 h-12 rounded p-1 pr-6 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
               onMouseEnter={() => dropDownEnter('group')}
               onMouseLeave={dropDownLeave}
               onClick={() => onClickMidNav('group')}
