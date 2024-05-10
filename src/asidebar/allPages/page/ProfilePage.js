@@ -102,8 +102,8 @@ const ProfilePage = () => {
                                             <h2 className={`${isActive2 === 'about' ? 'border-b-2 border-[#0866FF]' : ''}`}>About</h2>
                                         </div>
                                     </Link>
-                                    <div className='cursor-not-allowed hover:bg-[#F0F2F5] rounded-lg px-2 py-2'>Followers</div>
-                                    <div className='cursor-not-allowed hover:bg-[#F0F2F5] rounded-lg px-2 py-2'>Photos</div>
+                                    <div className='cursor-not-allowed rounded-lg px-2 py-2'>Followers</div>
+                                    <div className='cursor-not-allowed rounded-lg px-2 py-2'>Photos</div>
                                 </div>
 
                             </div>

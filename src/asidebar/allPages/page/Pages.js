@@ -97,7 +97,7 @@ const Pages = () => {
                                 </button></Link>
 
                                 <button className=' rounded-lg py-1 px-4 flex justify-center gap-2 font-semibold cursor-not-allowed bg-[#E4E6EB] dark:bg-[#323436] dark:text-white hover:bg-[#d4d6db]'>
-                                    <Icon icon="zondicons:announcement" width="1.2rem" height="1.2rem" style={{ color: 'black' }} className='mt-1' />Promote</button>
+                                    <Icon icon="zondicons:announcement" width="1.2rem" height="1.2rem" style={{ color: darkTheme ? 'white' : 'black' }} className='mt-1' />Promote</button>
                             </div>
                         </div>
                     ))}

@@ -148,7 +148,7 @@ const PostProfile = () => {
                                             </>)}
                                             <div className="flex justify-between">
                                                 <div className="ml-6 mb-2.5 bg-blue-500 w-5 h-5 rounded-full flex gap-3"><div className="flex mt-1 ml-1"><Icon icon="mdi:like" width="0.8rem" height="0.8rem" style={{ color: 'white' }} /></div>
-                                                <h5 className='dark:text-white'>0</h5>
+                                                    <h5 className='dark:text-white'>0</h5>
                                                 </div>
                                                 <div className="mr-6 flex gap-1">
                                                     <h5 className='dark:text-white'>0</h5>
@@ -176,66 +176,68 @@ const PostProfile = () => {
                                     </Card>
                                 ))
                             ) : (
-                            <>
-                                <Card className="w-full ml-2 rounded-xl mb-3">
-                                    <CardHeader className="flex justify-between gap-3.5">
-                                        <div className="py-3 flex">
-                                            <img className="w-10 h-10 rounded-full mt-1" src={getData.image} alt="Rounded avatar" />
-                                            <div className=''>
-                                                <Typography variant="h4" color="blue-gray" className="px-3 text-lg">
-                                                    {getData.name}
+                                <>
+                                    <div className='mx-2 w-5/7 mb-3'>
+                                        <Card className=" rounded-xl  dark:bg-[#323436] dark:text-white">
+                                            <CardHeader className="flex justify-between gap-3.5 dark:bg-[#323436] dark:text-white">
+                                                <div className="py-3 flex">
+                                                    <img className="w-10 h-10 rounded-full mt-1" src={getData.image} alt="Rounded avatar" />
+                                                    <div className=''>
+                                                        <Typography variant="h4" color="blue-gray" className="px-3 text-lg">
+                                                            {getData.name}
+                                                        </Typography>
+                                                        <h5 className='text-[10px] pl-3.5'>{ }</h5>
+                                                    </div>
+                                                </div>
+                                                <div className="Edit flex pt-3">
+                                                    <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] cursor-pointer p-1" />
+                                                </div>
+                                            </CardHeader>
+
+                                            <Typography variant="h4" color="blue-gray" className="text-[10px] absolute mt-9 ml-16 pl-1.5 text-zinc-500">
+                                            </Typography>
+
+                                            <CardBody floated={false} className="h-full w-full dark:text-white">
+
+                                                <p className="pl-6 pr-3 pb-3">{ }</p>
+                                                <div className="flex justify-center mb-3 font-semibold">
+                                                    There is no post yet.
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <div className="ml-4 mb-2.5 bg-blue-500 w-5 h-5 rounded-full flex gap-3"><div className="flex mt-1 ml-1"><Icon icon="mdi:like" width="0.8rem" height="0.8rem" style={{ color: darkTheme ? 'white' : 'white' }} /></div>
+                                                        <h5 className="mb-2"></h5>
+                                                    </div>
+                                                    <div className="mr-4 flex gap-1"><h5></h5>
+                                                        <Icon icon="basil:comment-solid" width="1.4rem" height="1.4rem" style={{ color: darkTheme ? 'white' : '#606770' }} /></div>
+                                                </div>
+                                                <div className="border-b border-neutral-400 mx-4"></div>
+                                            </CardBody>
+
+                                            <CardFooter className="flex justify-between px-5 pt-2 pb-2.5">
+                                                <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded-md px-5 py-1">
+                                                    <Icon icon="iconamoon:like-light" width="1.5rem" height="1.5rem" style={{ color: darkTheme ? 'white' : 'gray' }} className="mt-0.5" />
+                                                    <h4 className="font-semibold text-gray-600 mt-0.5 test-sm dark:text-white">Like</h4>
                                                 </Typography>
-                                                <h5 className='text-[10px] pl-3.5'>{ }</h5>
-                                            </div>
-                                        </div>
-                                        <div className="Edit flex pt-3">
-                                            <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] cursor-pointer p-1" />
-                                        </div>
-                                    </CardHeader>
+                                                <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-2 py-1" >
+                                                    <Icon icon="cil:comment-bubble" width="1.2rem" height="1.2rem" style={{ color: darkTheme ? 'white' : 'gray' }} className="mt-1" />
+                                                    <h4 className="text-gray-600 font-semibold test-sm dark:text-white">Comment</h4>
+                                                </Typography>
+                                                <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-3 py-1">
+                                                    <Icon icon="majesticons:share-line" width="1.5rem" height="1.5rem" style={{ color: darkTheme ? 'white' : 'gray' }} />
+                                                    <h4 className="font-semibold text-gray-600 dark:text-white test-sm">Share</h4>
+                                                </Typography>
+                                            </CardFooter>
 
-                                    <Typography variant="h4" color="blue-gray" className="text-[10px] absolute mt-9 ml-16 pl-1.5 text-zinc-500">
-                                    </Typography>
-
-                                    <CardBody floated={false} className="h-full w-full">
-
-                                        <p className="pl-6 pr-3 pb-3">{ }</p>
-                                        <div className="flex justify-center mb-3 font-semibold">
-                                            There is no post yet.
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="ml-4 mb-2.5 bg-blue-500 w-5 h-5 rounded-full flex gap-3"><div className="flex mt-1 ml-1"><Icon icon="mdi:like" width="0.8rem" height="0.8rem" style={{ color: darkTheme ? 'white' : 'white' }} /></div>
-                                                <h5 className="mb-2"></h5>
-                                            </div>
-                                            <div className="mr-4 flex gap-1"><h5></h5>
-                                                <Icon icon="basil:comment-solid" width="1.4rem" height="1.4rem" style={{ color: darkTheme ? 'white' : '#606770' }} /></div>
-                                        </div>
-                                        <div className="border-b border-neutral-400 mx-4"></div>
-                                    </CardBody>
-
-                                    <CardFooter className="flex justify-between px-5 pt-2 pb-1">
-                                        <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded-md px-5 py-1">
-                                            <Icon icon="iconamoon:like-light" width="1.5rem" height="1.5rem" style={{ color: darkTheme ? 'white' : 'gray' }} className="mt-0.5" />
-                                            <h4 className="font-semibold text-gray-600 mt-0.5 test-sm">Like</h4>
-                                        </Typography>
-                                        <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-2 py-1" >
-                                            <Icon icon="cil:comment-bubble" width="1.2rem" height="1.2rem" style={{ color: darkTheme ? 'white' : 'gray' }} className="mt-1" />
-                                            <h4 className="text-gray-600 font-semibold test-sm">Comment</h4>
-                                        </Typography>
-                                        <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] rounded px-3 py-1">
-                                            <Icon icon="majesticons:share-line" width="1.5rem" height="1.5rem" style={{ color: darkTheme ? 'white' : 'gray' }} />
-                                            <h4 className="font-semibold text-gray-600  test-sm">Share</h4>
-                                        </Typography>
-                                    </CardFooter>
-
-                                </Card>
-                                {/* <div className="text-center">There is no post yet.</div> */}
-                            </>)}
+                                        </Card>
+                                    </div>
+                                    {/* <div className="text-center">There is no post yet.</div> */}
+                                </>)}
                         </div>
                     </>
 
                 ) : (
                     <>
-                       {/* for large screen */}
+                        {/* for large screen */}
                         <div className='w-screen bg-[#F0F2F5] dark:bg-[#18191A] flex justify-end gap-2 pl-96'>
                             {/* left */}
                             <div className='Left w-3/5 pl-7 mt-2'>
