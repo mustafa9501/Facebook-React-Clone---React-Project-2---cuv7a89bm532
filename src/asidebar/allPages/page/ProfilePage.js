@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../../provider/UserProvider';
 import Cover from '../../../images/desktop-wallpaper.jpg';
 import Avatar from '../../../images/dummy_avatar.jpg';
+import { useLocation } from 'react-router-dom';
 
 const ProfilePage = () => {
 
@@ -14,6 +15,7 @@ const ProfilePage = () => {
     // const [isActive, setIsActive] = useState('post');
     const [getData, setData] = useState('')
     const navigate = useNavigate();
+    const location = useLocation();
 
     const pageDetails = async () => {
         try {
@@ -32,6 +34,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         pageDetails();
+       {(location.pathname == "/pages/profilepage/postprofile") ? setIsActive2('post') : ""}
     }, []);
 
     console.log(getData)

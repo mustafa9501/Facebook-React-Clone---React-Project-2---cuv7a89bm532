@@ -7,11 +7,13 @@ import { Cards } from '../cards/Cards';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ProfileImage from '../images/profile.png';
+import { useLocation } from 'react-router-dom';
 
 const Profile = () => {
 
     const { getUser, userId, darkTheme, setIsActive1, isActive1 } = useUser();
     const [getData, setData] = useState(JSON.parse(localStorage.getItem('userData')) || {});
+    const location = useLocation();
     
     const navigate = useNavigate();
     console.log(userId)
@@ -33,7 +35,7 @@ const Profile = () => {
 
     useEffect(() => {
         userDetails();
-        // setIsActive1('post')
+        {(location.pathname == "/profile/post") ? setIsActive1('post') : ""}
     }, [])
 
     const activeHandler = (link) => {

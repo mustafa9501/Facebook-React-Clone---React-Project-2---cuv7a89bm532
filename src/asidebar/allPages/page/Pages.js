@@ -106,6 +106,7 @@ const Pages = () => {
 
         ) : (
 
+            // for large screen
             <div className='bg-[#F0F2F5] dark:bg-[#18191A] w-screen h-5/7 flex'>
                 {/* left */}
                 <div className='Part-1 w-1/7 h-full bg-white dark:bg-[#242526] pl-4 pt-3' style={{ boxShadow: '0px 3px 2px 2px rgba(0, 0, 0, 0.1)' }}>
@@ -115,21 +116,21 @@ const Pages = () => {
                     </div>
                     <Link to='/pages/createpage'><div className='text-[#0866FF] dark:bg-[#323436] hover:hover:dark:bg-[#4d5053] hover:bg-[#d3dde5] rounded-lg px-2 py-1.5 mr-4 mt-5 text-center font-semibold cursor-pointer bg-[#e2f1ef]'>+ Create new Page</div></Link>
                     <div className='border-b border-gray-300 pl-3 mr-4 mt-3'></div>
-                    <div className='flex gap-4 mt-5 px-1 hover:bg-[#f0f2f5] hover:hover:dark:bg-[#4d5053] cursor-pointer rounded-lg mr-4 py-1.5'>
+                    <div className='flex gap-4 mt-5 px-1 hover:bg-[#f0f2f5] hover:hover:dark:bg-[#4d5053] cursor-not-allowed rounded-lg mr-4 py-1.5'>
                         <Icon icon="arcticons:business-suite" width="2rem" height="2rem" style={{ color: 'black' }} className='rounded-full bg-[#E4E6EB] p-1.5' />
-                        <h3 className='font-semibold text-lg mt-0.5 cursor-not-allowed dark:text-white'>Meta Business Suite</h3>
+                        <h3 className='font-semibold text-lg mt-0.5 dark:text-white'>Meta Business Suite</h3>
                     </div>
-                    <div className='flex gap-4 mt-3 px-1 hover:bg-[#f0f2f5] hover:hover:dark:bg-[#4d5053] cursor-pointer rounded-lg mr-4 py-1.5'>
+                    <div className='flex gap-4 mt-3 px-1 hover:bg-[#f0f2f5] hover:hover:dark:bg-[#4d5053] cursor-not-allowed rounded-lg mr-4 py-1.5'>
                         <Icon icon="iconamoon:discover-bold" width="2rem" height="2rem" style={{ color: 'black' }} className='rounded-full bg-[#d9dbe0] p-1.5' />
-                        <h3 className='font-semibold text-lg cursor-not-allowed dark:text-white'>Discover</h3>
+                        <h3 className='font-semibold text-lg dark:text-white'>Discover</h3>
                     </div>
-                    <div className='flex gap-4 mt-3 px-1 hover:bg-[#f0f2f5] hover:hover:dark:bg-[#4d5053] cursor-pointer rounded-lg mr-4 py-1.5'>
+                    <div className='flex gap-4 mt-3 px-1 hover:bg-[#f0f2f5] hover:hover:dark:bg-[#4d5053] cursor-not-allowed rounded-lg mr-4 py-1.5'>
                         <Icon icon="mdi:like" width="2rem" height="2rem" style={{ color: 'black' }} className='rounded-full bg-[#d9dbe0] p-1.5' />
-                        <h3 className='font-semibold text-lg cursor-not-allowed dark:text-white'>Liked Pages</h3>
+                        <h3 className='font-semibold text-lg  dark:text-white'>Liked Pages</h3>
                     </div>
-                    <div className='flex gap-4 mt-3 px-1 hover:bg-[#f0f2f5] hover:hover:dark:bg-[#4d5053] cursor-pointer rounded-lg mr-4 py-1.5'>
+                    <div className='flex gap-4 mt-3 px-1 hover:bg-[#f0f2f5] hover:hover:dark:bg-[#4d5053] cursor-not-allowed rounded-lg mr-4 py-1.5'>
                         <Icon icon="mingcute:user-add-fill" width="2rem" height="2rem" style={{ color: 'black' }} className='rounded-full bg-[#d9dbe0] p-1.5' />
-                        <h3 className='font-semibold text-lg cursor-not-allowed dark:text-white'>Invites</h3>
+                        <h3 className='font-semibold text-lg dark:text-white'>Invites</h3>
                     </div>
                 </div>
 

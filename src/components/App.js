@@ -68,6 +68,18 @@ function AppContent() {
     }  
  }
 
+ const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsScreenSmall(window.innerWidth < 1100);
+        };
+
+        window.addEventListener("resize", checkScreenSize);
+
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
   return (<>
   <div className={`${darkTheme && 'dark'}`}>
       <div className='h-screen w-screen bg-white dark:bg-[#18191A]'>
@@ -78,9 +90,15 @@ function AppContent() {
       {/* && location.pathname !== "/pages/profilepage/postprofile" */}
       {/* && location.pathname !== "/pages/profilepage/aboutprofile" */}
       {/* && location.pathname !== "/pages/createpage" */}
-  
-      {( location.pathname !== "/comment" && location.pathname !== "/search"  && location.pathname !== "/updatepost" && location.pathname !== "/composer")  && getUser && getUser.status === "success" && (
-      <Navbar />)}
+
+      {isScreenSmall ? ( <>
+        {(location.pathname !== "/profile/about" && location.pathname !== "/pages/profilepage/postprofile" && location.pathname !== "/pages/profilepage/aboutprofile" && location.pathname !== "/pages" && location.pathname !== "/pages/createpage" && location.pathname !== "/comment"  && location.pathname !== "/profile/post" && location.pathname !== "/search"  && location.pathname !== "/updatepost" && location.pathname !== "/composer")  && getUser && getUser.status === "success" && (
+          <Navbar />) }
+          </>
+      ) : (
+        <Navbar/ >
+      )}
+      
 
         <Routes>
           {!getUser && (

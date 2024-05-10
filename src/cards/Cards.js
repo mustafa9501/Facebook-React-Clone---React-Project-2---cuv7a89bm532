@@ -102,8 +102,16 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
-
+  
+  const [dropDownFlag, setDropDownFlag] = useState(false)
+  // let dropDownFlag = false;
   const dropDownHandler = (() => {
+    // const filteredData = name.filter(item => item.owner.email === getEmail);
+    if(sessionStorage.getItem("name") == name){
+      setDropDownFlag(true);
+    } else {
+      setDropDownFlag(false);
+    }
     setDropdownn(!getDropdownn);
   })
 
@@ -139,7 +147,7 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
                 <div className="Edit flex pt-3" onClick={dropDownHandler}>
                   <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] cursor-pointer p-1" />
                 </div>
-                {getDropdownn && <Dropdown id={id} />}
+                {getDropdownn && <Dropdown id={id} dropDownFlag={dropDownFlag} />}
               </CardHeader>
               <Typography variant="h4" color="blue-gray" className="text-[10px] absolute mt-9 ml-16 pl-1.5 text-zinc-500 dark:text-white">
                 {createdAt}
@@ -194,7 +202,7 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
               <div ref={popupRef} className="Edit flex pt-3" onClick={dropDownHandler}>
                 <Icon icon="solar:menu-dots-bold" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : '#6c6a6a' }} className="rounded-full hover:bg-[#e4e1e1] dark:hover:bg-[#606264] cursor-pointer p-1" />
               </div>
-              {getDropdownn && <Dropdown id={id} />}
+              {getDropdownn && <Dropdown id={id} dropDownFlag={dropDownFlag}/>}
             </CardHeader>
             <Typography variant="h4" color="blue-gray" className="text-[10px] absolute mt-9 ml-16 pl-1 text-zinc-500 dark:text-zinc-300">
               {createdAt}
