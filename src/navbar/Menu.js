@@ -74,31 +74,31 @@ const Menu = () => {
                     <div className='text-black dark:text-white font-semibold text-xl pl-3 pt-3'>Create</div>
 
                     <div className='pt-2' onClick={openPopup}>
-                        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
+                        <div className='flex gap-4 px-2 py-2 mx-1.5 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
                             <Icon icon="mage:edit-fill" width="2rem" height="2rem" style={{ color: '#484747' }} className='bg-[#E4E6EB] rounded-full p-1' />
                             <h3 className='font-semibold text-black pt-1 dark:text-white'>Post</h3>
                         </div>
                     </div>
                     <div className='pt-2'>
-                        <Link to='/pages/createpage'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-pointer'>
+                        <Link to='/pages/createpage'><div className='flex gap-4 px-2 py-2 mx-1.5 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
                             <Icon icon="tabler:flag-filled" width="2rem" height="2rem" style={{ color: '#484747' }} className='bg-[#E4E6EB] rounded-full p-1' />
                             <h3 className='font-semibold text-black dark:text-white pt-1'>Create Page</h3>
                         </div></Link>
                     </div>
                     <div className='pt-2'>
-                        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-not-allowed'>
+                        <div className='flex gap-4 px-2 py-2 mx-1.5 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
                             <Icon icon="gridicons:video" width="2rem" height="2rem" style={{ color: '#484747' }} className='bg-[#E4E6EB] rounded-full p-1' />
                             <h3 className='font-semibold text-black dark:text-white pt-1'>Reel</h3>
                         </div>
                     </div>
                     <div className='pt-2'>
-                        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-not-allowed'>
+                        <div className='flex gap-4 px-2 py-2 mx-1.5 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
                             <Icon icon="mdi:star-settings" width="2rem" height="2rem" style={{ color: '#484747' }} className='bg-[#E4E6EB] rounded-full p-1' />
                             <h3 className='font-semibold text-black dark:text-white pt-1'>Live event</h3>
                         </div>
                     </div>
                     <div className='pt-2'>
-                        <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] hover:rounded-md cursor-not-allowed'>
+                        <div className='flex gap-4 px-2 py-2 mx-1.5 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
                             <Icon icon="mdi:loudspeaker" width="2rem" height="2rem" style={{ color: '#484747' }} className='bg-[#E4E6EB] rounded-full p-1' />
                             <h3 className='font-semibold text-black dark:text-white pt-1'>Ad</h3>
                         </div>

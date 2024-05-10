@@ -65,6 +65,22 @@ const Aside = () => {
         <h3 className='pt-0.5 font-semibold'>Friends</h3>
         </div></Link>
 
+
+        <Link to='/group'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
+        <Icon icon="el:group-alt" width="1.5rem" height="1.5rem"  style={{color: '#1B82E9'}} />
+        <h3 className='pt-0.5 font-semibold'>Groups</h3>
+        </div></Link>
+        
+        <Link to='/videos'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
+        <Icon icon="mdi:youtube-tv" width="1.5rem" height="1.5rem"  style={{color: '#1B82E9'}} />
+        <h3 className='pt-0.5 font-semibold'>Videos</h3>
+        </div></Link>
+        
+        <Link to='/marketplace'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
+        <Icon icon="healthicons:market-stall" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
+        <h3 className='pt-0.5 font-semibold'>Marketplace</h3>
+        </div></Link>
+
         <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
         <Icon icon="icon-park:time" width="1.6rem" height="1.6rem" />
         <h3 className='pt-0.5 font-semibold'>Memories</h3>
@@ -74,21 +90,7 @@ const Aside = () => {
         <Icon icon="ph:bookmarks-simple-duotone" width="1.6rem" height="1.7rem"  style={{color: '#B749CE'}} />
         <h3 className='pt-0.5 font-semibold'>Saved</h3>
         </div>
-
-        <Link to='/group'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
-        <Icon icon="el:group-alt" width="1.5rem" height="1.5rem"  style={{color: '#1B82E9'}} />
-        <h3 className='pt-0.5 font-semibold'>Groups</h3>
-        </div></Link>
         
-        <Link to='/videos'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
-        <Icon icon="mdi:youtube-tv" width="1.5rem" height="1.5rem"  style={{color: '#1B82E9'}} />
-        <h3 className='pt-0.5 font-semibold'>Videos</h3>
-        </div></Link>
-
-        <Link to='/marketplace'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
-        <Icon icon="healthicons:market-stall" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
-        <h3 className='pt-0.5 font-semibold'>Marketplace</h3>
-        </div></Link>
 
         <div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-not-allowed'>
         <Icon icon="flat-color-icons:feedback" width="1.6rem" height="1.6rem" />

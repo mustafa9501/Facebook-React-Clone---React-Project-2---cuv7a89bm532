@@ -22,6 +22,8 @@ const Navbar = () => {
   const popupRef = useRef(null);
   const searchRef = useRef(null);
   const menuRef = useRef(null);
+  const messengerRef = useRef(null);
+  const notificationRef = useRef(null);
   
   const [activeIcon, setActiveIcon] = useState(false);
   const [homeHovered, setHomeHovered] = useState(false);
@@ -180,13 +182,23 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // if (searchDroplist && searchRef.current && !searchRef.current.contains(event.target)) {
-      //   // Clicked outside the search popup, close it
-      //   searchDroplistClose();
-      // }
+      
+      if (searchDroplist && searchRef.current && !searchRef.current.contains(event.target)) {
+        // Clicked outside the search popup, close it
+        searchDroplistClose();
+      }
+
       if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
         console.log('Closing menu');
         setIsMenuOpen(false);
+      }
+      if (isMessenger && messengerRef.current && !messengerRef.current.contains(event.target)) {
+        console.log('Closing menu');
+        setIsMessenger(false);
+      }
+      if (isNotificationOpen && notificationRef.current && !notificationRef.current.contains(event.target)) {
+        console.log('Closing menu');
+        setIsNotificationOpen(false);
       }
       if (isProfileOpen && popupRef.current && !popupRef.current.contains(event.target)) {
         // Clicked outside the account popup, close it
@@ -198,7 +210,7 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
-  }, [isProfileOpen, isMenuOpen]);
+  }, [isProfileOpen, isMenuOpen, isMessenger, isNotificationOpen, searchDroplist]);
   
 
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
@@ -564,6 +576,8 @@ const Navbar = () => {
         </>
 
       ) : (
+
+        // for larger screen
         <div className={`bg-white dark:bg-[#242526] drop-shadow-lg w-screen h-14 flex justify-between sticky top-0 z-10 ${darkTheme && 'dark'}`}>
           <div className='flex justify-between gap-12'>
             {/* left icons */}
@@ -672,7 +686,7 @@ const Navbar = () => {
               )}
             </div>
 
-            <div className='relative' onMouseEnter={() => dropDownEnter('messenger')}
+            <div ref={messengerRef} className='relative' onMouseEnter={() => dropDownEnter('messenger')}
               onMouseLeave={dropDownLeave}
               onClick={() => onClickRightNav('messenger')}>
               <Icon
@@ -688,7 +702,7 @@ const Navbar = () => {
               )}
             </div>
 
-            <div className='relative' onMouseEnter={() => dropDownEnter('notification')}
+            <div ref={notificationRef} className='relative' onMouseEnter={() => dropDownEnter('notification')}
               onMouseLeave={dropDownLeave}
               onClick={() => onClickRightNav('notification')}>
               <Icon

@@ -153,15 +153,15 @@ const CreatePage = () => {
                             </div>
 
                             <div className='flex gap-3 mr-4 pt-3.5 dark:bg-[#242526]'>
-                                <div className='rounded-lg bg-gray-300 dark:bg-[#323436] px-3.5 py-1.5 flex gap-1 cursor-pointer'>
+                                <div className='rounded-lg bg-gray-300 dark:bg-[#323436] px-3.5 py-1.5 flex gap-1 cursor-not-allowed'>
                                 <Icon icon="ri:chat-follow-up-fill" width="1.2rem" height="1.2rem"  style={{color: darkTheme ? 'white' : 'gray'}} className='mt-1'/>
                                     <h4 className='font-semibold text-gray-600 dark:text-white'>Follow</h4>
                                 </div>
-                                <div className='flex rounded-lg bg-gray-300 dark:bg-[#323436] px-3.5 py-1.5 gap-1 cursor-pointer'>
+                                <div className='flex rounded-lg bg-gray-300 dark:bg-[#323436] px-3.5 py-1.5 gap-1 cursor-not-allowed'>
                                 <Icon icon="simple-icons:messenger" width="1.2rem" height="1.2rem"  style={{color: darkTheme ? 'white' : 'gray'}} className='mt-1'/>
                                     <h4 className='font-semibold text-gray-600 dark:text-white'>Message</h4>
                                 </div>
-                                <div className='cursor-pointer'>
+                                <div className='cursor-not-allowed'>
                                     <h4 className='rounded-lg bg-gray-300 px-3.5 py-1.5 font-semibold dark:bg-[#323436] text-gray-600 dark:text-white'>...</h4>
                                 </div>
                             </div>

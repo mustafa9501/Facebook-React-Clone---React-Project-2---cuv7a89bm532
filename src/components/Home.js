@@ -53,6 +53,8 @@ const Home = () => {
 
     return (<>
         {isScreenSmall ? (
+
+            // for small screen
             <div className={`${darkTheme && 'dark'}`}>
                 <div className={`w-screen h-screen bg-white dark:bg-[#18191A]`}>
                     <div className='bg-white  dark:bg-[#18191A] flex gap-2 px-1 pt-2'>
@@ -68,8 +70,12 @@ const Home = () => {
                     <div className='border-b-4 border-gray-300 dark:border-gray-950  mt-2'></div>
                     {/* story images */}
                     <div className='flex justify-center gap-1 my-5 px-3 dark:bg-[#18191A]'>
-                        <div className='rounded-xl w-2/9 h-48'>
-                            <img src={Model4} alt='image' className='w-full h-full rounded-xl' />
+                        <div className='rounded-xl w-2/9 h-48 bg-white dark:bg-[#323436] relative'>
+                            <img src={Profile} alt='image' className='w-full h-3/4 rounded-xl bg-gray-400 relative' />
+                            <div className='absolute text-lg font-semibold top-2/4 mt-9 left-1/3 bg-[#1877F2] border-t-4 rounded-full px-1 py-1'>
+                            <Icon icon="ic:round-plus" width="1.5rem" height="1.5rem"  style={{color: 'white'}} />
+                            </div>
+                            <h4 className='text-[12px] font-semibold pt-7 text-center dark:text-white'>Create story</h4>
                         </div>
                         <div className='rounded-xl w-2/9 h-48 '>
                             <img src={Model3} alt='image' className='w-full h-full rounded-xl' />
@@ -106,6 +112,8 @@ const Home = () => {
                 </div>
             </div>
         ) : (
+
+            // for large screen
             <div className={`w-screen h-5/7 flex bg-[#F0F2F5] dark:bg-[#18191A] pt-1 ${darkTheme && 'dark'}`}>
                 {/* Content for the first part */}
                 <div className='basis-1/4 overflow-y-auto scrollbar'> <Aside />
@@ -115,8 +123,12 @@ const Home = () => {
                 <div className="basis-3/5 overflow-y-auto scrollbar">
 
                     <div className='flex justify-center gap-1 my-5'>
-                        <div className='rounded-xl w-1/5 h-56'>
-                            <img src={Model4} alt='image' className='w-full h-full rounded-xl' />
+                        <div className='rounded-xl w-1/5 h-56 relative bg-white dark:bg-[#323436]'>
+                            <img src={Profile} alt='image' className='w-full h-3/4 rounded-t-xl bg-gray-400 relative' />
+                            <div className='absolute text-lg font-semibold top-2/4 mt-9 left-1/3 ml-2 bg-[#1877F2] border-t-4 rounded-full px-1 py-1'>
+                            <Icon icon="ic:round-plus" width="1.8rem" height="1.8rem"  style={{color: 'white'}} />
+                            </div>
+                            <h4 className='text-sm font-semibold pt-7 pl-9 dark:text-white'>Create story</h4>
                         </div>
                         <div className='rounded-xl w-1/5 h-56 '>
                             <img src={Model3} alt='image' className='w-full h-full rounded-xl' />
