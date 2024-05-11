@@ -18,13 +18,13 @@ import Messenger from './Messenger';
 
 const Navbar = () => {
 
-  const { onClickMidNav, isActive, getUser, getsetting, gethelp, getdisplay, getfeedback, searchDroplistHandler, searchDroplist, searchDroplistClose, getName, signOutUser, getEmail, viewPageHandler, darkTheme, handleToggle} = useUser();
+  const { onClickMidNav, isActive, getUser, getsetting, gethelp, getdisplay, getfeedback, searchDroplistHandler, searchDroplist, searchDroplistClose, getName, signOutUser, getEmail, viewPageHandler, darkTheme, handleToggle } = useUser();
   const popupRef = useRef(null);
   const searchRef = useRef(null);
   const menuRef = useRef(null);
   const messengerRef = useRef(null);
   const notificationRef = useRef(null);
-  
+
   const [activeIcon, setActiveIcon] = useState(false);
   const [homeHovered, setHomeHovered] = useState(false);
   const [videoHovered, setVideoHovered] = useState(false);
@@ -180,26 +180,47 @@ const Navbar = () => {
   console.log(isMenuOpen)
   // console.log(isProfileOpen)
 
+  // if (searchDroplist && searchRef.current && !searchRef.current.contains(event.target)) {
+  //   // Clicked outside the search popup, close it
+  //   searchDroplistClose();
+  // }
+
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+
+  //     if (searchDroplist && searchRef.current && !searchRef.current.contains(event.target)) {
+  //       // Clicked outside the search popup, close it
+  //       searchDroplistClose();
+  //     }
+
+  //     if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+  //       console.log('Closing menu');
+  //       setIsMenuOpen(false);
+  //     }
+  //     if (isMessenger && messengerRef.current && !messengerRef.current.contains(event.target)) {
+  //       console.log('Closing menu');
+  //       setIsMessenger(false);
+  //     }
+  //     if (isNotificationOpen && notificationRef.current && !notificationRef.current.contains(event.target)) {
+  //       console.log('Closing menu');
+  //       setIsNotificationOpen(false);
+  //     }
+  //     if (isProfileOpen && popupRef.current && !popupRef.current.contains(event.target)) {
+  //       // Clicked outside the account popup, close it
+  //       setIsProfileOpen(false);
+  //     }
+  //   };
+  //   window.addEventListener('click', handleClickOutside);
+
+  //   return () => {
+  //     window.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, [isProfileOpen, isMenuOpen, isMessenger, isNotificationOpen, searchDroplist]);
+
+  // to open profile
   useEffect(() => {
     const handleClickOutside = (event) => {
 
-      if (searchDroplist && searchRef.current && !searchRef.current.contains(event.target)) {
-        // Clicked outside the search popup, close it
-        searchDroplistClose();
-      }
-
-      if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
-        console.log('Closing menu');
-        setIsMenuOpen(false);
-      }
-      if (isMessenger && messengerRef.current && !messengerRef.current.contains(event.target)) {
-        console.log('Closing menu');
-        setIsMessenger(false);
-      }
-      if (isNotificationOpen && notificationRef.current && !notificationRef.current.contains(event.target)) {
-        console.log('Closing menu');
-        setIsNotificationOpen(false);
-      }
       if (isProfileOpen && popupRef.current && !popupRef.current.contains(event.target)) {
         // Clicked outside the account popup, close it
         setIsProfileOpen(false);
@@ -210,8 +231,56 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
-  }, [isProfileOpen, isMenuOpen, isMessenger, isNotificationOpen, searchDroplist]);
-  
+  }, [isProfileOpen]);
+
+  // to open menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+
+      if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+        console.log('Closing menu');
+        setIsMenuOpen(false);
+      }
+    };
+    window.addEventListener('click', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // to open messenger
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+
+      if (isMessenger && messengerRef.current && !messengerRef.current.contains(event.target)) {
+        console.log('Closing menu');
+        setIsMessenger(false);
+      }
+    };
+    window.addEventListener('click', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMessenger]);
+
+  // to open notification
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+
+      if (isNotificationOpen && notificationRef.current && !notificationRef.current.contains(event.target)) {
+        console.log('Closing menu');
+        setIsNotificationOpen(false);
+      }
+    };
+    window.addEventListener('click', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [isNotificationOpen]);
+
 
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
 
@@ -501,65 +570,65 @@ const Navbar = () => {
       )}
 
       {isScreenSmall ? (
-        <> 
-         <div className={`${darkTheme && 'dark'}`}>
-          <div className={`flex justify-between w-full px-1 dark:bg-[#18191A]`}>
-            <Link to="/"><img src={Facebook} className='h-14 w-32 ml-5' /></Link>
-            <div className='flex gap-3'>
-              <Link to="/search"><Icon icon="ri:search-line" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : 'black' }} className='mt-3 rounded-full dark:bg-[#323436] bg-[#E4E6EB] p-1 cursor-pointer' /></Link>
-              <Icon icon="codicon:three-bars" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : 'black' }} className='mt-3 mr-3 rounded-full bg-[#E4E6EB] dark:bg-[#323436] p-1 cursor-pointer' onClick={toggleSidebar} />
+        <>
+          <div className={`${darkTheme && 'dark'}`}>
+            <div className={`flex justify-between w-full px-1 dark:bg-[#18191A]`}>
+              <Link to="/"><img src={Facebook} className='h-14 w-32 ml-5' /></Link>
+              <div className='flex gap-3'>
+                <Link to="/search"><Icon icon="ri:search-line" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : 'black' }} className='mt-3 rounded-full dark:bg-[#323436] bg-[#E4E6EB] p-1 cursor-pointer' /></Link>
+                <Icon icon="codicon:three-bars" width="2rem" height="2rem" style={{ color: darkTheme ? 'white' : 'black' }} className='mt-3 mr-3 rounded-full bg-[#E4E6EB] dark:bg-[#323436] p-1 cursor-pointer' onClick={toggleSidebar} />
+              </div>
             </div>
-          </div>
-          <div className='border-b border-gray-200 dark:border-gray-950'></div>
+            <div className='border-b border-gray-200 dark:border-gray-950'></div>
 
-          {/* home, video, page  */}
-          <div className='flex items-center justify-evenly gap-1 dark:bg-[#18191A]'>
-            <Link to='/'>
-              <div
-                className={`Home ml-1 w-20 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
-                onMouseEnter={() => dropDownEnter('home')}
+            {/* home, video, page  */}
+            <div className='flex items-center justify-evenly gap-1 dark:bg-[#18191A]'>
+              <Link to='/'>
+                <div
+                  className={`Home ml-1 w-20 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
+                  onMouseEnter={() => dropDownEnter('home')}
+                  onMouseLeave={dropDownLeave}
+                  onClick={() => onClickMidNav('home')}
+                >
+                  <Icon icon="fluent:home-28-filled" width="1.5rem" height="1.5rem" style={{ color: isActive === 'home' ? '#0866FF' : '#606266' }} />
+                </div></Link>
+
+              <Link to='/pages'><div
+                className={`Page ml-1 w-16 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
+                onMouseEnter={() => dropDownEnter('page')}
                 onMouseLeave={dropDownLeave}
-                onClick={() => onClickMidNav('home')}
+                onClick={() => onClickMidNav('page')}
+              // disabled={!isActive}
               >
-                <Icon icon="fluent:home-28-filled" width="1.5rem" height="1.5rem" style={{ color: isActive === 'home' ? '#0866FF' : '#606266' }} />
+                <Icon icon="material-symbols-light:emoji-flags" width="1.7rem" height="1.7rem" style={{ color: isActive === 'page' ? '#0866FF' : '#606266' }} />
               </div></Link>
 
-            <Link to='/pages'><div
-              className={`Page ml-1 w-16 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
-              onMouseEnter={() => dropDownEnter('page')}
-              onMouseLeave={dropDownLeave}
-              onClick={() => onClickMidNav('page')}
-            // disabled={!isActive}
-            >
-              <Icon icon="material-symbols-light:emoji-flags" width="1.7rem" height="1.7rem" style={{ color: isActive === 'page' ? '#0866FF' : '#606266' }} />
-            </div></Link>
-
-            <Link to='/videos'><div
-              className={`Home ml-1 w-16 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
-              onMouseEnter={() => dropDownEnter('video')}
-              onMouseLeave={dropDownLeave}
-              onClick={() => onClickMidNav('video')}
-            >
-              <Icon icon="ph:video-fill" width="1.5rem" height="1.5rem" style={{ color: isActive === 'video' ? '#0866FF' : '#606266' }} />
-            </div></Link>
-            <Link to='/marketplace'><div
-              className={`Home ml-1 w-16 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
-              onMouseEnter={() => dropDownEnter('market')}
-              onMouseLeave={dropDownLeave}
-              onClick={() => onClickMidNav('market')}
-            >
-              <Icon icon="healthicons:market-stall" width="1.5rem" height="1.5rem" style={{ color: isActive === 'market' ? '#0866FF' : '#606266' }} />
-            </div></Link>
-            <Link to='/group'><div
-              className={`Groups ml-1 w-16 h-12 rounded p-1 pr-6 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
-              onMouseEnter={() => dropDownEnter('group')}
-              onMouseLeave={dropDownLeave}
-              onClick={() => onClickMidNav('group')}
-            >
-              <Icon icon="ri:group-2-line" width="1.5rem" height="1.5rem" style={{ color: isActive === 'group' ? '#0866FF' : '#606266' }} />
-            </div></Link>
-          </div>
-          <div className='border-b border-gray-300 dark:border-gray-950'></div>
+              <Link to='/videos'><div
+                className={`Home ml-1 w-16 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
+                onMouseEnter={() => dropDownEnter('video')}
+                onMouseLeave={dropDownLeave}
+                onClick={() => onClickMidNav('video')}
+              >
+                <Icon icon="ph:video-fill" width="1.5rem" height="1.5rem" style={{ color: isActive === 'video' ? '#0866FF' : '#606266' }} />
+              </div></Link>
+              <Link to='/marketplace'><div
+                className={`Home ml-1 w-16 h-12 rounded p-1 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
+                onMouseEnter={() => dropDownEnter('market')}
+                onMouseLeave={dropDownLeave}
+                onClick={() => onClickMidNav('market')}
+              >
+                <Icon icon="healthicons:market-stall" width="1.5rem" height="1.5rem" style={{ color: isActive === 'market' ? '#0866FF' : '#606266' }} />
+              </div></Link>
+              <Link to='/group'><div
+                className={`Groups ml-1 w-16 h-12 rounded p-1 pr-6 cursor-pointer flex justify-center items-center transition-all border-[#0866FF] relative`}
+                onMouseEnter={() => dropDownEnter('group')}
+                onMouseLeave={dropDownLeave}
+                onClick={() => onClickMidNav('group')}
+              >
+                <Icon icon="ri:group-2-line" width="1.5rem" height="1.5rem" style={{ color: isActive === 'group' ? '#0866FF' : '#606266' }} />
+              </div></Link>
+            </div>
+            <div className='border-b border-gray-300 dark:border-gray-950'></div>
           </div>
         </>
 
@@ -569,13 +638,14 @@ const Navbar = () => {
         <div className={`bg-white dark:bg-[#242526] drop-shadow-lg w-screen h-14 flex justify-between sticky top-0 z-10 ${darkTheme && 'dark'}`}>
           <div className='flex justify-between gap-12'>
             {/* left icons */}
-            {searchDroplist && <Search ref={searchRef} />}
+            {searchDroplist && <Search />}
             <div className='flex'>
-              <Link to='/'><div className='p-2 pl-5 cursor-pointer'>
+              <Link to='/'><div className='p-2 pl-5 cursor-pointer' onClick={() => {
+                onClickMidNav('home')}}>
                 <Icon icon="logos:facebook" width="2.5rem" height="2.5rem" />
               </div></Link>
               <div className='absolute mt-5 ml-16 pl-4'>
-                <Icon icon="carbon:search" width="1.1rem" height="1.1rem" style={{ color:darkTheme ? 'white' : '#545454' }} />
+                <Icon icon="carbon:search" width="1.1rem" height="1.1rem" style={{ color: darkTheme ? 'white' : '#545454' }} />
               </div>
               <div className='Search' onClick={searchDroplistHandler}>
                 <input type='text' className='bg-[#F0F2F5] dark:bg-[#323436] rounded-full mt-2 py-2 px-10 focus:outline-none' placeholder='Search Facebook' readOnly />

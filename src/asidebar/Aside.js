@@ -55,28 +55,28 @@ const Aside = () => {
         <h3 className='pt-0.5 font-semibold dark:text-white'>COVID-19 Information Center</h3>
         </div>
 
-        <Link to='/pages'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
-        <Icon icon="noto-v1:triangular-flag" width="1.6rem" height="1.6rem" onClick={() => onClickMidNav('page')}/>
+        <Link to='/pages'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer' onClick={() => {onClickMidNav('page')}}>
+        <Icon icon="noto-v1:triangular-flag" width="1.6rem" height="1.6rem" />
         <h3 className='font-semibold'>Pages</h3>
         </div></Link>
 
-        <Link to='/friends'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
+        <Link to='/friends'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer' onClick={() => {onClickMidNav('friends')}}>
         <Icon icon="fa-solid:user-friends" width="1.7rem" height="1.7rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold'>Friends</h3>
         </div></Link>
 
 
-        <Link to='/group'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
+        <Link to='/group'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer' onClick={() => {onClickMidNav('group')}}>
         <Icon icon="el:group-alt" width="1.5rem" height="1.5rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold'>Groups</h3>
         </div></Link>
         
-        <Link to='/videos'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
+        <Link to='/videos'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer' onClick={() => {onClickMidNav('videos')}}>
         <Icon icon="mdi:youtube-tv" width="1.5rem" height="1.5rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold'>Videos</h3>
         </div></Link>
         
-        <Link to='/marketplace'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer'>
+        <Link to='/marketplace'><div className='flex gap-4 px-2 py-2 hover:bg-[#e6e3e3] dark:hover:bg-[#323436] hover:rounded-md cursor-pointer' onClick={() => {onClickMidNav('market')}}>
         <Icon icon="healthicons:market-stall" width="1.6rem" height="1.6rem"  style={{color: '#1B82E9'}} />
         <h3 className='pt-0.5 font-semibold'>Marketplace</h3>
         </div></Link>

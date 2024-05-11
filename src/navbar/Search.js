@@ -126,7 +126,7 @@ const Search = () => {
                             ) : (
                                 searchValue.map((obj, index) => (
                                     <Link to='/profile/post'>
-                                        <div key={index} className='ml-5 pt-2 flex gap-4 py-2 mr-2 mb-1 hover:bg-[#F2F2F2] dark:hover:bg-[#323436] rounded-lg cursor-pointer' onClick={() => userIdHandler(obj.author._id)}>
+                                        <div key={index} className='ml-5 pt-2 flex gap-4 py-2 mr-2 mb-1 hover:bg-[#F2F2F2] dark:hover:bg-[#323436] rounded-lg cursor-pointer' onClick={() => {userIdHandler(obj.author._id); searchDroplistClose()}}>
                                             <div className='h-10 w-10 pl-1'><img src={obj.author.profileImage || Profile} alt="Profile" className='rounded-full' /></div>
                                             <div className='pt-2'>{obj.author.name}</div>
                                         </div>
