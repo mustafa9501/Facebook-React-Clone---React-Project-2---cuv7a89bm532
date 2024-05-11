@@ -182,7 +182,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      
+
       if (searchDroplist && searchRef.current && !searchRef.current.contains(event.target)) {
         // Clicked outside the search popup, close it
         searchDroplistClose();
@@ -268,18 +268,6 @@ const Navbar = () => {
   const channelPopupHandler = () => {
     setShowChannel(!showChannel);
   }
-
-  //  // for dark mode code
-  // const toggleDarkMode = () => {
-  //   let htmlClasses = document.querySelector("html").classList;
-  //   if (localStorage.theme === "dark") {
-  //     htmlClasses.remove("dark");
-  //     localStorage.removeItem("theme");
-  //   } else {
-  //     htmlClasses.add("dark");
-  //     localStorage.setItem("theme", "dark");
-  //   }
-  // };
 
   return (
     <>

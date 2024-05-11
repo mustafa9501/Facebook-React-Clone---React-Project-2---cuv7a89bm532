@@ -36,7 +36,7 @@ export function CardComment({ content, id }) {
 
     return (
         <>
-            <Card className="w-5/7 pl-5 pb-1.5 pt-1.5 dark:bg-[#323436]">
+            <Card className="w-full px-5 pb-1.5 pt-1.5 dark:bg-[#323436]">
                 <Typography className='flex gap-10'>
                     <div className='flex justify-start gap-4'><img src={Avatar} alt='profile' className='h-10 w-10 bg-gray-100 rounded-full ' />
                         <div className='rounded-3xl bg-[#F0F2F5] dark:bg-[#323436] px-3 p-'>

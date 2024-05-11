@@ -84,7 +84,7 @@ const Comment = ({ onClose }) => {
                         <Icon icon="maki:cross" width="2rem" height="2rem" style={{ color: '#606771' }} className='bg-gray-200 hover:bg-gray-300 rounded-full p-1.5 cursor-pointer' onClick={() => navigate('/')} />
                     </div>
                     <div className='border-b pt-1 border-gray-400'></div>
-                    <div className='mb-3 ml-2'>
+                    <div className='mb-3 ml-2 mt-1.5'>
                         {/* {Array.isArray(commentData) && commentData?.map((obj, id) => {
                          return ( */}
                         {commentData && commentData.author && <Cards
@@ -101,7 +101,7 @@ const Comment = ({ onClose }) => {
 
                         {getcomment.map((obj, id) => {
                             return (<>
-                                <div key={obj.id} className='pl-6 pt-5'>
+                                <div key={obj.id} className='pt-2'>
                                     <CardComment
                                      content={obj.content}
                                      id={obj._id}
@@ -111,9 +111,9 @@ const Comment = ({ onClose }) => {
                         })}
                     </div>
                     <div className='flex'>
-                        <img src={Profile} className='h-10 w-10 rounded-full bg-gray-100 ml-6' />
-                        <input className='mb-10 pl-4 bg-[#F0F2F5] dark:bg-[#323436] ml-4 w-4/7 rounded-l-2xl pb-4 pt-4 focus:outline-none' placeholder='Write a comment...' onChange={(event) => setCreateComment(event.target.value)} />
-                        <div className='bg-[#F0F2F5] dark:bg-[#323436] h-14 py-4 pr-4 mr-4 rounded-r-2xl cursor-pointer' onClick={writeComment}>
+                        <img src={Profile} className='h-10 w-10 rounded-full bg-gray-100 ml-4' />
+                        <input className='mb-10 pl-3 bg-[#F0F2F5] dark:text-white dark:bg-[#323436] ml-4 w-4/7 rounded-l-2xl pb-4 pt-4 focus:outline-none' placeholder='Write a comment...' onChange={(event) => setCreateComment(event.target.value)} />
+                        <div className='bg-[#F0F2F5] dark:bg-[#323436] h-14 py-4 pr-3 mr-1 rounded-r-2xl cursor-pointer' onClick={writeComment}>
                             <Icon icon="iconamoon:send-fill" width="1.5rem" height="1.5rem" style={{ color: '#005DC7' }} />
                         </div>
                     </div>
@@ -151,7 +151,7 @@ const Comment = ({ onClose }) => {
 
                         {getcomment.map((obj, id) => {
                             return (<>
-                                <div key={obj.id} className='pl-6 pt-5 pb-2 dark:bg-[#323436]'>
+                                <div key={obj.id} className='pt-5 pb-2 dark:bg-[#323436]'>
                                     <CardComment
                                      content={obj.content}
                                      id={obj._id}
@@ -162,7 +162,7 @@ const Comment = ({ onClose }) => {
                         
                     </div>
                     <div className='flex pt-3 pb-6'>
-                        <img src={Profile} className='h-10 w-10 rounded-full bg-gray-100 ml-6' />
+                        <img src={Profile} className='h-10 w-11 rounded-full bg-gray-100 ml-6' />
                         <input className='mb-10 pl-4 bg-[#F0F2F5] dark:bg-[#242526] ml-4 w-4/7 rounded-l-2xl pb-4 pt-4 focus:outline-none' placeholder='Write a comment...' onChange={(event) => setCreateComment(event.target.value)} />
                         <div className='bg-[#F0F2F5] dark:bg-[#242526] h-14 py-4 pr-4 mr-4 rounded-r-2xl cursor-pointer' onClick={writeComment}>
                             <Icon icon="iconamoon:send-fill" width="1.5rem" height="1.5rem" style={{ color: '#005DC7' }} />

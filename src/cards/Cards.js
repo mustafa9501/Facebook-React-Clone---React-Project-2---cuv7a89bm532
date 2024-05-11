@@ -107,7 +107,7 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
   // let dropDownFlag = false;
   const dropDownHandler = (() => {
     // const filteredData = name.filter(item => item.owner.email === getEmail);
-    if(sessionStorage.getItem("name") == name){
+    if(sessionStorage.getItem("name") === name){
       setDropDownFlag(true);
     } else {
       setDropDownFlag(false);

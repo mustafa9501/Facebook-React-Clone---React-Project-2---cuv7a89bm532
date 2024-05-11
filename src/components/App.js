@@ -84,19 +84,14 @@ function AppContent() {
   <div className={`${darkTheme && 'dark'}`}>
       <div className='h-screen w-screen bg-white dark:bg-[#18191A]'>
 
-      {/* && location.pathname !== "/profile/post" */}
-      {/* location.pathname !== "/pages" && */}
-      {/* location.pathname !== "/profile/about" &&  */}
-      {/* && location.pathname !== "/pages/profilepage/postprofile" */}
-      {/* && location.pathname !== "/pages/profilepage/aboutprofile" */}
-      {/* && location.pathname !== "/pages/createpage" */}
-
       {isScreenSmall ? ( <>
         {(location.pathname !== "/profile/about" && location.pathname !== "/pages/profilepage/postprofile" && location.pathname !== "/pages/profilepage/aboutprofile" && location.pathname !== "/pages" && location.pathname !== "/pages/createpage" && location.pathname !== "/comment"  && location.pathname !== "/profile/post" && location.pathname !== "/search"  && location.pathname !== "/updatepost" && location.pathname !== "/composer")  && getUser && getUser.status === "success" && (
           <Navbar />) }
           </>
       ) : (
-        <Navbar/ >
+        <>
+        {getUser && getUser.status === "success" && (<Navbar/ >)}
+        </>
       )}
       
 
