@@ -225,9 +225,9 @@ export function Cards({ src, src1, alt, name, createdAt, content, likeCount, com
 
             <CardFooter className="flex justify-between px-5 pt-2 pb-1 dark:text-white">
               <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] dark:hover:bg-[#606264] rounded-md px-5 py-1" onClick={() => likeHandler(id)}>
-                <Icon icon={liked ? "mdi:like" : "mdi:like-outline"} width="1.2rem" height="1.2rem" style={{ color: liked ? '#1877F2' : 'gray' }} className="mt-0.5" />
+                <Icon icon={liked ? "mdi:like" : "mdi:like-outline"} width="1.2rem" height="1.2rem" style={{ color: liked ? '#1877F2' : (darkTheme ? 'white' : 'gray') }} className="mt-0.5" />
                 <h4 className={`font-semibold
-            ${liked ? 'text-[#1877F2]' : 'text-gray-600'} text-sm pt-0.5`}>Like</h4>
+            ${liked ? 'text-[#1877F2]' : (darkTheme ? 'dark:text-white' : 'text-gray-600')} text-sm pt-0.5`}>Like</h4>
               </Typography>
               <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] dark:hover:bg-[#606264] rounded px-2 py-1 mb-1" onClick={() => { openCommentPopup(id); userCommentPost() }}>
                 <Icon icon="cil:comment-bubble" width="1.2rem" height="1.2rem" style={{ color: darkTheme ? 'white' : 'gray' }} className="mt-1" />

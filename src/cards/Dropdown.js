@@ -39,9 +39,9 @@ const Dropdown = ({ id, dropDownFlag }) => {
         return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
 
-    useEffect(()=>{
-        console.log(dropDownFlag)
-    }, [])
+    // useEffect(()=>{
+    //     console.log(dropDownFlag)
+    // }, [])
 
     return (
         <>
