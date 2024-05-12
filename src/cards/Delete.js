@@ -30,7 +30,7 @@ const Delete = ({id}) => {
         }
     };
 
-    console.log(commentId)
+    console.log(id)
 
     const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
 
@@ -55,7 +55,7 @@ const Delete = ({id}) => {
             tabIndex="-1"
             style={{ boxShadow: '0px 1px 4px 3px rgba(0, 0, 0, 0.1)' }}>
 
-            <div className='Settings text-md flex justify-between hover:scale-105 hover:dark:scale-105 cursor-pointer rounded-md pr-2'>
+            <div className='Settings text-md flex justify-between hover:scale-105 hover:dark:scale-105 cursor-pointer rounded-md pr-1.5'>
                 <div className='flex gap-3' onClick={deleteComment}>
                     <Icon icon="subway:delete" width="1.8rem" height="1.8rem" style={{ color: 'black' }}
                         className='border bg-[#E4E6EB] rounded-full p-1.5' />

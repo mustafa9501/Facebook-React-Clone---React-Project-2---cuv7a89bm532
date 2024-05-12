@@ -24,6 +24,7 @@ const Home = () => {
 
     const [post, setPost] = useState([]);
     const { isPopupOpen, openPopup, closePopup, closeCommentPopup, commentPopup, getUser, updatePopupClose, updated, getName, darkTheme } = useUser();
+    // const [commentId, setCommentId] = useState(null);
 
     const navigate = useNavigate();
 
@@ -50,6 +51,11 @@ const Home = () => {
 
         return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
+
+    // const openCommentPopup = (id) => {
+    //     setCommentId(id);
+    // }
+    // console.log(commentId) 
 
     return (<>
         {isScreenSmall ? (
@@ -104,6 +110,7 @@ const Home = () => {
                                         id={obj._id}
                                         authorId={obj.author._id}
                                         isLiked={obj.isLiked}
+                                        // setCommentId={setCommentId(obj._id)}
                                     />
                                 </div>
                             )
@@ -184,7 +191,7 @@ const Home = () => {
                                     id={obj._id}
                                     authorId={obj.author._id}
                                     isLiked={obj.isLiked}
-                                // click={userPost}
+                                    // openCommentPopup2={() => openCommentPopup2(obj._id)}
                                 />
                             </div>
                         )
@@ -211,7 +218,7 @@ const Home = () => {
 
                 </div>
                 {isPopupOpen && <Popup onClose={closePopup} />}
-                {commentPopup && <Comment onClose1={closeCommentPopup} />}
+                {commentPopup && <Comment onClose1={closeCommentPopup}/>}
                 {updated && <UpdatePost onClose={updatePopupClose} />}
             </div >
         )}

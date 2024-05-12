@@ -16,9 +16,9 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-const Comment = ({ onClose1 }) => {
-    // console.log(id)
-    const { getcomment, singleId, getUser, setComment, darkTheme, setCommentId } = useUser();
+const Comment = ({ onClose1, commentId }) => {
+    console.log(commentId)
+    const { getcomment, singleId, getUser, setComment, darkTheme } = useUser();
     const [commentData, setCommentData] = useState([]);
     const [content, setCreateComment] = useState([]);
     const [liked, setLiked] = useState(false);
@@ -64,10 +64,6 @@ const Comment = ({ onClose1 }) => {
         })
     }
 
-    // const dropDownHandler = (() => {
-    //     setDropdown(!getDropdown);
-    // })
-
     const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
 
     useEffect(() => {
@@ -81,6 +77,60 @@ const Comment = ({ onClose1 }) => {
     }, []);
 
     console.log(singleId)
+
+    // const likeHandler = async () => {
+    //     try {
+    //       // Fetch the post data from the API
+    //       const response = await axios.get(`https://academics.newtonschool.co/api/v1/facebook/post/${singleId}`, {
+    //         headers: {
+    //           Authorization: `Bearer ${getUser.token}`
+    //         }
+    //       });   
+    //       // Extract the isLiked and likeCount properties from the API response
+    //       const { isLiked, likeCount } = response.data.data;   
+    //       // Toggle the like status
+    //       if (isLiked) {
+    //         // Unlike the post
+    //         await axios.delete(`https://academics.newtonschool.co/api/v1/facebook/like/${singleId}`, {
+    //           headers: {
+    //             Authorization: `Bearer ${getUser.token}`
+    //           }
+    //         });
+    //         // Decrease likeCount
+    //         const updatedLikeCount = likeCount - 1;
+    //         setDisplayLikeCount(updatedLikeCount);
+    //         // Remove like status from localStorage
+    //         localStorage.removeItem(`liked-${postId}`);
+    //       } else {
+    //         // Like the post
+    //         await axios.post(`https://academics.newtonschool.co/api/v1/facebook/like/${postId}`, null, {
+    //           headers: {
+    //             Authorization: `Bearer ${getUser.token}`
+    //           }
+    //         });
+    //         // Increase likeCount
+    //         const updatedLikeCount = likeCount + 1;
+    //         setDisplayLikeCount(updatedLikeCount);
+    //         // Store like status in localStorage
+    //         localStorage.setItem(`liked-${postId}`, 'true');
+    //       }
+    //       // Toggle the liked state
+    //       setLiked(!isLiked);
+    //       // Update the local state or perform any other necessary actions
+    //       // For example, you can update the UI to reflect the new like status and like count
+    //       console.log("Like status toggled successfully");
+    //     } catch (error) {
+    //       console.error("Error:", error);
+    //     }
+    //   };
+    
+    //   useEffect(() => {
+    //     // Check if the post is liked
+    //     const likedState = localStorage.getItem(`liked-${singleId}`);
+    //     if (likedState === 'true') {
+    //       setLiked(true);
+    //     }
+    //   }, [singleId]);
 
     return (<>
         {isScreenSmall ? (
@@ -211,7 +261,7 @@ const Comment = ({ onClose1 }) => {
                                 </CardBody>
 
                                 <CardFooter className="flex justify-between px-5 pt-2 pb-1 dark:text-white">
-                                    <Typography className="flex gap-2 cursor-pointer hover:bg-[#F2F2F2] dark:hover:bg-[#606264] rounded-md px-5 py-1" >
+                                    <Typography className="flex gap-2 cursor-not-allowed hover:bg-[#F2F2F2] dark:hover:bg-[#606264] rounded-md px-5 py-1">
                                         <Icon icon={liked ? "mdi:like" : "mdi:like-outline"} width="1.2rem" height="1.2rem" style={{ color: liked ? '#1877F2' : (darkTheme ? 'white' : 'gray') }} className="mt-0.5" />
                                         <h4 className={`font-semibold
             ${liked ? 'text-[#1877F2]' : (darkTheme ? 'dark:text-white' : 'text-gray-600')} text-sm pt-0.5`}>Like</h4>

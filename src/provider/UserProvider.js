@@ -40,7 +40,7 @@ export const UserProvider = ({ children }) => {
     });
     const [isActive1, setIsActive1] = useState('post');
     const [isActive2, setIsActive2] = useState('post');
-
+    
     useEffect(() => {
         localStorage.setItem('darkTheme', JSON.stringify(darkTheme));
     }, [darkTheme]);
@@ -133,7 +133,6 @@ export const UserProvider = ({ children }) => {
       const searchDroplistClose = () =>{
         setSearchDroplist(false)
       }
-
 
     const object = {
         getUser,
