@@ -211,7 +211,7 @@ const Home = () => {
 
                 </div>
                 {isPopupOpen && <Popup onClose={closePopup} />}
-                {commentPopup && <Comment onClose={closeCommentPopup} />}
+                {commentPopup && <Comment onClose1={closeCommentPopup} />}
                 {updated && <UpdatePost onClose={updatePopupClose} />}
             </div >
         )}
