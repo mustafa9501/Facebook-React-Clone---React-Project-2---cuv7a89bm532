@@ -33,7 +33,6 @@ export const UserProvider = ({ children }) => {
     const [userId, setUserId] = useState(0);
     const [viewPageId, setViewPageId] = useState(0);
     const [searchDroplist, setSearchDroplist] = useState(false);
-    const [commentId, setCommentId] = useState(null);
     const [darkTheme, setDarkTheme] = useState(() => {
         // Get dark theme preference from local storage or default to false
         const storedTheme = localStorage.getItem('darkTheme');
@@ -135,9 +134,6 @@ export const UserProvider = ({ children }) => {
         setSearchDroplist(false)
       }
 
-      const dropDownHandlerOpen = (id) => {
-        setCommentId(id);
-    };
 
     const object = {
         getUser,
@@ -183,8 +179,6 @@ export const UserProvider = ({ children }) => {
         onEmailHandler,
         getEmail,
         openComment,
-        commentId,
-        setCommentId,
         handleToggle,
         darkTheme,
         setIsActive1,

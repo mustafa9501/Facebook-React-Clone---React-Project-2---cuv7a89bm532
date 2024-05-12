@@ -17,13 +17,12 @@ import Profile from '../images/profile.png';
 
 export function CardComment({ content, id, name }) {
 
-    const { setCommentId, darkTheme } = useUser();
+    const {darkTheme } = useUser();
     const [getDropdown, setDropdown] = useState(false);
     
 
     const dropDownHandler = ((id) => {
         setDropdown(!getDropdown);
-        setCommentId(id)
     })
 
     // const dropDownHandler = ((event, id, index) => {
@@ -48,7 +47,7 @@ export function CardComment({ content, id, name }) {
                             <p className='text-black text-md dark:text-white'>{content}</p>
                         </div>
                     </div>
-                    <div onClick={() => { dropDownHandler(id) }} >
+                    <div onClick={() => { dropDownHandler() }} >
                         <Icon icon="tabler:dots" width="1.7rem" height="1.7rem" style={{ color: darkTheme ? 'white' : 'gray' }} className=' rounded-full hover:bg-gray-200 dark:hover:bg-[#494e50] cursor-pointer' />
                     </div>
                 </Typography>
@@ -56,7 +55,7 @@ export function CardComment({ content, id, name }) {
                     <h6 className='text-[11px] font-bold cursor-not-allowed dark:text-white'>Like</h6>
                     <h6 className='text-[11px] font-bold cursor-not-allowed dark:text-white'>Reply</h6>
                 </Typography>
-                {getDropdown && <Delete />}
+                {getDropdown && <Delete id={id}/>}
             </Card>
         </>
     );

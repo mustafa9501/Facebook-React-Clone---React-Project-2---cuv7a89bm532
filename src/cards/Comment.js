@@ -240,7 +240,7 @@ const Comment = ({ onClose1 }) => {
                     </div>
                     <div className='flex pt-3'>
                         <img src={Profile} className='h-10 w-11 rounded-full bg-gray-100 ml-6' />
-                        <input className='mb-10 pl-4 bg-[#e3e5e9] dark:bg-[#242526] ml-4 w-4/7 rounded-l-2xl pb-4 pt-4 focus:outline-none' placeholder='Write a comment...' onChange={(event) => setCreateComment(event.target.value)} />
+                        <input className='mb-10 pl-4 bg-[#e3e5e9] dark:text-white dark:bg-[#242526] ml-4 w-4/7 rounded-l-2xl pb-4 pt-4 focus:outline-none' placeholder='Write a comment...' onChange={(event) => setCreateComment(event.target.value)} />
                         <div className='bg-[#e3e5e9] dark:bg-[#242526] h-14 py-4 pr-4 mr-4 rounded-r-2xl cursor-pointer' onClick={writeComment}>
                             <Icon icon="iconamoon:send-fill" width="1.5rem" height="1.5rem" style={{ color: '#005DC7' }} />
                         </div>

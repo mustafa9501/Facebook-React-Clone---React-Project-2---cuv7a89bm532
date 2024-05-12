@@ -3,7 +3,7 @@ import {React, useState, useEffect} from 'react';
 import axios from 'axios';
 import { useUser } from '../provider/UserProvider';
 
-const Delete = () => {
+const Delete = ({id}) => {
 
     const {getUser, commentId, singleId, setComment, darkTheme} = useUser();
 
@@ -18,7 +18,7 @@ const Delete = () => {
 
     const deleteComment = async () => {  
         try {
-            const result = await axios.delete(`https://academics.newtonschool.co/api/v1/facebook/comment/${commentId}`, {
+            const result = await axios.delete(`https://academics.newtonschool.co/api/v1/facebook/comment/${id}`, {
                 headers: {
                     Authorization: `Bearer ${getUser.token}`
                 }
