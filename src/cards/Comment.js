@@ -105,6 +105,7 @@ const Comment = ({ onClose }) => {
                                     <CardComment
                                      content={obj.content}
                                      id={obj._id}
+                                     name={obj.author_details.name}
                                     />
                                 </div>
                             </>)
@@ -155,6 +156,7 @@ const Comment = ({ onClose }) => {
                                     <CardComment
                                      content={obj.content}
                                      id={obj._id}
+                                     name={obj.author_details.name}
                                     />
                                 </div>
                             </>)

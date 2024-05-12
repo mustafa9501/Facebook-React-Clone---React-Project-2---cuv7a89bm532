@@ -11,10 +11,10 @@ import { useUser } from '../provider/UserProvider';
 
 
 
-export function CardComment({ content, id }) {
+export function CardComment({ content, id, name }) {
 
     const {setCommentId} = useUser();
-
+    console.log(name)
     const [getDropdown, setDropdown] = useState(false);
 
     const dropDownHandler = ((event,id) => {
@@ -40,7 +40,7 @@ export function CardComment({ content, id }) {
                 <Typography className='flex gap-10'>
                     <div className='flex justify-start gap-4'><img src={Avatar} alt='profile' className='h-10 w-10 bg-gray-100 rounded-full ' />
                         <div className='rounded-3xl bg-[#F0F2F5] dark:bg-[#323436] px-3 p-'>
-                            <h2 className='font-semibold text-lg dark:text-white'>Unknown</h2>
+                            <h2 className='font-semibold text-lg dark:text-white'>{name}</h2>
                             <p className='text-black text-md dark:text-white'>{content}</p>
                         </div>
                     </div>
